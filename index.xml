@@ -63,10 +63,10 @@
     
     <item>
       <title>jQuery 都过时了，那我还学它干嘛？</title>
-      <link>http://fangyinghang.com/2018/why-still-jquery/</link>
+      <link>http://fangyinghang.com/why-still-jquery/</link>
       <pubDate>Mon, 15 Oct 2018 16:22:04 +0800</pubDate>
       
-      <guid>http://fangyinghang.com/2018/why-still-jquery/</guid>
+      <guid>http://fangyinghang.com/why-still-jquery/</guid>
       <description>
 
 &lt;p&gt;今天饥人谷的新生问我&lt;/p&gt;
@@ -275,10 +275,10 @@ axios.get(&#39;/api&#39;).then(fn1, fn2)
     
     <item>
       <title>我写了一个基于 Vue 的 UI 框架——轱辘 UI</title>
-      <link>http://fangyinghang.com/2018/gulu-ui/</link>
+      <link>http://fangyinghang.com/gulu-ui/</link>
       <pubDate>Fri, 03 Aug 2018 16:32:18 +0800</pubDate>
       
-      <guid>http://fangyinghang.com/2018/gulu-ui/</guid>
+      <guid>http://fangyinghang.com/gulu-ui/</guid>
       <description>
 
 &lt;p&gt;&lt;a href=&#34;https://frankfang.github.io/gulu/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;官方文档&lt;/a&gt; | &lt;a href=&#34;https://github.com/FrankFang/gulu&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;源码&lt;/a&gt;&lt;/p&gt;
@@ -361,10 +361,10 @@ axios.get(&#39;/api&#39;).then(fn1, fn2)
     
     <item>
       <title>我用了两个月的时间才理解 let</title>
-      <link>http://fangyinghang.com/2017/let-in-js/</link>
+      <link>http://fangyinghang.com/let-in-js/</link>
       <pubDate>Thu, 27 Jul 2017 13:39:30 +0800</pubDate>
       
-      <guid>http://fangyinghang.com/2017/let-in-js/</guid>
+      <guid>http://fangyinghang.com/let-in-js/</guid>
       <description>
 
 &lt;p&gt;当然不是说用完整的两个月时间来理解 let，而是零零碎碎地理解，同时我还要想着怎么写出一篇文章把这个事情说清楚。&lt;/p&gt;
@@ -653,10 +653,10 @@ function fn2(){
     
     <item>
       <title>深入理解 CSS：字体度量、line-height 和 vertical-align</title>
-      <link>http://fangyinghang.com/2017/everything-about-font-size/</link>
+      <link>http://fangyinghang.com/everything-about-font-size/</link>
       <pubDate>Thu, 16 Mar 2017 01:51:37 +0800</pubDate>
       
-      <guid>http://fangyinghang.com/2017/everything-about-font-size/</guid>
+      <guid>http://fangyinghang.com/everything-about-font-size/</guid>
       <description>
 
 &lt;p&gt;这是一篇译文，对 inline 和 inline-block 的元素剖析非常给力。&lt;/p&gt;
@@ -1040,10 +1040,10 @@ span {
     
     <item>
       <title>JS 的 new 到底是干什么的？</title>
-      <link>http://fangyinghang.com/2016/new-in-js/</link>
+      <link>http://fangyinghang.com/new-in-js/</link>
       <pubDate>Mon, 12 Dec 2016 01:45:22 +0800</pubDate>
       
-      <guid>http://fangyinghang.com/2016/new-in-js/</guid>
+      <guid>http://fangyinghang.com/new-in-js/</guid>
       <description>
 
 &lt;p&gt;大部分讲 new 的文章会从面向对象的思路讲起，但是我始终认为，在解释一个事物的时候，不应该引入另一个更复杂的事物。&lt;/p&gt;
@@ -1275,10 +1275,10 @@ for(var i=0; i&amp;lt;100; i++){
     
     <item>
       <title>从培训班出来之后找工作的经历，教会了我这五件事</title>
-      <link>http://fangyinghang.com/2016/five-key-learnings-from-the-post-bootcamp-job-search/</link>
+      <link>http://fangyinghang.com/five-key-learnings-from-the-post-bootcamp-job-search/</link>
       <pubDate>Sat, 03 Dec 2016 01:25:35 +0800</pubDate>
       
-      <guid>http://fangyinghang.com/2016/five-key-learnings-from-the-post-bootcamp-job-search/</guid>
+      <guid>http://fangyinghang.com/five-key-learnings-from-the-post-bootcamp-job-search/</guid>
       <description>
 
 &lt;p&gt;这是 &lt;a href=&#34;https://medium.freecodecamp.com/5-key-learnings-from-the-post-bootcamp-job-search-9a07468d2331&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Medium 上的一篇文章&lt;/a&gt;（已有 5900 个赞），讲的是国外一个培训出来的程序员，用三个月时间，找到了一份年薪 12 万美元的工作，并从中得到的五个忠告的故事。&lt;/p&gt;
@@ -1423,10 +1423,10 @@ for(var i=0; i&amp;lt;100; i++){
     
     <item>
       <title>this 的值到底是什么？一次说清楚</title>
-      <link>http://fangyinghang.com/2016/this-in-js/</link>
+      <link>http://fangyinghang.com/this-in-js/</link>
       <pubDate>Sun, 20 Nov 2016 13:39:30 +0800</pubDate>
       
-      <guid>http://fangyinghang.com/2016/this-in-js/</guid>
+      <guid>http://fangyinghang.com/this-in-js/</guid>
       <description>
 
 &lt;p&gt;你可能遇到过这样的 JS 面试题：&lt;/p&gt;
@@ -1586,10 +1586,10 @@ arr[0]() // 这里面的 this 又是什么呢？
     
     <item>
       <title>JS 中的闭包是什么？</title>
-      <link>http://fangyinghang.com/2016/closures-in-js/</link>
+      <link>http://fangyinghang.com/closures-in-js/</link>
       <pubDate>Sun, 18 Sep 2016 01:36:43 +0800</pubDate>
       
-      <guid>http://fangyinghang.com/2016/closures-in-js/</guid>
+      <guid>http://fangyinghang.com/closures-in-js/</guid>
       <description>
 
 &lt;p&gt;大名鼎鼎的闭包！这一题终于来了，面试必问：&lt;/p&gt;

@@ -66,7 +66,7 @@ func(p1, p2) 等价于 func.call(undefined, p1, p2) obj.child.method(p1, p2) 等
     "datePublished": "2016-11-20 13:39:30 &#43;0800 CST",
     "dateModified" : "2016-11-20 13:39:30 &#43;0800 CST",
     "url" : "http://fangyinghang.com/2016/this-in-js/",
-    "wordCount" : "251",
+    "wordCount" : "259",
     "keywords" : [  "方应杭的个人网站"]
 }
 </script>
@@ -123,14 +123,14 @@ func(p1, p2) 等价于 func.call(undefined, p1, p2) obj.child.method(p1, p2) 等
     <header class="post-header">
         <h1 class="post-title" itemprop="name headline">this 的值到底是什么？一次说清楚</h1>
         <div class="post-meta">
-                Written by <a itemprop="name" href="http://fangyinghang.com/" rel="author">
+                <a itemprop="name" href="http://fangyinghang.com/" rel="author">
                   方应杭</a>
-                <span class="post-time">
-                on <time datetime=2016-11-20 itemprop="datePublished">
-                  2016-11-20
-                </time>
+                <span class="post-time">写于
+                  <time datetime=2016-11-20 itemprop="datePublished">
+                    2016年11月20日
+                  </time>
                 </span>
-                in 
+                
         </div>
     </header>
     <div class="post-content">
@@ -172,7 +172,7 @@ bar() // 打印出的 this 是 window
 
 <p>而且这个解释，你在别的地方看不到。看懂这篇文章，所有关于 this 的面试题，都是小菜。</p>
 
-<h1 id="函数调用">函数调用</h1>
+<h2 id="函数调用">函数调用</h2>
 
 <p>首先需要从函数的调用开始讲起。</p>
 
@@ -206,13 +206,12 @@ obj.child.method.call(obj.child, p1, p2)
 <pre><code>func.call(context, p1, p2)
 </code></pre>
 
-<p>这样，this 就好解释了
-this，就是上面代码中的 context。就这么简单。</p>
+<p>这样，this 就好解释了 this，就是上面代码中的 context。就这么简单。</p>
 
-<blockquote>
-<p>this 是你 call 一个函数时传的 context，
-由于你从来不用 call 形式的函数调用，所以你一直不知道。</p>
-</blockquote>
+<p>也就是说 <strong>this 是你 call 一个函数时传的第一个参数</strong>，
+只是由于你从来不用 call 形式的函数调用，所以你一直不知道。</p>
+
+<h2 id="func-p1-p2-里的-this">func(p1, p2) 里的 this</h2>
 
 <p>先看 func(p1, p2) 中的 this 如何确定：</p>
 
@@ -243,6 +242,8 @@ func.call(undefined) // 可以简写为 func.call()
 
 <pre><code>func.call(obj) // 那么里面的 this 就是 obj 对象了
 </code></pre>
+
+<h2 id="obj-child-method-p1-p2-里的-this">obj.child.method(p1, p2) 里的 this</h2>
 
 <p>再看 obj.child.method(p1, p2) 的 this 如何确定</p>
 
@@ -279,7 +280,7 @@ bar()
 // 最后浏览器给你一个默认的 this —— window 对象
 </code></pre>
 
-<h1 id="语法">[ ] 语法</h1>
+<h2 id="语法">[ ] 语法</h2>
 
 <pre><code>function fn (){ console.log(this) }
 var arr = [fn, fn2]
@@ -290,12 +291,11 @@ arr[0]() // 这里面的 this 又是什么呢？
 
 <pre><code>arr[0]() 
 假想为  arr.0()
+然后转换为 arr.0.call(arr)
+那么里面的 this 就是 arr 了 :)
 </code></pre>
 
-<p>然后转换为 arr.0.call(arr)
-那么里面的 this 就是 arr 了 :)</p>
-
-<h1 id="总结">总结</h1>
+<h2 id="总结">总结</h2>
 
 <p>this 就是你 call 一个函数时，传入的第一个参数。（请务必背下来「this 就是 call 的第一个参数」）
 如果你的函数调用形式不是 call 形式，请按照「转换代码」将其转换为 call 形式。</p>
@@ -309,14 +309,14 @@ arr[0]() // 这里面的 this 又是什么呢？
     <div class="post-copyright">
              
             <p class="copyright-item">
-                <span>Author:</span>
+                <span>作者</span>
                 <span>方应杭 </span>
                 </p>
             
            
              
             <p class="copyright-item">
-                    <span>Link:</span>
+                    <span>链接</span>
                     <a href=http://fangyinghang.com/2016/this-in-js/>http://fangyinghang.com/2016/this-in-js/</span>
             </p>
             
@@ -331,8 +331,8 @@ arr[0]() // 这里面的 this 又是什么呢？
     <div class="post-tags">
         
         <section>
-                <a href="javascript:window.history.back();">back</a></span> · 
-                <span><a href="http://fangyinghang.com/">home</a></span>
+                <a href="javascript:window.history.back();">后退</a></span> · 
+                <span><a href="http://fangyinghang.com/">回到首页</a></span>
         </section>
     </div>
 

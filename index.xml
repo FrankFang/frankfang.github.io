@@ -84,7 +84,7 @@ bar() // 打印出的 this 是 window
 
 &lt;p&gt;而且这个解释，你在别的地方看不到。看懂这篇文章，所有关于 this 的面试题，都是小菜。&lt;/p&gt;
 
-&lt;h1 id=&#34;函数调用&#34;&gt;函数调用&lt;/h1&gt;
+&lt;h2 id=&#34;函数调用&#34;&gt;函数调用&lt;/h2&gt;
 
 &lt;p&gt;首先需要从函数的调用开始讲起。&lt;/p&gt;
 
@@ -118,13 +118,12 @@ obj.child.method.call(obj.child, p1, p2)
 &lt;pre&gt;&lt;code&gt;func.call(context, p1, p2)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;这样，this 就好解释了
-this，就是上面代码中的 context。就这么简单。&lt;/p&gt;
+&lt;p&gt;这样，this 就好解释了 this，就是上面代码中的 context。就这么简单。&lt;/p&gt;
 
-&lt;blockquote&gt;
-&lt;p&gt;this 是你 call 一个函数时传的 context，
-由于你从来不用 call 形式的函数调用，所以你一直不知道。&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;也就是说 &lt;strong&gt;this 是你 call 一个函数时传的第一个参数&lt;/strong&gt;，
+只是由于你从来不用 call 形式的函数调用，所以你一直不知道。&lt;/p&gt;
+
+&lt;h2 id=&#34;func-p1-p2-里的-this&#34;&gt;func(p1, p2) 里的 this&lt;/h2&gt;
 
 &lt;p&gt;先看 func(p1, p2) 中的 this 如何确定：&lt;/p&gt;
 
@@ -155,6 +154,8 @@ func.call(undefined) // 可以简写为 func.call()
 
 &lt;pre&gt;&lt;code&gt;func.call(obj) // 那么里面的 this 就是 obj 对象了
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;obj-child-method-p1-p2-里的-this&#34;&gt;obj.child.method(p1, p2) 里的 this&lt;/h2&gt;
 
 &lt;p&gt;再看 obj.child.method(p1, p2) 的 this 如何确定&lt;/p&gt;
 
@@ -191,7 +192,7 @@ bar()
 // 最后浏览器给你一个默认的 this —— window 对象
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h1 id=&#34;语法&#34;&gt;[ ] 语法&lt;/h1&gt;
+&lt;h2 id=&#34;语法&#34;&gt;[ ] 语法&lt;/h2&gt;
 
 &lt;pre&gt;&lt;code&gt;function fn (){ console.log(this) }
 var arr = [fn, fn2]
@@ -202,12 +203,11 @@ arr[0]() // 这里面的 this 又是什么呢？
 
 &lt;pre&gt;&lt;code&gt;arr[0]() 
 假想为  arr.0()
+然后转换为 arr.0.call(arr)
+那么里面的 this 就是 arr 了 :)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;然后转换为 arr.0.call(arr)
-那么里面的 this 就是 arr 了 :)&lt;/p&gt;
-
-&lt;h1 id=&#34;总结&#34;&gt;总结&lt;/h1&gt;
+&lt;h2 id=&#34;总结&#34;&gt;总结&lt;/h2&gt;
 
 &lt;p&gt;this 就是你 call 一个函数时，传入的第一个参数。（请务必背下来「this 就是 call 的第一个参数」）
 如果你的函数调用形式不是 call 形式，请按照「转换代码」将其转换为 call 形式。&lt;/p&gt;

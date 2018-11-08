@@ -6,10 +6,28 @@
     <description>Recent content in Posts on 方应杭的个人网站</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 20 Nov 2016 13:39:30 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 27 Jul 2017 13:39:30 +0800</lastBuildDate>
     
 	<atom:link href="http://fangyinghang.com/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>我用了两个月的时间才理解 let</title>
+      <link>http://fangyinghang.com/2017/let-in-js/</link>
+      <pubDate>Thu, 27 Jul 2017 13:39:30 +0800</pubDate>
+      
+      <guid>http://fangyinghang.com/2017/let-in-js/</guid>
+      <description>当然不是说用完整的两个月时间来理解 let，而是零零碎碎地理解，同时我还要想着怎么写出一篇文章把这个事情说清楚。
+在 let 刚出来的时候，我就「以为」我理解了 let。然鹅在过去的两个月里，我对 let 的理解发生了一波三折的变化。
+我写这篇文章，是希望我的学习过程，能对你自学有帮助。
+初识 let 跟很多人一样，我第一次了解 let 的特性是从 MDN 的文档：
+我得到的信息有这么几条：
+ let 声明的变量的作用域是块级的； let 不能重复声明已存在的变量； let 有暂时死区，不会被提升。  大部分人应该都是这么认为的，我也是这么理解的。
+这个理解「没有问题」，但是不够「全面和深刻」。
+第一次质疑 我第一次质疑我的理解是在遇到 for 循环的时候，代码如下。
+// 代码段1 var liList = document.querySelectorAll(&#39;li&#39;) // 共5个li for( var i=0; i&amp;lt;liList.length; i++){ liList[i].onclick = function(){ console.log(i) } }  大家都知道依次点击 li 会打印出 5 个 5。如果把 var i 改成 let i，就会分别打印出 0、1、2、3、4：
+// 代码段2 var liList = document.querySelectorAll(&#39;li&#39;) // 共5个li for( let i=0; i&amp;lt;liList.</description>
+    </item>
     
     <item>
       <title>this 的值到底是什么？一次说清楚</title>

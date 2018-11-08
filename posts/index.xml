@@ -95,5 +95,14 @@ func.call(context, p1, p2)  其他两种都是语法糖，可以等价地变为 
 func(p1, p2) 等价于 func.call(undefined, p1, p2) obj.child.method(p1, p2) 等价于 obj.child.method.call(obj.child, p1, p2)  请记下来。（我们称此代码为「转换代码」，方便下文引用）</description>
     </item>
     
+    <item>
+      <title>JS 中的闭包是什么？</title>
+      <link>http://fangyinghang.com/2016/closures-in-js/</link>
+      <pubDate>Sun, 18 Sep 2016 01:36:43 +0800</pubDate>
+      
+      <guid>http://fangyinghang.com/2016/closures-in-js/</guid>
+      <description>大名鼎鼎的闭包！这一题终于来了，面试必问： 请用自己的话简述 什么是「闭包」。 「闭包」的作用是什么。 首先来简述什么是闭包 假设上面三行代码在一个立</description>
+    </item>
+    
   </channel>
 </rss>

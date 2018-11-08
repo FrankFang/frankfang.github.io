@@ -6,17 +6,17 @@
     <description>Recent content in Posts on 方应杭的个人网站</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 08 Nov 2018 13:39:30 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 20 Nov 2016 13:39:30 +0800</lastBuildDate>
     
 	<atom:link href="http://fangyinghang.com/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>this 的值到底是什么？一次说清楚</title>
-      <link>http://fangyinghang.com/2018/this-in-js/</link>
-      <pubDate>Thu, 08 Nov 2018 13:39:30 +0800</pubDate>
+      <link>http://fangyinghang.com/2016/this-in-js/</link>
+      <pubDate>Sun, 20 Nov 2016 13:39:30 +0800</pubDate>
       
-      <guid>http://fangyinghang.com/2018/this-in-js/</guid>
+      <guid>http://fangyinghang.com/2016/this-in-js/</guid>
       <description>你可能遇到过这样的 JS 面试题：
 var obj = { foo: function(){ console.log(this) } } var bar = obj.foo obj.foo() // 打印出的 this 是 obj bar() // 打印出的 this 是 window  请解释最后两行函数的值为什么不一样。
 初学者关于 this 的理解一直很模糊。今天这篇文章就要一次讲清楚了。

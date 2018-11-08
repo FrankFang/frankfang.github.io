@@ -2,19 +2,110 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
-  <url>
-    <loc>http://fangyinghang.com/categories/</loc>
-    <priority>0</priority>
-  </url>
+    <url>
+      <loc>http://fangyinghang.com/my/resume/</loc>
+      
+      <lastmod>2018-11-08T04:04:02+08:00</lastmod>
+      
+      
+      
+      
+    </url>
   
-  <url>
-    <loc>http://fangyinghang.com/tags/</loc>
-    <priority>0</priority>
-  </url>
+    <url>
+      <loc>http://fangyinghang.com/my/articles/</loc>
+      
+      <lastmod>2018-11-08T04:04:02+08:00</lastmod>
+      
+      
+      
+      
+    </url>
   
-  <url>
-    <loc>http://fangyinghang.com/</loc>
-    <priority>0</priority>
-  </url>
+    <url>
+      <loc>http://fangyinghang.com/my/courses/</loc>
+      
+      <lastmod>2018-11-08T04:04:02+08:00</lastmod>
+      
+      
+      
+      
+    </url>
+  
+    <url>
+      <loc>http://fangyinghang.com/contacts/</loc>
+      
+      <lastmod>2018-11-08T03:43:41+08:00</lastmod>
+      
+      
+      
+      
+    </url>
+  
+    <url>
+      <loc>http://fangyinghang.com/2018/home/</loc>
+      
+      <lastmod>2018-11-08T03:31:39+08:00</lastmod>
+      
+      
+      
+      
+    </url>
+  
+    <url>
+      <loc>http://fangyinghang.com/categories/</loc>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>http://fangyinghang.com/my/</loc>
+      
+      <lastmod>2018-11-08T04:04:02+08:00</lastmod>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>http://fangyinghang.com/posts/</loc>
+      
+      <lastmod>2018-11-08T03:31:39+08:00</lastmod>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>http://fangyinghang.com/tags/</loc>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>http://fangyinghang.com/</loc>
+      
+      <lastmod>2018-11-08T04:04:02+08:00</lastmod>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
   
 </urlset>

@@ -1,14 +1,68 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>方应杭的个人网站</title>
+    <title>方应杭的个人网站 on 方应杭的个人网站</title>
     <link>http://fangyinghang.com/</link>
-    <description>Recent content on 方应杭的个人网站</description>
+    <description>Recent content in 方应杭的个人网站 on 方应杭的个人网站</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
+    <lastBuildDate>Thu, 08 Nov 2018 04:04:02 +0800</lastBuildDate>
+    <atom:link href="/" rel="self" type="application/rss+xml" />
     
-	<atom:link href="http://fangyinghang.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>工作经历</title>
+      <link>http://fangyinghang.com/my/resume/</link>
+      <pubDate>Thu, 08 Nov 2018 04:04:02 +0800</pubDate>
+      
+      <guid>http://fangyinghang.com/my/resume/</guid>
+      <description>&lt;p&gt;1 2 3&lt;/p&gt;
+</description>
+    </item>
     
+    <item>
+      <title>我的文章</title>
+      <link>http://fangyinghang.com/my/articles/</link>
+      <pubDate>Thu, 08 Nov 2018 04:04:02 +0800</pubDate>
+      
+      <guid>http://fangyinghang.com/my/articles/</guid>
+      <description>&lt;p&gt;1 2 3&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>我的课程</title>
+      <link>http://fangyinghang.com/my/courses/</link>
+      <pubDate>Thu, 08 Nov 2018 04:04:02 +0800</pubDate>
+      
+      <guid>http://fangyinghang.com/my/courses/</guid>
+      <description>&lt;p&gt;1 2 3&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>联系方式</title>
+      <link>http://fangyinghang.com/contacts/</link>
+      <pubDate>Thu, 08 Nov 2018 03:43:41 +0800</pubDate>
+      
+      <guid>http://fangyinghang.com/contacts/</guid>
+      <description>&lt;p&gt;微信扫码&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://fangyinghang.com/images/me/wechat.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;邮箱&lt;/p&gt;
+
+&lt;p&gt;fangyinghang # foxmail.com&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Home</title>
+      <link>http://fangyinghang.com/2018/home/</link>
+      <pubDate>Thu, 08 Nov 2018 03:31:39 +0800</pubDate>
+      
+      <guid>http://fangyinghang.com/2018/home/</guid>
+      <description></description>
+    </item>
     
   </channel>
 </rss>

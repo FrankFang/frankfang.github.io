@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mys on 方应杭的个人网站</title>
+    <link>http://fangyinghang.com/my/</link>
+    <description>Recent content in Mys on 方应杭的个人网站</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Thu, 08 Nov 2018 04:04:02 +0800</lastBuildDate>
+    
+	<atom:link href="http://fangyinghang.com/my/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>工作经历</title>
+      <link>http://fangyinghang.com/my/resume/</link>
+      <pubDate>Thu, 08 Nov 2018 04:04:02 +0800</pubDate>
+      
+      <guid>http://fangyinghang.com/my/resume/</guid>
+      <description>1 2 3</description>
+    </item>
+    
+    <item>
+      <title>我的文章</title>
+      <link>http://fangyinghang.com/my/articles/</link>
+      <pubDate>Thu, 08 Nov 2018 04:04:02 +0800</pubDate>
+      
+      <guid>http://fangyinghang.com/my/articles/</guid>
+      <description>1 2 3</description>
+    </item>
+    
+    <item>
+      <title>我的课程</title>
+      <link>http://fangyinghang.com/my/courses/</link>
+      <pubDate>Thu, 08 Nov 2018 04:04:02 +0800</pubDate>
+      
+      <guid>http://fangyinghang.com/my/courses/</guid>
+      <description>1 2 3</description>
+    </item>
+    
+  </channel>
+</rss>

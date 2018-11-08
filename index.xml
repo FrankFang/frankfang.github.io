@@ -25,7 +25,8 @@
 &lt;li&gt;&lt;a href=&#34;https://xiedaimala.com/courses/003b1951-22af-4821-ad80-d2880c0074eb&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;CSS 深入浅出&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://xiedaimala.com/courses/ec3a5e28-02da-47d6-9226-927db23e82a2&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;前端零基础入门&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -36,7 +37,15 @@
       <guid>http://fangyinghang.com/my/resume/</guid>
       <description>&lt;p&gt;毕业于华中科技大学软件工程专业，先后在腾讯、阿里巴巴、彩程担任前端工程师。
 现在在饥人谷讲课、开发、写作。&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;技术栈&#34;&gt;技术栈：&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Web 前端开发技术（CSS、JavaScript、TypeScript、Vue、React、Angular 等）&lt;/li&gt;
+&lt;li&gt;Web 后端开发技术（Ruby on Rails、Node.js 等）&lt;/li&gt;
+&lt;/ul&gt;</description>
     </item>
     
     <item>
@@ -55,13 +64,9 @@
       <pubDate>Thu, 08 Nov 2018 03:43:41 +0800</pubDate>
       
       <guid>http://fangyinghang.com/contacts/</guid>
-      <description>&lt;p&gt;微信扫码&lt;/p&gt;
+      <description>&lt;p&gt;邮箱：fangyinghang # foxmail.com&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://fangyinghang.com/images/me/wechat.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;邮箱&lt;/p&gt;
-
-&lt;p&gt;fangyinghang # foxmail.com&lt;/p&gt;
+&lt;p&gt;微信： &lt;img src=&#34;http://fangyinghang.com/images/me/wechat.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 </description>
     </item>
     

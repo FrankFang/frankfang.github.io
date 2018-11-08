@@ -17,7 +17,18 @@
       <pubDate>Thu, 08 Nov 2018 04:04:02 +0800</pubDate>
       
       <guid>http://fangyinghang.com/my/courses/</guid>
-      <description> React 入门（连载中） TypeScript 入门（连载中） SCSS 入门（连载中） 自制 Vue UI 框架（连载中） JS 深入浅出 ES6 深入浅出 CSS 深入浅出 前端零基础入门  </description>
+      <description>&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://xiedaimala.com/courses/63308031-98f4-4907-ade4-c22d4aa82f27&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;React 入门（连载中）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://xiedaimala.com/courses/6f105ef5-8969-4863-82e7-beb162ddc5b3&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;TypeScript 入门（连载中）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://xiedaimala.com/courses/9ff75915-a19f-451d-b3a5-85feed5a6bc1&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;SCSS 入门（连载中）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://xiedaimala.com/courses/6d63da67-6eea-4711-aeb4-0c3a949341dc&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;自制 Vue UI 框架（连载中）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://xiedaimala.com/courses/24f54465-854f-4de7-9808-72a0bf5b3181&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;JS 深入浅出&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://xiedaimala.com/courses/12a78a03-35f9-42ea-9b37-540540460f6e&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;ES6 深入浅出&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://xiedaimala.com/courses/003b1951-22af-4821-ad80-d2880c0074eb&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;CSS 深入浅出&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://xiedaimala.com/courses/ec3a5e28-02da-47d6-9226-927db23e82a2&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;前端零基础入门&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -26,7 +37,10 @@
       <pubDate>Thu, 08 Nov 2018 04:04:02 +0800</pubDate>
       
       <guid>http://fangyinghang.com/my/resume/</guid>
-      <description>毕业于华中科技大学软件工程专业，先后在腾讯、阿里巴巴、彩程担任前端工程师。 现在在饥人谷讲课、开发、写作。</description>
+      <description>&lt;p&gt;毕业于华中科技大学软件工程专业，先后在腾讯、阿里巴巴、彩程担任前端工程师。
+现在在饥人谷讲课、开发、写作。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

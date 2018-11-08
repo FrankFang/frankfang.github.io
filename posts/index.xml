@@ -69,6 +69,15 @@ jQuery 教你如何设计 API 上文说到我一个不会 JS 的人居然能看�
     </item>
     
     <item>
+      <title>深入理解 CSS：字体度量、line-height 和 vertical-align</title>
+      <link>http://fangyinghang.com/2017/everything-about-font-size/</link>
+      <pubDate>Thu, 16 Mar 2017 01:51:37 +0800</pubDate>
+      
+      <guid>http://fangyinghang.com/2017/everything-about-font-size/</guid>
+      <description>这是一篇译文，对 inline 和 inline-block 的元素剖析非常给力。 原文：Deep dive CSS: font metrics, line-height and vertical-align - Vincent De Oliveira line-height 和 vertical-align 都是简单的 CSS 属性，以致于大多数人自以为知道这两个属性的工</description>
+    </item>
+    
+    <item>
       <title>JS 的 new 到底是干什么的？</title>
       <link>http://fangyinghang.com/2016/new-in-js/</link>
       <pubDate>Mon, 12 Dec 2016 01:45:22 +0800</pubDate>

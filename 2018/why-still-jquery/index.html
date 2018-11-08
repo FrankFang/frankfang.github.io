@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="方应杭">
+  <meta name="description" content="方应杭的个人网站">
+  <meta name="keywords" content="方应杭,前端,饥人谷,前端培训">
+  
+  <link rel="prev" href="http://fangyinghang.com/2017/let-in-js/" />
+  
+  <link rel="canonical" href="http://fangyinghang.com/2018/why-still-jquery/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           jQuery 都过时了，那我还学它干嘛？ | 方应杭的个人网站
+       
+  </title>
+  <meta name="title" content="jQuery 都过时了，那我还学它干嘛？ | 方应杭的个人网站">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "http://fangyinghang.com/"
+    },
+    "articleSection" : "posts",
+    "name" : "jQuery 都过时了，那我还学它干嘛？",
+    "headline" : "jQuery 都过时了，那我还学它干嘛？",
+    "description" : "今天饥人谷的新生问我
+ 请问现在我还需要学习 jQuery 吗？听你在知乎说 jQuery 已经过时了，是不是就不用学了？
+ 短答案 jQuery 还是可以学一学的，学了之后对写代码和封装库很有帮助。
+现在的「新人」依然可以学习 jQuery 的思想，因为以「新人」的水平，直接理解 Vue / React 的思想难度较大，jQuery 是一个很不错的中间过渡，因为 jQuery 也蕴含了非常多的编程套路。
+但是如果你不想学，就不学吧。直接去学 Vue / React 会难一点，但也能学会。
+长答案： jQuery 当然过时了。
+距离我上次在项目中使用 jQuery，可能已经快两年时间了（除去上课时演示功能时用 jQuery）。回想我学习 jQuery 的过程，还挺神奇的。
+当年我在大学的技术小组里做 C# 网站开发，需要用到 jQuery 特效，组里的一名小伙伴会用一点 jQuery，很快就用 .animate 做出了让我啧啧称奇的特效。我觉得 jQuery 好神奇啊，虽然我当时连 JS 都不会。
+于是我立马买了一本《锋利的 jQuery》，硬看。
+什么叫「硬看」呢？因为我不会 JS，而且我并没有照着书上敲代码，仅仅使用眼睛「看 jQuery 代码」。神奇的是——我居然很快看懂了几乎整本书。以至于那位会用 jQuery 的小伙伴遇到 bug 问我时我能直接给出解答，看起来他并没有看《锋利的 jQuery》这本书（笑）。
+到了 2018 年，几乎已经没有新项目会使用 jQuery 来开发了；即使有，也是一件不值得拿出来炫耀的事情。那为什么我还是建议学习 jQuery 呢？
+原因如下。
+jQuery 教你如何设计 API 上文说到我一个不会 JS 的人居然能看懂 jQuery 的书，其实这不是因为我厉害，而是因为 jQuery 的 API 设计得太人性化了！",
+    "inLanguage" : "zh-CN",
+    "author" : "方应杭",
+    "creator" : "方应杭",
+    "publisher": "方应杭",
+    "accountablePerson" : "方应杭",
+    "copyrightHolder" : "方应杭",
+    "copyrightYear" : "2018",
+    "datePublished": "2018-10-15 16:22:04 &#43;0800 CST",
+    "dateModified" : "2018-10-15 16:22:04 &#43;0800 CST",
+    "url" : "http://fangyinghang.com/2018/why-still-jquery/",
+    "wordCount" : "369",
+    "keywords" : [  "方应杭的个人网站"]
+}
+</script>
+
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	 
+          <a href="http://fangyinghang.com/">方应杭的个人网站</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" 
+                   
+                  href="/" title="">
+                  首页
+                </a>
+                
+                <a class="menu-item" 
+                   
+                  href="/posts/" title="">
+                  文章
+                </a>
+                
+                <a class="menu-item" 
+                   
+                  href="/contacts/" title="">
+                  联系我
+                </a>
+                
+                <a class="menu-item" 
+                   
+                  href="/wechat-subscribe/" title="">
+                  订阅
+                </a>
+                
+                <a class="menu-item" 
+                   target="_blank"
+                  href="https://www.ximalaya.com/keji/12837765/" title="">
+                  电台
+                </a>
+                
+                <a class="menu-item" 
+                   
+                  href="/index.xml" title="">
+                  RSS
+                </a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  
+              
+              <a href="http://fangyinghang.com/">方应杭的个人网站</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/" title="">首页</a>
+                
+                <a class="menu-item" href="/posts/" title="">文章</a>
+                
+                <a class="menu-item" href="/contacts/" title="">联系我</a>
+                
+                <a class="menu-item" href="/wechat-subscribe/" title="">订阅</a>
+                
+                <a class="menu-item" href="https://www.ximalaya.com/keji/12837765/" title="">电台</a>
+                
+                <a class="menu-item" href="/index.xml" title="">RSS</a>
+                
+        </div>
+    </div>
+</nav>
+
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">jQuery 都过时了，那我还学它干嘛？</h1>
+        <div class="post-meta">
+                <a itemprop="name" href="http://fangyinghang.com/" rel="author">
+                  方应杭</a>
+                <span class="post-time">写于
+                  <time datetime=2018-10-15 itemprop="datePublished">
+                    2018年10月15日
+                  </time>
+                </span>
+                
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<p>今天饥人谷的新生问我</p>
+
+<blockquote>
+<p>请问现在我还需要学习 jQuery 吗？听你在知乎说 jQuery 已经过时了，是不是就不用学了？</p>
+</blockquote>
+
+<h2 id="短答案">短答案</h2>
+
+<p>jQuery 还是可以学一学的，学了之后对写代码和封装库很有帮助。</p>
+
+<p>现在的「新人」依然可以学习 jQuery 的思想，因为以「新人」的水平，直接理解 Vue / React 的思想难度较大，jQuery 是一个很不错的中间过渡，因为 jQuery 也蕴含了非常多的编程套路。</p>
+
+<p>但是如果你不想学，就不学吧。直接去学 Vue / React 会难一点，但也能学会。</p>
+
+<h2 id="长答案">长答案：</h2>
+
+<p>jQuery 当然过时了。</p>
+
+<p>距离我上次在项目中使用 jQuery，可能已经快两年时间了（除去上课时演示功能时用 jQuery）。回想我学习 jQuery 的过程，还挺神奇的。</p>
+
+<p>当年我在大学的技术小组里做 C# 网站开发，需要用到 jQuery 特效，组里的一名小伙伴会用一点 jQuery，很快就用 .animate 做出了让我啧啧称奇的特效。我觉得 jQuery 好神奇啊，虽然我当时连 JS 都不会。</p>
+
+<p>于是我立马买了一本《锋利的 jQuery》，硬看。</p>
+
+<p>什么叫「硬看」呢？因为我不会 JS，而且我并没有照着书上敲代码，仅仅使用眼睛「看 jQuery 代码」。神奇的是——我居然很快看懂了几乎整本书。以至于那位会用 jQuery 的小伙伴遇到 bug 问我时我能直接给出解答，看起来他并没有看《锋利的 jQuery》这本书（笑）。</p>
+
+<p>到了 2018 年，几乎已经没有新项目会使用 jQuery 来开发了；即使有，也是一件不值得拿出来炫耀的事情。那为什么我还是建议学习 jQuery 呢？</p>
+
+<p>原因如下。</p>
+
+<h2 id="jquery-教你如何设计-api">jQuery 教你如何设计 API</h2>
+
+<p>上文说到我一个不会 JS 的人居然能看懂 jQuery 的书，其实这不是因为我厉害，而是因为 jQuery 的 API 设计得太人性化了！</p>
+
+<p>举几个例子给大家看看：</p>
+
+<p>第一个是 jQuery 对事件监听的简化</p>
+
+<pre><code>// 那时，如果不用 jQuery，监听事件（兼容 IE 6）你要这么写
+if (button.addEventListener)  
+  button.addEventListener('click',fn);
+else if (button.attachEvent) { 
+  button.attachEvent('onclick', fn);
+}else {
+  button.onclick = fn;
+}
+
+// 但是如果你用 jQuery，你只需要这么写
+$(button).on('click', fn)
+</code></pre>
+
+<p>第二个是 jQuery 对元素选择的简化</p>
+
+<pre><code>// 如果你想获取 .nav &gt; .navItem 对应的所有元素，用 jQuery 是这样写的
+$('.nav &gt; .navItem')
+
+// 在 IE 6 上，你得这么写
+var navItems = document.getElementsByClassName('navItem')
+var result = []
+for(var i = 0; i &lt; navItems.length; i++){
+  if(navItems[i].parentNode.className.match(/\bnav\b/){
+    result.push(navItems[i])
+  }
+}
+</code></pre>
+
+<p>有没有发现 jQuery 的代码一读就读懂了？可读性非常强！</p>
+
+<p>当时我作为一个新人，每每看到 jQuery 那优雅的 API，都禁不住去思考 jQuery 到底是怎么实现的，我自己能不能实现出来（但我并不推荐看 jQuery 源码）。本着这样的想法，我学会了很多编程技巧。</p>
+
+<p>为什么有些人代码水平老是提不高了，就是因为不会造轮子，不会设计优雅的 API，更不会实现优雅的 API，只会调用其他库或框架提供的功能（中枪的举手）。</p>
+
+<p>而 jQuery 则提供了一个简单而又经典的范例供大家学习。</p>
+
+<p>不信的话我们就来看看 jQuery 用到了哪些所谓的设计模式（其实就是编程套路）吧。</p>
+
+<ol>
+<li><p>发布订阅模式</p>
+
+<pre><code>var eventHub = $({})
+eventHub.on('xxx', function(){ console.log('收到') })
+eventHub.trigger('xxx')
+</code></pre></li>
+
+<li><p>用原型继承实现插件系统</p>
+
+<pre><code>$.fn.modal = function(){ ... }
+$('#div1').modal()
+</code></pre>
+
+<p>Vue 2 的插件也是类似的思路哦</p></li>
+
+<li><p>事件委托</p>
+
+<pre><code>$('div').on('click', 'span', function(){...})
+</code></pre>
+
+<p>说实话，你在 2018 年找前端让他写一个事件委托，我保证 90% 写出来的代码都是有「明显」bug 的。</p></li>
+
+<li><p>链式调用</p>
+
+<pre><code>$('div').text('hi').addClass('red').animate({left: 100})
+</code></pre></li>
+
+<li><p>函数重载（伪）</p>
+
+<pre><code>$(fn)
+$('div')
+$(div)
+$($(div))
+$('span', '#scope1')
+</code></pre>
+
+<p>你会发现 $ 这个函数的参数可以是函数、字符串、元素和 jQuery 对象，甚至还能接受多个参数，这种重载是怎么做到的？</p></li>
+
+<li><p>命名空间</p>
+
+<pre><code>// 你的插件在一个 button 上绑定了很多事件
+$button.on('click.plugin', function(){...})
+$button.on('mouseenter.plugin', function(){...})
+// 然后你想在某个时刻移除以上所有事件
+$button.off('.plugin')
+</code></pre>
+
+<p>如果你不用 jQuery 就很麻烦了。</p></li>
+
+<li><p>高阶函数</p>
+
+<pre><code>var fn2 = $.proxy(fn1, asThis, param1)
+</code></pre>
+
+<p>$.proxy 接受一个函数，返回一个新的函数。</p></li>
+</ol>
+
+<p>其他就不一一列举了。</p>
+
+<h2 id="jquery-的-api-风格依然在流行">jQuery 的 API 风格依然在流行</h2>
+
+<p>我们把 jQuery 和 Axios 做一下对比：</p>
+
+<pre><code>$.ajax({url:'/api', method:'get'})
+$.get('/api').then(fn1,fn2)
+
+axios({ url: '/api', method: 'get'})
+axios.get('/api').then(fn1, fn2)
+</code></pre>
+
+<p>为什么 2018 年流行的 axios 跟 jQuery.ajax 这么相像呢？</p>
+
+<p>因为 jQuery 的 API 实在太好用了！搞得新库根本没法超越它，没有办法设计出更简洁的 API 了。毕竟 jQuery 也是在前端界流行近十年。</p>
+
+<p>所以你学了 jQuery 很容易过渡其他类似的新库。</p>
+
+<h2 id="jquery-也能做-mvc">jQuery 也能做 MVC</h2>
+
+<p>很多人以为前端框架是从 Vue、React 和 Angular 才开始的，其实 jQuery 时代早就有基于 jQuery 的 MV* 库了，比如著名的 Backbone.js 和 Marionette.js。</p>
+
+<p>看看下面的 Backbone 应用代码</p>
+
+<pre><code>var TodoView = Backbone.View.extend({
+    tagName:  'div',
+    template: _.template($('#item-template').html()),
+    events: {
+        'click .toggle': 'xxx',
+    },
+    initialize: function () {
+        this.listenTo(this.model, 'change', this.render);
+    },
+    render: function () {
+        if (this.model.changed.id !== undefined) {return; }
+        this.$el.html(this.template(this.model.toJSON()));
+        return this;
+    }
+});
+</code></pre>
+
+<p>AngularJS、Vue 1.x、Vue 2.x 其实都是顺着 Backbone MVC 的思路慢慢优化、改造得来的，如果你提前了解 Backbone 作为知识铺垫，那么理解 Vue 是非常容易的。如果面试官问你 MVC 和 MVVM 的区别，你也是很容易就可以答出来的。</p>
+
+<p>最后就引用我之前的一个回答作为结尾来说明学习 jQuery 意义：</p>
+
+<p><a href="https://www.zhihu.com/question/20521802/answer/290354219" rel="nofollow noreferrer" target="_blank">完全理解jQuery源代码，在前端行业算什么水平？</a></p>
+
+<blockquote>
+<p>说明你</p>
+
+<ol>
+<li>精通正则表达式</li>
+<li>了解闭包</li>
+<li>了解原型链</li>
+<li>精通 DOM API</li>
+<li>了解各种设计模式（事件、Promise、伪重载、装饰器模式等）</li>
+<li>精通 DOM 事件</li>
+<li>了解旧浏览器的各种特性（bug）</li>
+<li>了解模块化</li>
+<li>了解浏览器渲染原理</li>
+<li>精通 AJAX</li>
+<li>了解 HTTP 请求</li>
+</ol>
+
+<p>可以秒杀中国 80% 的前端</p>
+</blockquote>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>作者</span>
+                <span>方应杭 </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>链接</span>
+                    <a href=http://fangyinghang.com/2018/why-still-jquery/>http://fangyinghang.com/2018/why-still-jquery/</span>
+            </p>
+            
+             
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+        <section>
+                <a href="javascript:window.history.back();">后退</a></span> · 
+                <span><a href="http://fangyinghang.com/">回到首页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="http://fangyinghang.com/2017/let-in-js/" class="prev" rel="prev" title="我用了两个月的时间才理解 let"><i class="iconfont icon-left"></i>&nbsp;我用了两个月的时间才理解 let</a>
+         
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+  <div class="copyright">
+    <div>
+      &copy;
+      
+      <span itemprop="copyrightYear">2012 - 2018</span>
+      
+      <span class="with-love">
+        <i class="iconfont icon-love"></i> 
+      </span>
+      
+      <span class="author" itemprop="copyrightHolder"><a href="http://fangyinghang.com/">方应杭</a> </span> 
+      
+
+      
+      <span>
+    </div>
+    <div>
+      Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+  </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+
+     </div>
+  </body>
+</html>

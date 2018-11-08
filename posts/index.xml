@@ -6,10 +6,31 @@
     <description>Recent content in Posts on 方应杭的个人网站</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 27 Jul 2017 13:39:30 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 15 Oct 2018 16:22:04 +0800</lastBuildDate>
     
 	<atom:link href="http://fangyinghang.com/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>jQuery 都过时了，那我还学它干嘛？</title>
+      <link>http://fangyinghang.com/2018/why-still-jquery/</link>
+      <pubDate>Mon, 15 Oct 2018 16:22:04 +0800</pubDate>
+      
+      <guid>http://fangyinghang.com/2018/why-still-jquery/</guid>
+      <description>今天饥人谷的新生问我
+ 请问现在我还需要学习 jQuery 吗？听你在知乎说 jQuery 已经过时了，是不是就不用学了？
+ 短答案 jQuery 还是可以学一学的，学了之后对写代码和封装库很有帮助。
+现在的「新人」依然可以学习 jQuery 的思想，因为以「新人」的水平，直接理解 Vue / React 的思想难度较大，jQuery 是一个很不错的中间过渡，因为 jQuery 也蕴含了非常多的编程套路。
+但是如果你不想学，就不学吧。直接去学 Vue / React 会难一点，但也能学会。
+长答案： jQuery 当然过时了。
+距离我上次在项目中使用 jQuery，可能已经快两年时间了（除去上课时演示功能时用 jQuery）。回想我学习 jQuery 的过程，还挺神奇的。
+当年我在大学的技术小组里做 C# 网站开发，需要用到 jQuery 特效，组里的一名小伙伴会用一点 jQuery，很快就用 .animate 做出了让我啧啧称奇的特效。我觉得 jQuery 好神奇啊，虽然我当时连 JS 都不会。
+于是我立马买了一本《锋利的 jQuery》，硬看。
+什么叫「硬看」呢？因为我不会 JS，而且我并没有照着书上敲代码，仅仅使用眼睛「看 jQuery 代码」。神奇的是——我居然很快看懂了几乎整本书。以至于那位会用 jQuery 的小伙伴遇到 bug 问我时我能直接给出解答，看起来他并没有看《锋利的 jQuery》这本书（笑）。
+到了 2018 年，几乎已经没有新项目会使用 jQuery 来开发了；即使有，也是一件不值得拿出来炫耀的事情。那为什么我还是建议学习 jQuery 呢？
+原因如下。
+jQuery 教你如何设计 API 上文说到我一个不会 JS 的人居然能看懂 jQuery 的书，其实这不是因为我厉害，而是因为 jQuery 的 API 设计得太人性化了！</description>
+    </item>
     
     <item>
       <title>我用了两个月的时间才理解 let</title>

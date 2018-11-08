@@ -62,28 +62,6 @@
     </item>
     
     <item>
-      <title>微信订阅</title>
-      <link>http://fangyinghang.com/wechat-subscribe/</link>
-      <pubDate>Thu, 08 Nov 2018 03:43:41 +0800</pubDate>
-      
-      <guid>http://fangyinghang.com/wechat-subscribe/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;http://fangyinghang.com/images/me/qrcode.jpg&#34; alt=&#34;扫码关注&#34; /&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>联系方式</title>
-      <link>http://fangyinghang.com/contacts/</link>
-      <pubDate>Thu, 08 Nov 2018 03:43:41 +0800</pubDate>
-      
-      <guid>http://fangyinghang.com/contacts/</guid>
-      <description>&lt;p&gt;邮箱：fangyinghang # foxmail.com&lt;/p&gt;
-
-&lt;p&gt;知乎：&lt;a href=&#34;https://www.zhihu.com/people/zhihusucks/answers/by_votes&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;zhihusucks&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
       <title>jQuery 都过时了，那我还学它干嘛？</title>
       <link>http://fangyinghang.com/2018/why-still-jquery/</link>
       <pubDate>Mon, 15 Oct 2018 16:22:04 +0800</pubDate>
@@ -1771,6 +1749,28 @@ func()
 &lt;p&gt;&lt;strong&gt;如果你觉得一个概念很复杂，那么很可能是你理解错了。&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;完。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>微信订阅</title>
+      <link>http://fangyinghang.com/wechat-subscribe/</link>
+      <pubDate>Sun, 08 Nov 2015 03:43:41 +0800</pubDate>
+      
+      <guid>http://fangyinghang.com/wechat-subscribe/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;http://fangyinghang.com/images/me/qrcode.jpg&#34; alt=&#34;扫码关注&#34; /&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>联系方式</title>
+      <link>http://fangyinghang.com/contacts/</link>
+      <pubDate>Sun, 08 Nov 2015 03:43:41 +0800</pubDate>
+      
+      <guid>http://fangyinghang.com/contacts/</guid>
+      <description>&lt;p&gt;邮箱：fangyinghang # foxmail.com&lt;/p&gt;
+
+&lt;p&gt;知乎：&lt;a href=&#34;https://www.zhihu.com/people/zhihusucks/answers/by_votes&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;zhihusucks&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     

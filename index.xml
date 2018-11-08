@@ -296,6 +296,92 @@ axios.get(&#39;/api&#39;).then(fn1, fn2)
     </item>
     
     <item>
+      <title>我写了一个基于 Vue 的 UI 框架——轱辘 UI</title>
+      <link>http://fangyinghang.com/2018/gulu-ui/</link>
+      <pubDate>Fri, 03 Aug 2018 16:32:18 +0800</pubDate>
+      
+      <guid>http://fangyinghang.com/2018/gulu-ui/</guid>
+      <description>
+
+&lt;p&gt;&lt;a href=&#34;https://frankfang.github.io/gulu/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;官方文档&lt;/a&gt; | &lt;a href=&#34;https://github.com/FrankFang/gulu&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;源码&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;轱辘 UI 是一个不太一样的 UI 框架。&lt;/p&gt;
+
+&lt;p&gt;本 UI 框架是一个「面向源码阅读者」的框架。如果对你有帮助，请不要吝惜你的 star。&lt;/p&gt;
+
+&lt;p&gt;也就是说，我制作这个框架的目的就是让前端新人学习轮子的制作思路。所有代码都追求可读性。&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;你可以通过查看逐个 commit 来学习本框架的制作思路&lt;/li&gt;
+&lt;li&gt;也可以通过我&lt;a href=&#34;https://xiedaimala.com/courses/6d63da67-6eea-4711-aeb4-0c3a949341dc&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;录制的视频&lt;/a&gt;来学习
+（抱歉，由于制作非常耗时，所以视频是收费的。不过项目搭建过程的录屏是&lt;strong&gt;免费&lt;/strong&gt;的，这几节视频能帮你快速从零开始本项目。）&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;如果你想从第一个commit 开始看，请点击&lt;a href=&#34;https://github.com/FrankFang/gulu/commits/master?after=36fbd6867d0a223184ad67e3d2bc3569e88847e0+104&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;这里&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;如果你对代码有疑问，欢迎&lt;a href=&#34;https://github.com/frankfang/gulu/issues&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;提issue&lt;/a&gt;，我会回答你的疑问。也可以在本文末尾加群咨询。&lt;/p&gt;
+
+&lt;p&gt;本 UI 框架是基于 Vue 2 实现的。&lt;/p&gt;
+
+&lt;p&gt;注意：本 UI 框架的代码尚未完全完工（目前代码大概完成 50%），请不要在生产环境中使用本 UI 框架。&lt;/p&gt;
+
+&lt;h2 id=&#34;你能学到什么&#34;&gt;你能学到什么&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;单元测试、覆盖率、持续集成等工程概念&lt;/li&gt;
+&lt;li&gt;重构、TDD/BDD、设计模式、单向数据流等技术概念&lt;/li&gt;
+&lt;li&gt;Vue 的几乎所有功能，并且是深入理解这些功能，而不是肤浅理解&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;有哪些轮子&#34;&gt;有哪些轮子&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;简单轮子：按钮、输入框、网格、布局、Toast、Tabs、Popover、手风琴（代码已完成）&lt;/li&gt;
+&lt;li&gt;进阶轮子：级联选择、无缝轮播、响应式导航条、分页、表单验证、Table、图片上传、Sticky、Tree、Suggestion、Datepicker（代码未完成）&lt;/li&gt;
+&lt;li&gt;其他：路由、状态管理（代码未完成）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;注意：这只是目前的计划，具体要完成的轮子可能与上面有出入。&lt;/p&gt;
+
+&lt;h2 id=&#34;项目特点&#34;&gt;项目特点&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;使用 Travis CI 进行持续集成&lt;/li&gt;
+&lt;li&gt;有丰富的单元测试，项目完成时，期望测试覆盖率超过 90%&lt;/li&gt;
+&lt;li&gt;自说明的代码，即使没有注释，你也能看懂&lt;/li&gt;
+&lt;li&gt;初期我使用 parcel 构建方便新人上手，后期改为 Vue Cli 3 以实现更多功能&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;背景&#34;&gt;背景&lt;/h2&gt;
+
+&lt;p&gt;我几年前曾经发表过《&lt;a href=&#34;https://juejin.im/post/58ef6004ac502e006c16f2d6&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;笨办法学前端&lt;/a&gt;》一文，
+当时我觉得开源社区里虽然有很多不错的库，但是这些库都是以实用为主，其源码并不适合&lt;strong&gt;新人&lt;/strong&gt;阅读。&lt;/p&gt;
+
+&lt;p&gt;于是我业余时间用原生 JS 造了几个轮子放在 GitHub，没想到居然有几百人关注，还希望我能发布更详细的教程。&lt;/p&gt;
+
+&lt;p&gt;但是我当时并没有时间来做更详细的教程。&lt;/p&gt;
+
+&lt;p&gt;现在我终于……还是很忙，不过我决定用每周六和周日来录制「造轮子」的视频。&lt;/p&gt;
+
+&lt;p&gt;这一次为了顺应前端的潮流，我直接采用 Vue 2 来造轮子。如果你正在学习 Vue 2，那么轱辘 UI 的源码会非常适合你阅读。&lt;/p&gt;
+
+&lt;h2 id=&#34;视觉稿&#34;&gt;视觉稿&lt;/h2&gt;
+
+&lt;p&gt;本 UI 框架借鉴了一些成熟 UI 框架（如 Framework7、Element UI 和 Ant Design）的外观，简化之后我自己制作了一个&lt;a href=&#34;https://www.yuque.com/u29422/gulu/artboards/22283&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;视觉稿&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;如果你发现视觉稿有什么不足的地方，可以直接在上面留言，我也会看到。&lt;/p&gt;
+
+&lt;h2 id=&#34;为什么叫轱辘ui&#34;&gt;为什么叫轱辘UI&lt;/h2&gt;
+
+&lt;p&gt;因为轱辘就是「轮子」的意思，这个项目几乎就是在造轮子。&lt;/p&gt;
+
+&lt;h2 id=&#34;微信交流群&#34;&gt;微信交流群&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://qr.jirengu.com/api/taskUrl?tid=8&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;点击查看二维码&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>我用了两个月的时间才理解 let</title>
       <link>http://fangyinghang.com/2017/let-in-js/</link>
       <pubDate>Thu, 27 Jul 2017 13:39:30 +0800</pubDate>

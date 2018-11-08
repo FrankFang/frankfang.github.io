@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="方应杭">
+  <meta name="description" content="方应杭的个人网站">
+  <meta name="keywords" content="方应杭,前端,饥人谷,前端培训">
+  
+  <link rel="prev" href="http://fangyinghang.com/2016/five-key-learnings-from-the-post-bootcamp-job-search/" />
+  <link rel="next" href="http://fangyinghang.com/2017/let-in-js/" />
+  <link rel="canonical" href="http://fangyinghang.com/2016/new-in-js/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           JS 的 new 到底是干什么的？ | 方应杭的个人网站
+       
+  </title>
+  <meta name="title" content="JS 的 new 到底是干什么的？ | 方应杭的个人网站">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "http://fangyinghang.com/"
+    },
+    "articleSection" : "posts",
+    "name" : "JS 的 new 到底是干什么的？",
+    "headline" : "JS 的 new 到底是干什么的？",
+    "description" : "大部分讲 new 的文章会从面向对象的思路讲起，但是我始终认为，在解释一个事物的时候，不应该引入另一个更复杂的事物。 今天我从「省代码」的角度来讲 ne",
+    "inLanguage" : "zh-CN",
+    "author" : "方应杭",
+    "creator" : "方应杭",
+    "publisher": "方应杭",
+    "accountablePerson" : "方应杭",
+    "copyrightHolder" : "方应杭",
+    "copyrightYear" : "2016",
+    "datePublished": "2016-12-12 01:45:22 &#43;0800 CST",
+    "dateModified" : "2016-12-12 01:45:22 &#43;0800 CST",
+    "url" : "http://fangyinghang.com/2016/new-in-js/",
+    "wordCount" : "2282",
+    "keywords" : [  "方应杭的个人网站"]
+}
+</script>
+
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	 
+          <a href="http://fangyinghang.com/">方应杭的个人网站</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" 
+                   
+                  href="/" title="">
+                  首页
+                </a>
+                
+                <a class="menu-item" 
+                   
+                  href="/posts/" title="">
+                  文章
+                </a>
+                
+                <a class="menu-item" 
+                   
+                  href="/contacts/" title="">
+                  联系我
+                </a>
+                
+                <a class="menu-item" 
+                   
+                  href="/wechat-subscribe/" title="">
+                  订阅
+                </a>
+                
+                <a class="menu-item" 
+                   target="_blank"
+                  href="https://www.ximalaya.com/keji/12837765/" title="">
+                  电台
+                </a>
+                
+                <a class="menu-item" 
+                   
+                  href="/index.xml" title="">
+                  RSS
+                </a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  
+              
+              <a href="http://fangyinghang.com/">方应杭的个人网站</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/" title="">首页</a>
+                
+                <a class="menu-item" href="/posts/" title="">文章</a>
+                
+                <a class="menu-item" href="/contacts/" title="">联系我</a>
+                
+                <a class="menu-item" href="/wechat-subscribe/" title="">订阅</a>
+                
+                <a class="menu-item" href="https://www.ximalaya.com/keji/12837765/" title="">电台</a>
+                
+                <a class="menu-item" href="/index.xml" title="">RSS</a>
+                
+        </div>
+    </div>
+</nav>
+
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">JS 的 new 到底是干什么的？</h1>
+        <div class="post-meta">
+                <a itemprop="name" href="http://fangyinghang.com/" rel="author">
+                  方应杭</a>
+                <span class="post-time">写于
+                  <time datetime=2016-12-12 itemprop="datePublished">
+                    2016年12月12日
+                  </time>
+                </span>
+                
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+            
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<p>大部分讲 new 的文章会从面向对象的思路讲起，但是我始终认为，在解释一个事物的时候，不应该引入另一个更复杂的事物。</p>
+
+<p>今天我从「省代码」的角度来讲 new。</p>
+
+<hr />
+
+<p>想象我们在制作一个策略类战争游戏，玩家可以操作一堆士兵攻击敌方。</p>
+
+<p>我们着重来研究一下这个游戏里面的「制造士兵」环节。</p>
+
+<p>一个士兵的在计算机里就是一堆属性，如下图：</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/new-in-js/1.jpg" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
+
+<p>我们只需要这样就可以制造一个士兵：</p>
+
+<pre><code>var 士兵 = {
+  ID: 1, // 用于区分每个士兵
+  兵种:&quot;美国大兵&quot;,
+  攻击力:5,
+  生命值:42, 
+  行走:function(){ /*走俩步的代码*/},
+  奔跑:function(){ /*狂奔的代码*/  },
+  死亡:function(){ /*Go die*/    },
+  攻击:function(){ /*糊他熊脸*/   },
+  防御:function(){ /*护脸*/       }
+}
+
+兵营.制造(士兵)
+</code></pre>
+
+<h2 id="制造一百个士兵">制造一百个士兵</h2>
+
+<p>如果需要制造 100 个士兵怎么办呢？</p>
+
+<p>循环 100 次吧：</p>
+
+<pre><code>var 士兵们 = []
+var 士兵
+for(var i=0; i&lt;100; i++){
+  士兵 = {
+    ID: i, // ID 不能重复
+    兵种:&quot;美国大兵&quot;,
+    攻击力:5,
+    生命值:42, 
+    行走:function(){ /*走俩步的代码*/}，
+    奔跑:function(){ /*狂奔的代码*/  },
+    死亡:function(){ /*Go die*/    },
+    攻击:function(){ /*糊他熊脸*/   },
+    防御:function(){ /*护脸*/       }
+  }
+  士兵们.push(士兵)
+}
+
+兵营.批量制造(士兵们)
+</code></pre>
+
+<p>哎呀好简单。</p>
+
+<h2 id="质疑">质疑</h2>
+
+<p>上面的代码存在一个问题：浪费了很多内存。</p>
+
+<ol>
+<li><p>行走、奔跑、死亡、攻击、防御这五个动作对于每个士兵其实是一样的，只需要各自引用同一个函数就可以了，没必要重复创建 100 个行走、100个奔跑……</p></li>
+
+<li><p>这些士兵的兵种和攻击力都是一样的，没必要创建 100 次。</p></li>
+
+<li><p>只有 ID 和生命值需要创建 100 次，因为每个士兵有自己的 ID 和生命值。</p></li>
+</ol>
+
+<h2 id="改进">改进</h2>
+
+<p>看过我们的专栏以前文章（<a href="https://zhuanlan.zhihu.com/p/23090041?refer=study-fe" rel="nofollow noreferrer" target="_blank">JS 原型链</a>）的同学肯定知道，用原型链可以解决重复创建的问题：我们先创建一个「士兵原型」，然后让「士兵」的 <strong>proto</strong> 指向「士兵原型」</p>
+
+<pre><code>var 士兵原型 = {
+  兵种:&quot;美国大兵&quot;,
+  攻击力:5,
+  行走:function(){ /*走俩步的代码*/}，
+  奔跑:function(){ /*狂奔的代码*/  },
+  死亡:function(){ /*Go die*/    },
+  攻击:function(){ /*糊他熊脸*/   },
+  防御:function(){ /*护脸*/       }
+}
+var 士兵们 = []
+var 士兵
+for(var i=0; i&lt;100; i++){
+  士兵 = {
+    ID: i, // ID 不能重复
+    生命值:42
+  }
+
+  /*实际工作中不要这样写，因为 __proto__ 不是标准属性*/
+  士兵.__proto__ = 士兵原型 
+
+  士兵们.push(士兵)
+}
+
+兵营.批量制造(士兵们)
+</code></pre>
+
+<h2 id="优雅">优雅？</h2>
+
+<p>有人指出创建一个士兵的代码分散在两个地方很不优雅，于是我们用一个函数把这两部分联系起来：</p>
+
+<pre><code>function 士兵(ID){
+  var 临时对象 = {}
+
+  临时对象.__proto__ = 士兵.原型
+
+  临时对象.ID = ID
+  临时对象.生命值 = 42
+
+  return 临时对象
+}
+
+士兵.原型 = {
+  兵种:&quot;美国大兵&quot;,
+  攻击力:5,
+  行走:function(){ /*走俩步的代码*/}，
+  奔跑:function(){ /*狂奔的代码*/  },
+  死亡:function(){ /*Go die*/    },
+  攻击:function(){ /*糊他熊脸*/   },
+  防御:function(){ /*护脸*/       }
+}
+
+// 保存为文件：士兵.js
+</code></pre>
+
+<p>然后就可以愉快地引用「士兵」来创建士兵了：</p>
+
+<pre><code>var 士兵们 = []
+for(var i=0; i&lt;100; i++){
+  士兵们.push(士兵(i))
+}
+
+兵营.批量制造(士兵们)
+</code></pre>
+
+<h2 id="js-之父的关怀">JS 之父的关怀</h2>
+
+<p>JS 之父创建了 new 关键字，可以让我们少写几行代码：</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/new-in-js/2.jpg" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
+
+<p>只要你在士兵前面使用 new 关键字，那么可以少做四件事情：</p>
+
+<ol>
+<li><p>不用创建临时对象，因为 new 会帮你做（<strong>你使用「this」就可以访问到临时对象</strong>）；</p></li>
+
+<li><p>不用绑定原型，因为 new 会帮你做（new 为了知道原型在哪，所以指定原型的名字为 prototype）；</p></li>
+
+<li><p>不用 return 临时对象，因为 new 会帮你做；</p></li>
+
+<li><p>不要给原型想名字了，因为 new 指定名字为 prototype。</p></li>
+</ol>
+
+<h2 id="这一次我们用-new-来写">这一次我们用 new 来写</h2>
+
+<pre><code>function 士兵(ID){
+  this.ID = ID
+  this.生命值 = 42
+}
+
+士兵.prototype = {
+  兵种:&quot;美国大兵&quot;,
+  攻击力:5,
+  行走:function(){ /*走俩步的代码*/},
+  奔跑:function(){ /*狂奔的代码*/  },
+  死亡:function(){ /*Go die*/    },
+  攻击:function(){ /*糊他熊脸*/   },
+  防御:function(){ /*护脸*/       }
+}
+
+// 保存为文件：士兵.js
+</code></pre>
+
+<p>然后是创建士兵（加了一个 new 关键字）：</p>
+
+<pre><code>var 士兵们 = []
+for(var i=0; i&lt;100; i++){
+  士兵们.push(new 士兵(i))
+}
+
+兵营.批量制造(士兵们)
+</code></pre>
+
+<p><strong>new 的作用，就是省那么几行代码。（也就是所谓的语法糖）</strong></p>
+
+<h2 id="注意-constructor-属性">注意 constructor 属性</h2>
+
+<p>new 操作为了记录「临时对象是由哪个函数创建的」，所以预先给「士兵.prototype」加了一个 constructor 属性：</p>
+
+<pre><code>士兵.prototype = {
+  constructor: 士兵
+}
+</code></pre>
+
+<p>如果你重新对「士兵.prototype」赋值，那么这个 constructor 属性就没了，所以你应该这么写：</p>
+
+<pre><code>士兵.prototype.兵种 = &quot;美国大兵&quot;
+士兵.prototype.攻击力 = 5
+士兵.prototype.行走 = function(){ /*走俩步的代码*/}
+士兵.prototype.奔跑 = function(){ /*狂奔的代码*/  }
+士兵.prototype.死亡 = function(){ /*Go die*/    }
+士兵.prototype.攻击 = function(){ /*糊他熊脸*/   }
+士兵.prototype.防御 = function(){ /*护脸*/       }
+</code></pre>
+
+<p>或者你也可以自己给 constructor 重新赋值：</p>
+
+<pre><code>士兵.prototype = {
+  constructor: 士兵,
+  兵种:&quot;美国大兵&quot;,
+  攻击力:5,
+  行走:function(){ /*走俩步的代码*/},
+  奔跑:function(){ /*狂奔的代码*/  },
+  死亡:function(){ /*Go die*/    },
+  攻击:function(){ /*糊他熊脸*/   },
+  防御:function(){ /*护脸*/       }
+}
+</code></pre>
+
+<p>完。</p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>作者</span>
+                <span>方应杭 </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>链接</span>
+                    <a href=http://fangyinghang.com/2016/new-in-js/>http://fangyinghang.com/2016/new-in-js/</span>
+            </p>
+            
+             
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+        <section>
+                <a href="javascript:window.history.back();">后退</a></span> · 
+                <span><a href="http://fangyinghang.com/">回到首页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="http://fangyinghang.com/2016/five-key-learnings-from-the-post-bootcamp-job-search/" class="prev" rel="prev" title="从培训班出来之后找工作的经历，教会了我这五件事"><i class="iconfont icon-left"></i>&nbsp;从培训班出来之后找工作的经历，教会了我这五件事</a>
+         
+        
+        <a href="http://fangyinghang.com/2017/let-in-js/" class="next" rel="next" title="我用了两个月的时间才理解 let">我用了两个月的时间才理解 let&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+  <div class="copyright">
+    <div>
+      &copy;
+      
+      <span itemprop="copyrightYear">2012 - 2018</span>
+      
+      <span class="with-love">
+        <i class="iconfont icon-love"></i> 
+      </span>
+      
+      <span class="author" itemprop="copyrightHolder"><a href="http://fangyinghang.com/">方应杭</a> </span> 
+      
+
+      
+      <span>
+    </div>
+    <div>
+      Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+  </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+     <link href="//lib.baomitu.com/lightgallery/1.6.11/css/lightgallery.min.css" rel="stylesheet">  
+      
+     <script src="/js/vendor_gallery.min.js" async="" ></script>
+    
+  
+
+
+
+
+     </div>
+  </body>
+</html>

@@ -674,6 +674,241 @@ function fn2(){
     </item>
     
     <item>
+      <title>JS 的 new 到底是干什么的？</title>
+      <link>http://fangyinghang.com/2016/new-in-js/</link>
+      <pubDate>Mon, 12 Dec 2016 01:45:22 +0800</pubDate>
+      
+      <guid>http://fangyinghang.com/2016/new-in-js/</guid>
+      <description>
+
+&lt;p&gt;大部分讲 new 的文章会从面向对象的思路讲起，但是我始终认为，在解释一个事物的时候，不应该引入另一个更复杂的事物。&lt;/p&gt;
+
+&lt;p&gt;今天我从「省代码」的角度来讲 new。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;想象我们在制作一个策略类战争游戏，玩家可以操作一堆士兵攻击敌方。&lt;/p&gt;
+
+&lt;p&gt;我们着重来研究一下这个游戏里面的「制造士兵」环节。&lt;/p&gt;
+
+&lt;p&gt;一个士兵的在计算机里就是一堆属性，如下图：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://fangyinghang.com/images/new-in-js/1.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;我们只需要这样就可以制造一个士兵：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var 士兵 = {
+  ID: 1, // 用于区分每个士兵
+  兵种:&amp;quot;美国大兵&amp;quot;,
+  攻击力:5,
+  生命值:42, 
+  行走:function(){ /*走俩步的代码*/},
+  奔跑:function(){ /*狂奔的代码*/  },
+  死亡:function(){ /*Go die*/    },
+  攻击:function(){ /*糊他熊脸*/   },
+  防御:function(){ /*护脸*/       }
+}
+
+兵营.制造(士兵)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;制造一百个士兵&#34;&gt;制造一百个士兵&lt;/h2&gt;
+
+&lt;p&gt;如果需要制造 100 个士兵怎么办呢？&lt;/p&gt;
+
+&lt;p&gt;循环 100 次吧：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var 士兵们 = []
+var 士兵
+for(var i=0; i&amp;lt;100; i++){
+  士兵 = {
+    ID: i, // ID 不能重复
+    兵种:&amp;quot;美国大兵&amp;quot;,
+    攻击力:5,
+    生命值:42, 
+    行走:function(){ /*走俩步的代码*/}，
+    奔跑:function(){ /*狂奔的代码*/  },
+    死亡:function(){ /*Go die*/    },
+    攻击:function(){ /*糊他熊脸*/   },
+    防御:function(){ /*护脸*/       }
+  }
+  士兵们.push(士兵)
+}
+
+兵营.批量制造(士兵们)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;哎呀好简单。&lt;/p&gt;
+
+&lt;h2 id=&#34;质疑&#34;&gt;质疑&lt;/h2&gt;
+
+&lt;p&gt;上面的代码存在一个问题：浪费了很多内存。&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;行走、奔跑、死亡、攻击、防御这五个动作对于每个士兵其实是一样的，只需要各自引用同一个函数就可以了，没必要重复创建 100 个行走、100个奔跑……&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;这些士兵的兵种和攻击力都是一样的，没必要创建 100 次。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;只有 ID 和生命值需要创建 100 次，因为每个士兵有自己的 ID 和生命值。&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;改进&#34;&gt;改进&lt;/h2&gt;
+
+&lt;p&gt;看过我们的专栏以前文章（&lt;a href=&#34;https://zhuanlan.zhihu.com/p/23090041?refer=study-fe&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;JS 原型链&lt;/a&gt;）的同学肯定知道，用原型链可以解决重复创建的问题：我们先创建一个「士兵原型」，然后让「士兵」的 &lt;strong&gt;proto&lt;/strong&gt; 指向「士兵原型」&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var 士兵原型 = {
+  兵种:&amp;quot;美国大兵&amp;quot;,
+  攻击力:5,
+  行走:function(){ /*走俩步的代码*/}，
+  奔跑:function(){ /*狂奔的代码*/  },
+  死亡:function(){ /*Go die*/    },
+  攻击:function(){ /*糊他熊脸*/   },
+  防御:function(){ /*护脸*/       }
+}
+var 士兵们 = []
+var 士兵
+for(var i=0; i&amp;lt;100; i++){
+  士兵 = {
+    ID: i, // ID 不能重复
+    生命值:42
+  }
+
+  /*实际工作中不要这样写，因为 __proto__ 不是标准属性*/
+  士兵.__proto__ = 士兵原型 
+
+  士兵们.push(士兵)
+}
+
+兵营.批量制造(士兵们)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;优雅&#34;&gt;优雅？&lt;/h2&gt;
+
+&lt;p&gt;有人指出创建一个士兵的代码分散在两个地方很不优雅，于是我们用一个函数把这两部分联系起来：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;function 士兵(ID){
+  var 临时对象 = {}
+
+  临时对象.__proto__ = 士兵.原型
+
+  临时对象.ID = ID
+  临时对象.生命值 = 42
+
+  return 临时对象
+}
+
+士兵.原型 = {
+  兵种:&amp;quot;美国大兵&amp;quot;,
+  攻击力:5,
+  行走:function(){ /*走俩步的代码*/}，
+  奔跑:function(){ /*狂奔的代码*/  },
+  死亡:function(){ /*Go die*/    },
+  攻击:function(){ /*糊他熊脸*/   },
+  防御:function(){ /*护脸*/       }
+}
+
+// 保存为文件：士兵.js
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后就可以愉快地引用「士兵」来创建士兵了：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var 士兵们 = []
+for(var i=0; i&amp;lt;100; i++){
+  士兵们.push(士兵(i))
+}
+
+兵营.批量制造(士兵们)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;js-之父的关怀&#34;&gt;JS 之父的关怀&lt;/h2&gt;
+
+&lt;p&gt;JS 之父创建了 new 关键字，可以让我们少写几行代码：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://fangyinghang.com/images/new-in-js/2.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;只要你在士兵前面使用 new 关键字，那么可以少做四件事情：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;不用创建临时对象，因为 new 会帮你做（&lt;strong&gt;你使用「this」就可以访问到临时对象&lt;/strong&gt;）；&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;不用绑定原型，因为 new 会帮你做（new 为了知道原型在哪，所以指定原型的名字为 prototype）；&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;不用 return 临时对象，因为 new 会帮你做；&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;不要给原型想名字了，因为 new 指定名字为 prototype。&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;这一次我们用-new-来写&#34;&gt;这一次我们用 new 来写&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;function 士兵(ID){
+  this.ID = ID
+  this.生命值 = 42
+}
+
+士兵.prototype = {
+  兵种:&amp;quot;美国大兵&amp;quot;,
+  攻击力:5,
+  行走:function(){ /*走俩步的代码*/},
+  奔跑:function(){ /*狂奔的代码*/  },
+  死亡:function(){ /*Go die*/    },
+  攻击:function(){ /*糊他熊脸*/   },
+  防御:function(){ /*护脸*/       }
+}
+
+// 保存为文件：士兵.js
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后是创建士兵（加了一个 new 关键字）：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var 士兵们 = []
+for(var i=0; i&amp;lt;100; i++){
+  士兵们.push(new 士兵(i))
+}
+
+兵营.批量制造(士兵们)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;new 的作用，就是省那么几行代码。（也就是所谓的语法糖）&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;注意-constructor-属性&#34;&gt;注意 constructor 属性&lt;/h2&gt;
+
+&lt;p&gt;new 操作为了记录「临时对象是由哪个函数创建的」，所以预先给「士兵.prototype」加了一个 constructor 属性：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;士兵.prototype = {
+  constructor: 士兵
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果你重新对「士兵.prototype」赋值，那么这个 constructor 属性就没了，所以你应该这么写：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;士兵.prototype.兵种 = &amp;quot;美国大兵&amp;quot;
+士兵.prototype.攻击力 = 5
+士兵.prototype.行走 = function(){ /*走俩步的代码*/}
+士兵.prototype.奔跑 = function(){ /*狂奔的代码*/  }
+士兵.prototype.死亡 = function(){ /*Go die*/    }
+士兵.prototype.攻击 = function(){ /*糊他熊脸*/   }
+士兵.prototype.防御 = function(){ /*护脸*/       }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;或者你也可以自己给 constructor 重新赋值：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;士兵.prototype = {
+  constructor: 士兵,
+  兵种:&amp;quot;美国大兵&amp;quot;,
+  攻击力:5,
+  行走:function(){ /*走俩步的代码*/},
+  奔跑:function(){ /*狂奔的代码*/  },
+  死亡:function(){ /*Go die*/    },
+  攻击:function(){ /*糊他熊脸*/   },
+  防御:function(){ /*护脸*/       }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;完。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>从培训班出来之后找工作的经历，教会了我这五件事</title>
       <link>http://fangyinghang.com/2016/five-key-learnings-from-the-post-bootcamp-job-search/</link>
       <pubDate>Sat, 03 Dec 2016 01:25:35 +0800</pubDate>

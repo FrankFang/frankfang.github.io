@@ -69,6 +69,15 @@ jQuery 教你如何设计 API 上文说到我一个不会 JS 的人居然能看�
     </item>
     
     <item>
+      <title>JS 的 new 到底是干什么的？</title>
+      <link>http://fangyinghang.com/2016/new-in-js/</link>
+      <pubDate>Mon, 12 Dec 2016 01:45:22 +0800</pubDate>
+      
+      <guid>http://fangyinghang.com/2016/new-in-js/</guid>
+      <description>大部分讲 new 的文章会从面向对象的思路讲起，但是我始终认为，在解释一个事物的时候，不应该引入另一个更复杂的事物。 今天我从「省代码」的角度来讲 ne</description>
+    </item>
+    
+    <item>
       <title>从培训班出来之后找工作的经历，教会了我这五件事</title>
       <link>http://fangyinghang.com/2016/five-key-learnings-from-the-post-bootcamp-job-search/</link>
       <pubDate>Sat, 03 Dec 2016 01:25:35 +0800</pubDate>

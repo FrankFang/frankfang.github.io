@@ -6,19 +6,10 @@
     <description>Recent content in Posts on 方应杭的个人网站</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 09 Nov 2018 02:20:36 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 15 Oct 2018 16:22:04 +0800</lastBuildDate>
     
 	<atom:link href="http://fangyinghang.com/posts/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Dont Join Outsourcing Company</title>
-      <link>http://fangyinghang.com/dont-join-outsourcing-company/</link>
-      <pubDate>Fri, 09 Nov 2018 02:20:36 +0800</pubDate>
-      
-      <guid>http://fangyinghang.com/dont-join-outsourcing-company/</guid>
-      <description>为什么大部分程序员都不去「外包」公司？ 短答案：99% 的外包公司都是血汗工厂，压榨劳力，真真儿地是「用程序员的生命换钱」。 目前我只知道一家外包</description>
-    </item>
     
     <item>
       <title>jQuery 都过时了，那我还学它干嘛？</title>
@@ -129,6 +120,15 @@ func(p1, p2) 等价于 func.call(undefined, p1, p2) obj.child.method(p1, p2) 等
       
       <guid>http://fangyinghang.com/closures-in-js/</guid>
       <description>大名鼎鼎的闭包！这一题终于来了，面试必问： 请用自己的话简述 什么是「闭包」。 「闭包」的作用是什么。 首先来简述什么是闭包 假设上面三行代码在一个立</description>
+    </item>
+    
+    <item>
+      <title>Dont Join Outsourcing Company</title>
+      <link>http://fangyinghang.com/dont-join-outsourcing-company/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://fangyinghang.com/dont-join-outsourcing-company/</guid>
+      <description>为什么大部分程序员都不去「外包」公司？ 短答案：99% 的外包公司都是血汗工厂，压榨劳力，真真儿地是「用程序员的生命换钱」。 目前我只知道一家外包</description>
     </item>
     
   </channel>

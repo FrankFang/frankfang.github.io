@@ -167,5 +167,14 @@ func(p1, p2) 等价于 func.call(undefined, p1, p2) obj.child.method(p1, p2) 等
       <description>大名鼎鼎的闭包！这一题终于来了，面试必问： 请用自己的话简述 什么是「闭包」。 「闭包」的作用是什么。 首先来简述什么是闭包 假设上面三行代码在一个立</description>
     </item>
     
+    <item>
+      <title>Iife in Js</title>
+      <link>http://fangyinghang.com/iife-in-js/</link>
+      <pubDate>Fri, 16 Sep 2016 02:22:21 +0800</pubDate>
+      
+      <guid>http://fangyinghang.com/iife-in-js/</guid>
+      <description>这是 JS 中的一个常见概念，面试时经常会被问到， 请「用自己的语言」简述 立即执行函数是什么 立即执行函数有什么用途 回答： 1. 立即执行函数是什么 立即执行</description>
+    </item>
+    
   </channel>
 </rss>

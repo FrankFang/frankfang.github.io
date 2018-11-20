@@ -21,6 +21,15 @@
     </item>
     
     <item>
+      <title>JS 原型链</title>
+      <link>http://fangyinghang.com/prototype-in-js/</link>
+      <pubDate>Fri, 09 Nov 2018 02:21:19 +0800</pubDate>
+      
+      <guid>http://fangyinghang.com/prototype-in-js/</guid>
+      <description>我们知道 JS 有对象，比如 var obj = { name: &#39;obj&#39; } 我们可以对 obj 进行一些操作，包括 「读」属性 「新增」属性 「更新」属性 「删除」属性 下面我们主要来看一下「读」和</description>
+    </item>
+    
+    <item>
       <title>我不是很懂 Node.js 社区的 DRY 文化</title>
       <link>http://fangyinghang.com/i-dont-get-node-style/</link>
       <pubDate>Fri, 09 Nov 2018 02:18:28 +0800</pubDate>
@@ -168,7 +177,7 @@ func(p1, p2) 等价于 func.call(undefined, p1, p2) obj.child.method(p1, p2) 等
     </item>
     
     <item>
-      <title>Iife in Js</title>
+      <title>JS 立即执行函数</title>
       <link>http://fangyinghang.com/iife-in-js/</link>
       <pubDate>Fri, 16 Sep 2016 02:22:21 +0800</pubDate>
       

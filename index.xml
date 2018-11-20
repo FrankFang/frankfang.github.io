@@ -1825,6 +1825,112 @@ span {
     </item>
     
     <item>
+      <title>npm 是干什么的</title>
+      <link>http://fangyinghang.com/what-is-npm/</link>
+      <pubDate>Wed, 14 Dec 2016 02:16:39 +0800</pubDate>
+      
+      <guid>http://fangyinghang.com/what-is-npm/</guid>
+      <description>
+
+&lt;p&gt;网上的 npm 教程主要都在讲怎么安装、配置和使用 npm，却不告诉新人「为什么要使用 npm」。今天我就来讲讲这个话题。&lt;/p&gt;
+
+&lt;p&gt;本文目标读者是「不太了解 npm 的新人」，大神您别看了，不然又说我啰嗦了 😂。&lt;/p&gt;
+
+&lt;h2 id=&#34;社区&#34;&gt;社区&lt;/h2&gt;
+
+&lt;p&gt;程序员自古以来就有社区文化：&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;社区的意思是：拥有共同职业或兴趣的人们，自发组织在一起，通过分享信息和资源进行合作。虚拟社区的参与者经常会在线讨论相关话题，或访问某些网站。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;前端程序员也有社区，世界上最大的前端社区应该就是 GitHub 了。前端通过 GitHub 来&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;分享源代码（线上代码仓库）&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;讨论问题（Issue 列表）&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;收集学习资源和常去的网站（比如我收集的&lt;a href=&#34;https://github.com/FrankFang/best-chinese-front-end-blogs&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;优质中文前端博客&lt;/a&gt;）&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;加入社区最大的好处之一是，你可以使用别人贡献的代码，你也可以贡献代码给别人用。&lt;/p&gt;
+
+&lt;h2 id=&#34;共享代码&#34;&gt;共享代码&lt;/h2&gt;
+
+&lt;p&gt;前端是怎么共享代码的呢？&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;在 GitHub 还没有兴起的年代，前端是通过网址来共享代码的&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;比如你想使用 jQuery，那么你点击 jQuery 网站上提供的链接就可以下载 jQuery，放到自己的网站上使用&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://fangyinghang.com/images/what-is-npm/1.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;GItHub 兴起之后，社区中也有人使用 GitHub 的下载功能：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://fangyinghang.com/images/what-is-npm/2.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;麻烦&#34;&gt;麻烦&lt;/h2&gt;
+
+&lt;p&gt;当一个网站依赖的代码越来越多，程序员发现这是一件很麻烦的事情：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;去 jQuery 官网下载 jQuery&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;去 BootStrap 官网下载 BootStrap&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;去 Underscore 官网下载 Underscore&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;……&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;有些程序员就受不鸟了，一个&lt;a href=&#34;http://zhihu.com/question/48406009/answer/134182064&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;拥有三大美德&lt;/a&gt;的程序员 &lt;a href=&#34;https://github.com/isaacs&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Isaac Z. Schlueter&lt;/a&gt; （以下简称 Isaaz）给出一个解决方案：用一个工具把这些代码集中到一起来管理吧！&lt;/p&gt;
+
+&lt;p&gt;这个工具就是他用 JavaScript （运行在 Node.js 上）写的 npm，全称是 Node Package Manager&lt;/p&gt;
+
+&lt;h2 id=&#34;具体步骤&#34;&gt;具体步骤&lt;/h2&gt;
+
+&lt;p&gt;NPM 的思路大概是这样的：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;买个服务器作为代码仓库（registry），在里面放所有需要被共享的代码&lt;/li&gt;
+&lt;li&gt;发邮件通知 jQuery、Bootstrap、Underscore 作者使用 npm publish 把代码提交到 registry 上，分别取名 jquery、bootstrap 和 underscore（注意大小写）&lt;/li&gt;
+&lt;li&gt;社区里的其他人如果想使用这些代码，就把 jquery、bootstrap 和 underscore 写到 package.json 里，然后运行 npm install ，npm 就会帮他们下载代码&lt;/li&gt;
+&lt;li&gt;下载完的代码出现在 node_modules 目录里，可以随意使用了。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;这些可以被使用的代码被叫做「包」（package），这就是 NPM 名字的由来：Node Package(包) Manager(管理器)。&lt;/p&gt;
+
+&lt;h2 id=&#34;发展&#34;&gt;发展&lt;/h2&gt;
+
+&lt;p&gt;Isaaz 通知 jQuery 作者 John Resig，他会答应吗？这事儿不一定啊，对不对。&lt;/p&gt;
+
+&lt;p&gt;只有社区里的人都觉得 「npm 是个宝」的时候，John Resig 才会考虑使用 npm。&lt;/p&gt;
+
+&lt;p&gt;那么 npm 是怎么火的呢？&lt;/p&gt;
+
+&lt;p&gt;npm 的发展是跟 Node.js 的发展相辅相成的。&lt;/p&gt;
+
+&lt;p&gt;Node.js 是由一个在德国工作的美国程序员 Ryan Dahl 写的。他写了 Node.js，但是 Node.js 缺少一个包管理器，于是他和 npm 的作者一拍即合、抱团取暖，最终 Node.js 内置了 npm。&lt;/p&gt;
+
+&lt;p&gt;后来的事情大家都知道，Node.js 火了。&lt;/p&gt;
+
+&lt;p&gt;随着 Node.js 的火爆，大家开始用 npm 来共享 JS 代码了，于是 jQuery 作者也将 jQuery 发布到 npm 了。&lt;/p&gt;
+
+&lt;p&gt;所以现在，你可以使用 npm install jquery 来下载 jQuery 代码。&lt;/p&gt;
+
+&lt;p&gt;现在用 npm 来分享代码已经成了前端的标配。&lt;/p&gt;
+
+&lt;h2 id=&#34;后续&#34;&gt;后续&lt;/h2&gt;
+
+&lt;p&gt;Node.js 目前由 Ryan Dahl 当时所在的公司 joyent 继续开发。Ryan Dahl 现在已经去研究 AI 和机器学习了，并且&lt;a href=&#34;https://groups.google.com/forum/#!topic/nodejs/hfajgpvGTLY&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;他把 Node.js 的维护权交给了 Isaaz&lt;/a&gt;。（我是不是也应该去研究 AI 和机器学习啊教练）&lt;/p&gt;
+
+&lt;p&gt;而 Isaaz 维护了一段时间后，辞职了，成立了一个公司专门维护 npm 的 registry，公司名叫做 &lt;a href=&#34;https://www.npmjs.com/about#about-npm-inc&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;npm 股份有限公司&lt;/a&gt;……谁说开源不能赚钱的~&lt;/p&gt;
+
+&lt;h2 id=&#34;社区的力量&#34;&gt;社区的力量&lt;/h2&gt;
+
+&lt;p&gt;回顾前端的发展是你会发现，都是社区里的某个人，发布了一份代码，最终影响前端几年的走向。比如 jQuery，比如 Node.js，比如 npm。（其实其他语言也是这样的）&lt;/p&gt;
+
+&lt;p&gt;所以，社区的力量是巨大的。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>JS 的 new 到底是干什么的？</title>
       <link>http://fangyinghang.com/new-in-js/</link>
       <pubDate>Mon, 12 Dec 2016 01:45:22 +0800</pubDate>
@@ -2204,169 +2310,6 @@ for(var i=0; i&amp;lt;100; i++){
 &lt;p&gt;你可能觉得找到好工作遥遥无期，但是你会成功的。持续地投入时间、持续地投简历、持续地照顾好自己。&lt;/p&gt;
 
 &lt;p&gt;你会得到你应得的。&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>this 的值到底是什么？一次说清楚</title>
-      <link>http://fangyinghang.com/this-in-js/</link>
-      <pubDate>Sun, 20 Nov 2016 13:39:30 +0800</pubDate>
-      
-      <guid>http://fangyinghang.com/this-in-js/</guid>
-      <description>
-
-&lt;p&gt;你可能遇到过这样的 JS 面试题：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;var obj = {
-  foo: function(){
-    console.log(this)
-  }
-}
-
-var bar = obj.foo
-obj.foo() // 打印出的 this 是 obj
-bar() // 打印出的 this 是 window
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;请解释最后两行函数的值为什么不一样。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;初学者关于 this 的理解一直很模糊。今天这篇文章就要一次讲清楚了。&lt;/p&gt;
-
-&lt;p&gt;而且这个解释，你在别的地方看不到。看懂这篇文章，所有关于 this 的面试题，都是小菜。&lt;/p&gt;
-
-&lt;h2 id=&#34;函数调用&#34;&gt;函数调用&lt;/h2&gt;
-
-&lt;p&gt;首先需要从函数的调用开始讲起。&lt;/p&gt;
-
-&lt;p&gt;JS（ES5）里面有三种函数调用形式：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;func(p1, p2) 
-obj.child.method(p1, p2)
-func.call(context, p1, p2) // 先不讲 apply
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;一般，初学者都知道前两种形式，而且认为前两种形式「优于」第三种形式。&lt;/p&gt;
-
-&lt;p&gt;从看到这篇文章起，你一定要记住，第三种调用形式，才是正常调用形式：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;func.call(context, p1, p2)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;其他两种都是语法糖，可以等价地变为 call 形式：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;func(p1, p2) 等价于
-func.call(undefined, p1, p2)
-
-obj.child.method(p1, p2) 等价于
-obj.child.method.call(obj.child, p1, p2)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;请记下来。（我们称此代码为「转换代码」，方便下文引用）&lt;/p&gt;
-
-&lt;p&gt;至此我们的函数调用只有一种形式：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;func.call(context, p1, p2)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;这样，this 就好解释了 this，就是上面代码中的 context。就这么简单。&lt;/p&gt;
-
-&lt;p&gt;也就是说 &lt;strong&gt;this 是你 call 一个函数时传的第一个参数&lt;/strong&gt;，
-只是由于你从来不用 call 形式的函数调用，所以你一直不知道。&lt;/p&gt;
-
-&lt;h2 id=&#34;func-p1-p2-里的-this&#34;&gt;func(p1, p2) 里的 this&lt;/h2&gt;
-
-&lt;p&gt;先看 func(p1, p2) 中的 this 如何确定：&lt;/p&gt;
-
-&lt;p&gt;当你写下面代码时&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;function func(){
-  console.log(this)
-}
-
-func()
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;等价于&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;function func(){
-  console.log(this)
-}
-
-func.call(undefined) // 可以简写为 func.call()
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;按理说打印出来的 this 应该就是 undefined 了吧，但是浏览器里有一条规则：&lt;/p&gt;
-
-&lt;p&gt;如果你传的 context 就 null 或者 undefined，那么 window 对象就是默认的 context（严格模式下默认 context 是 undefined）
-因此上面的打印结果是 window。&lt;/p&gt;
-
-&lt;p&gt;如果你希望这里的 this 不是 window，很简单：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;func.call(obj) // 那么里面的 this 就是 obj 对象了
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;obj-child-method-p1-p2-里的-this&#34;&gt;obj.child.method(p1, p2) 里的 this&lt;/h2&gt;
-
-&lt;p&gt;再看 obj.child.method(p1, p2) 的 this 如何确定&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;var obj = {
-  foo: function(){
-    console.log(this)
-  }
-}
-
-obj.foo() 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;按照「转换代码」，我们将 obj.foo() 转换为&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;obj.foo.call(obj)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;好了，this 就是 obj。搞定。&lt;/p&gt;
-
-&lt;p&gt;回到题目：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;var obj = {
-  foo: function(){
-    console.log(this)
-  }
-}
-
-var bar = obj.foo
-obj.foo() // 转换为 obj.foo.call(obj)，this 就是 obj
-bar() 
-// 转换为 bar.call()
-// 由于没有传 context
-// 所以 this 就是 undefined
-// 最后浏览器给你一个默认的 this —— window 对象
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;语法&#34;&gt;[ ] 语法&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;function fn (){ console.log(this) }
-var arr = [fn, fn2]
-arr[0]() // 这里面的 this 又是什么呢？
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;我们可以把 arr[0]( ) 想象为arr.0( )，虽然后者的语法错了，但是形式与转换代码里的 obj.child.method(p1, p2) 对应上了，于是就可以愉快的转换了：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;arr[0]() 
-假想为  arr.0()
-然后转换为 arr.0.call(arr)
-那么里面的 this 就是 arr 了 :)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;总结&#34;&gt;总结&lt;/h2&gt;
-
-&lt;p&gt;this 就是你 call 一个函数时，传入的第一个参数。（请务必背下来「this 就是 call 的第一个参数」）
-如果你的函数调用形式不是 call 形式，请按照「转换代码」将其转换为 call 形式。&lt;/p&gt;
-
-&lt;p&gt;以后你遇到所有跟 this 有关的笔试题，都不会有疑问了。&lt;/p&gt;
-
-&lt;p&gt;完。&lt;/p&gt;
 </description>
     </item>
     

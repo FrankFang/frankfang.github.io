@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="方应杭">
+  <meta name="description" content="方应杭的个人网站">
+  <meta name="keywords" content="方应杭,前端,饥人谷,前端培训">
+  
+  <link rel="prev" href="http://fangyinghang.com/new-in-js/" />
+  <link rel="next" href="http://fangyinghang.com/everything-about-font-size/" />
+  <link rel="canonical" href="http://fangyinghang.com/what-is-npm/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           npm 是干什么的 | 方应杭的个人网站
+       
+  </title>
+  <meta name="title" content="npm 是干什么的 | 方应杭的个人网站">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "http://fangyinghang.com/"
+    },
+    "articleSection" : "posts",
+    "name" : "npm 是干什么的",
+    "headline" : "npm 是干什么的",
+    "description" : "网上的 npm 教程主要都在讲怎么安装、配置和使用 npm，却不告诉新人「为什么要使用 npm」。今天我就来讲讲这个话题。 本文目标读者是「不太了解 npm 的新",
+    "inLanguage" : "zh-CN",
+    "author" : "方应杭",
+    "creator" : "方应杭",
+    "publisher": "方应杭",
+    "accountablePerson" : "方应杭",
+    "copyrightHolder" : "方应杭",
+    "copyrightYear" : "2016",
+    "datePublished": "2016-12-14 02:16:39 &#43;0800 CST",
+    "dateModified" : "2016-12-14 02:16:39 &#43;0800 CST",
+    "url" : "http://fangyinghang.com/what-is-npm/",
+    "wordCount" : "1347",
+    "keywords" : [  "方应杭的个人网站"]
+}
+</script>
+
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	 
+          <a href="http://fangyinghang.com/">方应杭的个人网站</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" 
+                   
+                  href="/" title="">
+                  首页
+                </a>
+                
+                <a class="menu-item" 
+                   
+                  href="/posts/" title="">
+                  文章
+                </a>
+                
+                <a class="menu-item" 
+                   
+                  href="/contacts/" title="">
+                  联系我
+                </a>
+                
+                <a class="menu-item" 
+                   
+                  href="/wechat-subscribe/" title="">
+                  订阅
+                </a>
+                
+                <a class="menu-item" 
+                   target="_blank"
+                  href="https://www.ximalaya.com/keji/12837765/" title="">
+                  电台
+                </a>
+                
+                <a class="menu-item" 
+                   
+                  href="/index.xml" title="">
+                  RSS
+                </a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  
+              
+              <a href="http://fangyinghang.com/">方应杭的个人网站</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/" title="">首页</a>
+                
+                <a class="menu-item" href="/posts/" title="">文章</a>
+                
+                <a class="menu-item" href="/contacts/" title="">联系我</a>
+                
+                <a class="menu-item" href="/wechat-subscribe/" title="">订阅</a>
+                
+                <a class="menu-item" href="https://www.ximalaya.com/keji/12837765/" title="">电台</a>
+                
+                <a class="menu-item" href="/index.xml" title="">RSS</a>
+                
+        </div>
+    </div>
+</nav>
+
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">npm 是干什么的</h1>
+        <div class="post-meta">
+                <a itemprop="name" href="http://fangyinghang.com/" rel="author">
+                  方应杭</a>
+                <span class="post-time">写于
+                  <time datetime=2016-12-14 itemprop="datePublished">
+                    2016年12月14日
+                  </time>
+                </span>
+                
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+            
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<p>网上的 npm 教程主要都在讲怎么安装、配置和使用 npm，却不告诉新人「为什么要使用 npm」。今天我就来讲讲这个话题。</p>
+
+<p>本文目标读者是「不太了解 npm 的新人」，大神您别看了，不然又说我啰嗦了 😂。</p>
+
+<h2 id="社区">社区</h2>
+
+<p>程序员自古以来就有社区文化：</p>
+
+<blockquote>
+<p>社区的意思是：拥有共同职业或兴趣的人们，自发组织在一起，通过分享信息和资源进行合作。虚拟社区的参与者经常会在线讨论相关话题，或访问某些网站。</p>
+</blockquote>
+
+<p>前端程序员也有社区，世界上最大的前端社区应该就是 GitHub 了。前端通过 GitHub 来</p>
+
+<ol>
+<li>分享源代码（线上代码仓库）<br /></li>
+<li>讨论问题（Issue 列表）<br /></li>
+<li>收集学习资源和常去的网站（比如我收集的<a href="https://github.com/FrankFang/best-chinese-front-end-blogs" rel="nofollow noreferrer" target="_blank">优质中文前端博客</a>）</li>
+</ol>
+
+<p>加入社区最大的好处之一是，你可以使用别人贡献的代码，你也可以贡献代码给别人用。</p>
+
+<h2 id="共享代码">共享代码</h2>
+
+<p>前端是怎么共享代码的呢？</p>
+
+<p><strong>在 GitHub 还没有兴起的年代，前端是通过网址来共享代码的</strong></p>
+
+<p>比如你想使用 jQuery，那么你点击 jQuery 网站上提供的链接就可以下载 jQuery，放到自己的网站上使用</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/what-is-npm/1.jpg" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
+
+<p><strong>GItHub 兴起之后，社区中也有人使用 GitHub 的下载功能：</strong></p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/what-is-npm/2.jpg" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
+
+<h2 id="麻烦">麻烦</h2>
+
+<p>当一个网站依赖的代码越来越多，程序员发现这是一件很麻烦的事情：</p>
+
+<ol>
+<li>去 jQuery 官网下载 jQuery<br /></li>
+<li>去 BootStrap 官网下载 BootStrap<br /></li>
+<li>去 Underscore 官网下载 Underscore<br /></li>
+<li>……<br /></li>
+</ol>
+
+<p>有些程序员就受不鸟了，一个<a href="http://zhihu.com/question/48406009/answer/134182064" rel="nofollow noreferrer" target="_blank">拥有三大美德</a>的程序员 <a href="https://github.com/isaacs" rel="nofollow noreferrer" target="_blank">Isaac Z. Schlueter</a> （以下简称 Isaaz）给出一个解决方案：用一个工具把这些代码集中到一起来管理吧！</p>
+
+<p>这个工具就是他用 JavaScript （运行在 Node.js 上）写的 npm，全称是 Node Package Manager</p>
+
+<h2 id="具体步骤">具体步骤</h2>
+
+<p>NPM 的思路大概是这样的：</p>
+
+<ol>
+<li>买个服务器作为代码仓库（registry），在里面放所有需要被共享的代码</li>
+<li>发邮件通知 jQuery、Bootstrap、Underscore 作者使用 npm publish 把代码提交到 registry 上，分别取名 jquery、bootstrap 和 underscore（注意大小写）</li>
+<li>社区里的其他人如果想使用这些代码，就把 jquery、bootstrap 和 underscore 写到 package.json 里，然后运行 npm install ，npm 就会帮他们下载代码</li>
+<li>下载完的代码出现在 node_modules 目录里，可以随意使用了。</li>
+</ol>
+
+<p>这些可以被使用的代码被叫做「包」（package），这就是 NPM 名字的由来：Node Package(包) Manager(管理器)。</p>
+
+<h2 id="发展">发展</h2>
+
+<p>Isaaz 通知 jQuery 作者 John Resig，他会答应吗？这事儿不一定啊，对不对。</p>
+
+<p>只有社区里的人都觉得 「npm 是个宝」的时候，John Resig 才会考虑使用 npm。</p>
+
+<p>那么 npm 是怎么火的呢？</p>
+
+<p>npm 的发展是跟 Node.js 的发展相辅相成的。</p>
+
+<p>Node.js 是由一个在德国工作的美国程序员 Ryan Dahl 写的。他写了 Node.js，但是 Node.js 缺少一个包管理器，于是他和 npm 的作者一拍即合、抱团取暖，最终 Node.js 内置了 npm。</p>
+
+<p>后来的事情大家都知道，Node.js 火了。</p>
+
+<p>随着 Node.js 的火爆，大家开始用 npm 来共享 JS 代码了，于是 jQuery 作者也将 jQuery 发布到 npm 了。</p>
+
+<p>所以现在，你可以使用 npm install jquery 来下载 jQuery 代码。</p>
+
+<p>现在用 npm 来分享代码已经成了前端的标配。</p>
+
+<h2 id="后续">后续</h2>
+
+<p>Node.js 目前由 Ryan Dahl 当时所在的公司 joyent 继续开发。Ryan Dahl 现在已经去研究 AI 和机器学习了，并且<a href="https://groups.google.com/forum/#!topic/nodejs/hfajgpvGTLY" rel="nofollow noreferrer" target="_blank">他把 Node.js 的维护权交给了 Isaaz</a>。（我是不是也应该去研究 AI 和机器学习啊教练）</p>
+
+<p>而 Isaaz 维护了一段时间后，辞职了，成立了一个公司专门维护 npm 的 registry，公司名叫做 <a href="https://www.npmjs.com/about#about-npm-inc" rel="nofollow noreferrer" target="_blank">npm 股份有限公司</a>……谁说开源不能赚钱的~</p>
+
+<h2 id="社区的力量">社区的力量</h2>
+
+<p>回顾前端的发展是你会发现，都是社区里的某个人，发布了一份代码，最终影响前端几年的走向。比如 jQuery，比如 Node.js，比如 npm。（其实其他语言也是这样的）</p>
+
+<p>所以，社区的力量是巨大的。</p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>作者</span>
+                <span>方应杭 </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>链接</span>
+                    <a href=http://fangyinghang.com/what-is-npm/>http://fangyinghang.com/what-is-npm/</span>
+            </p>
+            
+             
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+        <section>
+                <a href="javascript:window.history.back();">后退</a></span> · 
+                <span><a href="http://fangyinghang.com/">回到首页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="http://fangyinghang.com/new-in-js/" class="prev" rel="prev" title="JS 的 new 到底是干什么的？"><i class="iconfont icon-left"></i>&nbsp;JS 的 new 到底是干什么的？</a>
+         
+        
+        <a href="http://fangyinghang.com/everything-about-font-size/" class="next" rel="next" title="深入理解 CSS：字体度量、line-height 和 vertical-align">深入理解 CSS：字体度量、line-height 和 vertical-align&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+  <div class="copyright">
+    <div>
+      &copy;
+      
+      <span itemprop="copyrightYear">2012 - 2018</span>
+      
+      <span class="with-love">
+        <i class="iconfont icon-love"></i> 
+      </span>
+      
+      <span class="author" itemprop="copyrightHolder"><a href="http://fangyinghang.com/">方应杭</a> </span> 
+      
+
+      
+      <span>
+    </div>
+    <div>
+      Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+  </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+     <link href="//lib.baomitu.com/lightgallery/1.6.11/css/lightgallery.min.css" rel="stylesheet">  
+      
+     <script src="/js/vendor_gallery.min.js" async="" ></script>
+    
+  
+
+
+
+
+     </div>
+  </body>
+</html>

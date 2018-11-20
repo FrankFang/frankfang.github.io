@@ -132,6 +132,15 @@ jQuery 教你如何设计 API 上文说到我一个不会 JS 的人居然能看�
     </item>
     
     <item>
+      <title>npm 是干什么的</title>
+      <link>http://fangyinghang.com/what-is-npm/</link>
+      <pubDate>Wed, 14 Dec 2016 02:16:39 +0800</pubDate>
+      
+      <guid>http://fangyinghang.com/what-is-npm/</guid>
+      <description>网上的 npm 教程主要都在讲怎么安装、配置和使用 npm，却不告诉新人「为什么要使用 npm」。今天我就来讲讲这个话题。 本文目标读者是「不太了解 npm 的新</description>
+    </item>
+    
+    <item>
       <title>JS 的 new 到底是干什么的？</title>
       <link>http://fangyinghang.com/new-in-js/</link>
       <pubDate>Mon, 12 Dec 2016 01:45:22 +0800</pubDate>

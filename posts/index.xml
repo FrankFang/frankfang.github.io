@@ -123,6 +123,15 @@ jQuery 教你如何设计 API 上文说到我一个不会 JS 的人居然能看�
     </item>
     
     <item>
+      <title>npx 是干什么的</title>
+      <link>http://fangyinghang.com/what-is-npx/</link>
+      <pubDate>Wed, 12 Jul 2017 02:20:53 +0800</pubDate>
+      
+      <guid>http://fangyinghang.com/what-is-npx/</guid>
+      <description>最近我在更新 npm 5.2.0 的时候发现会买一送一，自动安装了 npx。 一个月后 npx 就是前端必会的知识，相信我 ; ) （不要问我是不是抄袭，看看文章发表时间你就知</description>
+    </item>
+    
+    <item>
       <title>深入理解 CSS：字体度量、line-height 和 vertical-align</title>
       <link>http://fangyinghang.com/everything-about-font-size/</link>
       <pubDate>Thu, 16 Mar 2017 01:51:37 +0800</pubDate>

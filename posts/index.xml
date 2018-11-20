@@ -21,15 +21,6 @@
     </item>
     
     <item>
-      <title>JS 原型链</title>
-      <link>http://fangyinghang.com/prototype-in-js/</link>
-      <pubDate>Fri, 09 Nov 2018 02:21:19 +0800</pubDate>
-      
-      <guid>http://fangyinghang.com/prototype-in-js/</guid>
-      <description>我们知道 JS 有对象，比如 var obj = { name: &#39;obj&#39; } 我们可以对 obj 进行一些操作，包括 「读」属性 「新增」属性 「更新」属性 「删除」属性 下面我们主要来看一下「读」和</description>
-    </item>
-    
-    <item>
       <title>我不是很懂 Node.js 社区的 DRY 文化</title>
       <link>http://fangyinghang.com/i-dont-get-node-style/</link>
       <pubDate>Fri, 09 Nov 2018 02:18:28 +0800</pubDate>
@@ -165,6 +156,15 @@ func(p1, p2) obj.child.method(p1, p2) func.call(context, p1, p2) // 先不讲 ap
 从看到这篇文章起，你一定要记住，第三种调用形式，才是正常调用形式：
 func.call(context, p1, p2)  其他两种都是语法糖，可以等价地变为 call 形式：
 func(p1, p2) 等价于 func.call(undefined, p1, p2) obj.child.method(p1, p2) 等价于 obj.child.method.call(obj.child, p1, p2)  请记下来。（我们称此代码为「转换代码」，方便下文引用）</description>
+    </item>
+    
+    <item>
+      <title>JS 原型链</title>
+      <link>http://fangyinghang.com/prototype-in-js/</link>
+      <pubDate>Thu, 20 Oct 2016 02:21:19 +0800</pubDate>
+      
+      <guid>http://fangyinghang.com/prototype-in-js/</guid>
+      <description>我们知道 JS 有对象，比如 var obj = { name: &#39;obj&#39; } 我们可以对 obj 进行一些操作，包括 「读」属性 「新增」属性 「更新」属性 「删除」属性 下面我们主要来看一下「读」和</description>
     </item>
     
     <item>

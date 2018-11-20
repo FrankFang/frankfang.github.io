@@ -381,118 +381,6 @@ myEmitter.on(&#39;event&#39;, () =&amp;gt; {
     </item>
     
     <item>
-      <title>JS 原型链</title>
-      <link>http://fangyinghang.com/prototype-in-js/</link>
-      <pubDate>Fri, 09 Nov 2018 02:21:19 +0800</pubDate>
-      
-      <guid>http://fangyinghang.com/prototype-in-js/</guid>
-      <description>
-
-&lt;p&gt;我们知道 JS 有对象，比如&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;var obj = { name: &#39;obj&#39; } 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;我们可以对 obj 进行一些操作，包括&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;「读」属性&lt;/li&gt;
-&lt;li&gt;「新增」属性&lt;/li&gt;
-&lt;li&gt;「更新」属性&lt;/li&gt;
-&lt;li&gt;「删除」属性&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;下面我们主要来看一下「读」和「新增」属性。&lt;/p&gt;
-
-&lt;h2 id=&#34;为什么有-valueof-tostring-属性呢&#34;&gt;为什么有 valueOf / toString 属性呢？&lt;/h2&gt;
-
-&lt;p&gt;在我们没有对 obj 进行任何其他操作之前，发现 obj 已经有几个属性（方法）了：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://fangyinghang.com/images/prototype-in-js/1.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;那么问题来了：valueOf / toString / constructor 是怎么来？我们并没有给 obj.valueOf 赋值呀。&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;要搞清楚 valueOf / toString / constructor 是怎么来的，就要用到 console.dir 了。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://fangyinghang.com/images/prototype-in-js/2.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;上面这个图有点难懂，我手画一个示意图：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://fangyinghang.com/images/prototype-in-js/3.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;我们发现 console.dir(obj) 打出来的结果是：&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;obj 本身有一个属性 name（这是我们给它加的）&lt;/li&gt;
-&lt;li&gt;obj 还有一个属性叫做 &lt;strong&gt;proto&lt;/strong&gt;（它是一个对象）&lt;/li&gt;
-&lt;li&gt;obj.&lt;strong&gt;proto&lt;/strong&gt; 有很多属性，包括 valueOf、toString、constructor 等&lt;/li&gt;
-&lt;li&gt;obj.&lt;strong&gt;proto&lt;/strong&gt; 其实也有一个叫做 &lt;strong&gt;proto&lt;/strong&gt; 的属性（console.log 没有显示），值为 null&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;现在回到我们的问题：obj 为什么会拥有 valueOf / toString / constructor 这几个属性？&lt;/p&gt;
-
-&lt;p&gt;答案：&lt;/p&gt;
-
-&lt;p&gt;这跟 &lt;strong&gt;proto&lt;/strong&gt; 有关。&lt;/p&gt;
-
-&lt;p&gt;当我们「读取」 obj.toString 时，JS 引擎会做下面的事情：&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;看看 obj 对象本身有没有 toString 属性。没有就走到下一步。&lt;/li&gt;
-&lt;li&gt;看看 obj.&lt;strong&gt;proto&lt;/strong&gt; 对象有没有 toString 属性，发现 obj.&lt;strong&gt;proto&lt;/strong&gt; 有 toString 属性，于是找到了
-所以 obj.toString 实际上就是第 2 步中找到的 obj.&lt;strong&gt;proto&lt;/strong&gt;.toString。
-可以想象，&lt;/li&gt;
-&lt;li&gt;如果 obj.&lt;strong&gt;proto&lt;/strong&gt; 没有，那么浏览器会继续查看 obj.&lt;strong&gt;proto&lt;/strong&gt;.&lt;strong&gt;proto&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;如果 obj.&lt;strong&gt;proto&lt;/strong&gt;.&lt;strong&gt;proto&lt;/strong&gt; 也没有，那么浏览器会继续查看 obj.&lt;strong&gt;proto&lt;/strong&gt;.&lt;strong&gt;proto&lt;/strong&gt;.proto__&lt;/li&gt;
-&lt;li&gt;直到找到 toString 或者 &lt;strong&gt;proto&lt;/strong&gt; 为 null。&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;上面的过程，就是「读」属性的「搜索过程」。&lt;/p&gt;
-
-&lt;p&gt;而这个「搜索过程」，是连着由 &lt;strong&gt;proto&lt;/strong&gt; 组成的链子一直走的。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;这个链子，就叫做「原型链」。&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;共享原型链&#34;&gt;共享原型链&lt;/h2&gt;
-
-&lt;p&gt;现在我们有另一个对象&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;var obj2 = { name: &#39;obj2&#39; }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;如图：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://fangyinghang.com/images/prototype-in-js/4.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;那么 obj.toString 和 obj2.toString 其实是同一个东西，也就是 obj2.&lt;strong&gt;proto&lt;/strong&gt;.toString。&lt;/p&gt;
-
-&lt;p&gt;这有什么意义呢？&lt;/p&gt;
-
-&lt;p&gt;如果我们改写 obj2.&lt;strong&gt;proto&lt;/strong&gt;.toString，那么 obj.toString 其实也会变！&lt;/p&gt;
-
-&lt;p&gt;这样 obj 和 obj2 就是具有某些相同行为的对象，这就是意义所在。&lt;/p&gt;
-
-&lt;h2 id=&#34;差异化&#34;&gt;差异化&lt;/h2&gt;
-
-&lt;p&gt;如果我们想让 obj.toString 和 obj2.toString 的行为不同怎么做呢？&lt;/p&gt;
-
-&lt;p&gt;直接赋值就好了：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;obj.toString = function(){ return &#39;新的 toString 方法&#39; }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://fangyinghang.com/images/prototype-in-js/5.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;总结&#34;&gt;总结&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;「读」属性时会&lt;strong&gt;沿着原型链搜索&lt;/strong&gt;。&lt;/li&gt;
-&lt;li&gt;「新增」属性时&lt;strong&gt;不会&lt;/strong&gt;去看原型链（但是如果你给这个属性加了一些配置，则不一样，以后讲）。&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
       <title>我不是很懂 Node.js 社区的 DRY 文化</title>
       <link>http://fangyinghang.com/i-dont-get-node-style/</link>
       <pubDate>Fri, 09 Nov 2018 02:18:28 +0800</pubDate>
@@ -2321,6 +2209,118 @@ arr[0]() // 这里面的 this 又是什么呢？
 &lt;p&gt;以后你遇到所有跟 this 有关的笔试题，都不会有疑问了。&lt;/p&gt;
 
 &lt;p&gt;完。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>JS 原型链</title>
+      <link>http://fangyinghang.com/prototype-in-js/</link>
+      <pubDate>Thu, 20 Oct 2016 02:21:19 +0800</pubDate>
+      
+      <guid>http://fangyinghang.com/prototype-in-js/</guid>
+      <description>
+
+&lt;p&gt;我们知道 JS 有对象，比如&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var obj = { name: &#39;obj&#39; } 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;我们可以对 obj 进行一些操作，包括&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;「读」属性&lt;/li&gt;
+&lt;li&gt;「新增」属性&lt;/li&gt;
+&lt;li&gt;「更新」属性&lt;/li&gt;
+&lt;li&gt;「删除」属性&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;下面我们主要来看一下「读」和「新增」属性。&lt;/p&gt;
+
+&lt;h2 id=&#34;为什么有-valueof-tostring-属性呢&#34;&gt;为什么有 valueOf / toString 属性呢？&lt;/h2&gt;
+
+&lt;p&gt;在我们没有对 obj 进行任何其他操作之前，发现 obj 已经有几个属性（方法）了：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://fangyinghang.com/images/prototype-in-js/1.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;那么问题来了：valueOf / toString / constructor 是怎么来？我们并没有给 obj.valueOf 赋值呀。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;要搞清楚 valueOf / toString / constructor 是怎么来的，就要用到 console.dir 了。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://fangyinghang.com/images/prototype-in-js/2.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;上面这个图有点难懂，我手画一个示意图：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://fangyinghang.com/images/prototype-in-js/3.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;我们发现 console.dir(obj) 打出来的结果是：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;obj 本身有一个属性 name（这是我们给它加的）&lt;/li&gt;
+&lt;li&gt;obj 还有一个属性叫做 &lt;strong&gt;proto&lt;/strong&gt;（它是一个对象）&lt;/li&gt;
+&lt;li&gt;obj.&lt;strong&gt;proto&lt;/strong&gt; 有很多属性，包括 valueOf、toString、constructor 等&lt;/li&gt;
+&lt;li&gt;obj.&lt;strong&gt;proto&lt;/strong&gt; 其实也有一个叫做 &lt;strong&gt;proto&lt;/strong&gt; 的属性（console.log 没有显示），值为 null&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;现在回到我们的问题：obj 为什么会拥有 valueOf / toString / constructor 这几个属性？&lt;/p&gt;
+
+&lt;p&gt;答案：&lt;/p&gt;
+
+&lt;p&gt;这跟 &lt;strong&gt;proto&lt;/strong&gt; 有关。&lt;/p&gt;
+
+&lt;p&gt;当我们「读取」 obj.toString 时，JS 引擎会做下面的事情：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;看看 obj 对象本身有没有 toString 属性。没有就走到下一步。&lt;/li&gt;
+&lt;li&gt;看看 obj.&lt;strong&gt;proto&lt;/strong&gt; 对象有没有 toString 属性，发现 obj.&lt;strong&gt;proto&lt;/strong&gt; 有 toString 属性，于是找到了
+所以 obj.toString 实际上就是第 2 步中找到的 obj.&lt;strong&gt;proto&lt;/strong&gt;.toString。
+可以想象，&lt;/li&gt;
+&lt;li&gt;如果 obj.&lt;strong&gt;proto&lt;/strong&gt; 没有，那么浏览器会继续查看 obj.&lt;strong&gt;proto&lt;/strong&gt;.&lt;strong&gt;proto&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;如果 obj.&lt;strong&gt;proto&lt;/strong&gt;.&lt;strong&gt;proto&lt;/strong&gt; 也没有，那么浏览器会继续查看 obj.&lt;strong&gt;proto&lt;/strong&gt;.&lt;strong&gt;proto&lt;/strong&gt;.proto__&lt;/li&gt;
+&lt;li&gt;直到找到 toString 或者 &lt;strong&gt;proto&lt;/strong&gt; 为 null。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;上面的过程，就是「读」属性的「搜索过程」。&lt;/p&gt;
+
+&lt;p&gt;而这个「搜索过程」，是连着由 &lt;strong&gt;proto&lt;/strong&gt; 组成的链子一直走的。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;这个链子，就叫做「原型链」。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;共享原型链&#34;&gt;共享原型链&lt;/h2&gt;
+
+&lt;p&gt;现在我们有另一个对象&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var obj2 = { name: &#39;obj2&#39; }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如图：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://fangyinghang.com/images/prototype-in-js/4.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;那么 obj.toString 和 obj2.toString 其实是同一个东西，也就是 obj2.&lt;strong&gt;proto&lt;/strong&gt;.toString。&lt;/p&gt;
+
+&lt;p&gt;这有什么意义呢？&lt;/p&gt;
+
+&lt;p&gt;如果我们改写 obj2.&lt;strong&gt;proto&lt;/strong&gt;.toString，那么 obj.toString 其实也会变！&lt;/p&gt;
+
+&lt;p&gt;这样 obj 和 obj2 就是具有某些相同行为的对象，这就是意义所在。&lt;/p&gt;
+
+&lt;h2 id=&#34;差异化&#34;&gt;差异化&lt;/h2&gt;
+
+&lt;p&gt;如果我们想让 obj.toString 和 obj2.toString 的行为不同怎么做呢？&lt;/p&gt;
+
+&lt;p&gt;直接赋值就好了：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;obj.toString = function(){ return &#39;新的 toString 方法&#39; }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://fangyinghang.com/images/prototype-in-js/5.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;总结&#34;&gt;总结&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;「读」属性时会&lt;strong&gt;沿着原型链搜索&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;「新增」属性时&lt;strong&gt;不会&lt;/strong&gt;去看原型链（但是如果你给这个属性加了一些配置，则不一样，以后讲）。&lt;/li&gt;
+&lt;/ul&gt;
 </description>
     </item>
     

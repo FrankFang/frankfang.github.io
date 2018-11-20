@@ -12,12 +12,12 @@
     
     
     <item>
-      <title>Eventloop Timers and Nexttick</title>
+      <title>Event Loop、计时器、nextTick</title>
       <link>http://fangyinghang.com/eventloop-timers-and-nexttick/</link>
       <pubDate>Fri, 09 Nov 2018 02:23:41 +0800</pubDate>
       
       <guid>http://fangyinghang.com/eventloop-timers-and-nexttick/</guid>
-      <description>原文：The Node.js Event Loop, Timers, and process.nextTick() | Node.js 以下是译文： 什么是事件循环（Event Loop，注意空格） JavaScript 是单线程的，有了 event loop 的加持，Node.js 才可以非阻</description>
+      <description>原文：The Node.js Event Loop, Timers, and process.nextTick() | Node.js 以下是译文。 什么是事件循环（Event Loop，注意空格） JavaScript 是单线程的，有了 event loop 的加持，Node.js 才可以非阻</description>
     </item>
     
     <item>

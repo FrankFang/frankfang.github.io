@@ -10,7 +10,7 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>Eventloop Timers and Nexttick</title>
+      <title>Event Loop、计时器、nextTick</title>
       <link>http://fangyinghang.com/eventloop-timers-and-nexttick/</link>
       <pubDate>Fri, 09 Nov 2018 02:23:41 +0800</pubDate>
       
@@ -19,9 +19,7 @@
 
 &lt;p&gt;原文：&lt;a href=&#34;http://link.zhihu.com/?target=https%3A//nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;The Node.js Event Loop, Timers, and process.nextTick() | Node.js&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;以下是译文：&lt;/p&gt;
-
-&lt;hr /&gt;
+&lt;p&gt;以下是译文。&lt;/p&gt;
 
 &lt;h2 id=&#34;什么是事件循环-event-loop-注意空格&#34;&gt;什么是事件循环（Event Loop，注意空格）&lt;/h2&gt;
 
@@ -33,15 +31,17 @@
 
 &lt;p&gt;当 Node.js 启动时，会做这几件事&lt;/p&gt;
 
-&lt;p&gt;1. 初始化 event loop&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;初始化 event loop&lt;/p&gt;&lt;/li&gt;
 
-&lt;p&gt;2. 开始执行脚本（或者进入 REPL，本文不涉及 REPL）。这些脚本有可能会调用一些异步 API、设定计时器或者调用 process.nextTick()&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;开始执行脚本（或者进入 REPL，本文不涉及 REPL）。这些脚本有可能会调用一些异步 API、设定计时器或者调用 process.nextTick()&lt;/p&gt;&lt;/li&gt;
 
-&lt;p&gt;3. 开始处理 event loop&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;开始处理 event loop&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
 
 &lt;p&gt;如何处理 event loop 呢？下图给出了一个简单的概览：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt; ┌───────────────────────┐
+&lt;pre&gt;&lt;code&gt;   ┌───────────────────────┐
 ┌─&amp;gt;│        timers         │
 │  └──────────┬────────────┘
 │  ┌──────────┴────────────┐
@@ -94,7 +94,7 @@
 
 &lt;h2 id=&#34;各阶段详解&#34;&gt;各阶段详解&lt;/h2&gt;
 
-&lt;p&gt;&lt;strong&gt;timers 阶段&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;timers-阶段&#34;&gt;timers 阶段&lt;/h3&gt;
 
 &lt;p&gt;计时器实际上是在指定多久以后可以执行某个回调函数，而不是指定某个函数的确切执行时间。当指定的时间达到后，计时器的回调函数会尽早被执行。如果操作系统很忙，或者 Node.js 正在执行一个耗时的函数，那么计时器的回调函数就会被推迟执行。&lt;/p&gt;
 
@@ -132,7 +132,7 @@ someAsyncOperation(() =&amp;gt; {
 
 &lt;p&gt;注意：为了防止 poll 阶段占用了 event loop 的所有时间，libuv（Node.js 用来实现 event loop 和所有异步行为的 C 语言写成的库）对 poll 阶段的最长停留时间做出了限制，具体时间因操作系统而异。&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;I/O callbacks 阶段&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;i-o-callbacks-阶段&#34;&gt;I/O callbacks 阶段&lt;/h3&gt;
 
 &lt;p&gt;这个阶段会执行一些系统操作的回调函数，比如 TCP 报错，如果一个 TCP socket 开始连接时出现了 ECONNREFUSED 错误，一些 *nix 系统就会（向 Node.js）通知这个错误。这个通知就会被放入 I/O callbacks 队列。&lt;/p&gt;
 
@@ -160,7 +160,7 @@ someAsyncOperation(() =&amp;gt; {
 
 &lt;p&gt;一旦 poll 队列为空，event loop 就会检查计时器有没有到期，如果有计时器到期了，event loop 就会回到 timers 阶段执行计时器的回调。&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;check 阶段&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;check-阶段&#34;&gt;check 阶段&lt;/h3&gt;
 
 &lt;p&gt;这个阶段允许开发者在 poll 阶段结束后立即执行一些函数。如果 poll 阶段空闲了，同时存在 setImmediate() 任务，event loop 就会进入 check 阶段。&lt;/p&gt;
 
@@ -170,7 +170,7 @@ someAsyncOperation(() =&amp;gt; {
 
 &lt;p&gt;（译注：感觉同样的话说了三遍）&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;close callbacks 阶段&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;close-callbacks-阶段&#34;&gt;close callbacks 阶段&lt;/h3&gt;
 
 &lt;p&gt;如果一个 socket 或者 handle 被突然关闭（比如 socket.destroy()），那么就会有一个 close 事件进入这个阶段。否则（译注：我没看到这个否则在否定什么，是在否定「突然」吗？），这个 close 事件就会进入 process.nextTick()。&lt;/p&gt;
 

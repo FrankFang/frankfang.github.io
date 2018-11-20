@@ -22,10 +22,10 @@
   <title>
        
        
-           Eventloop Timers and Nexttick | 方应杭的个人网站
+           Event Loop、计时器、nextTick | 方应杭的个人网站
        
   </title>
-  <meta name="title" content="Eventloop Timers and Nexttick | 方应杭的个人网站">
+  <meta name="title" content="Event Loop、计时器、nextTick | 方应杭的个人网站">
     
   
   <link rel="stylesheet" href="/font/iconfont.css">
@@ -44,9 +44,9 @@
          "@id": "http://fangyinghang.com/"
     },
     "articleSection" : "posts",
-    "name" : "Eventloop Timers and Nexttick",
-    "headline" : "Eventloop Timers and Nexttick",
-    "description" : "原文：The Node.js Event Loop, Timers, and process.nextTick() | Node.js 以下是译文： 什么是事件循环（Event Loop，注意空格） JavaScript 是单线程的，有了 event loop 的加持，Node.js 才可以非阻",
+    "name" : "Event Loop、计时器、nextTick",
+    "headline" : "Event Loop、计时器、nextTick",
+    "description" : "原文：The Node.js Event Loop, Timers, and process.nextTick() | Node.js 以下是译文。 什么是事件循环（Event Loop，注意空格） JavaScript 是单线程的，有了 event loop 的加持，Node.js 才可以非阻",
     "inLanguage" : "zh-CN",
     "author" : "方应杭",
     "creator" : "方应杭",
@@ -57,7 +57,7 @@
     "datePublished": "2018-11-09 02:23:41 &#43;0800 CST",
     "dateModified" : "2018-11-09 02:23:41 &#43;0800 CST",
     "url" : "http://fangyinghang.com/eventloop-timers-and-nexttick/",
-    "wordCount" : "4722",
+    "wordCount" : "4719",
     "keywords" : [  "方应杭的个人网站"]
 }
 </script>
@@ -152,7 +152,7 @@
       		
 <article class="post-warp" itemscope itemtype="http://schema.org/Article">
     <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">Eventloop Timers and Nexttick</h1>
+        <h1 class="post-title" itemprop="name headline">Event Loop、计时器、nextTick</h1>
         <div class="post-meta">
                 <a itemprop="name" href="http://fangyinghang.com/" rel="author">
                   方应杭</a>
@@ -184,9 +184,7 @@
 
 <p>原文：<a href="http://link.zhihu.com/?target=https%3A//nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/" rel="nofollow noreferrer" target="_blank">The Node.js Event Loop, Timers, and process.nextTick() | Node.js</a></p>
 
-<p>以下是译文：</p>
-
-<hr />
+<p>以下是译文。</p>
 
 <h2 id="什么是事件循环-event-loop-注意空格">什么是事件循环（Event Loop，注意空格）</h2>
 
@@ -198,15 +196,17 @@
 
 <p>当 Node.js 启动时，会做这几件事</p>
 
-<p>1. 初始化 event loop</p>
+<ol>
+<li><p>初始化 event loop</p></li>
 
-<p>2. 开始执行脚本（或者进入 REPL，本文不涉及 REPL）。这些脚本有可能会调用一些异步 API、设定计时器或者调用 process.nextTick()</p>
+<li><p>开始执行脚本（或者进入 REPL，本文不涉及 REPL）。这些脚本有可能会调用一些异步 API、设定计时器或者调用 process.nextTick()</p></li>
 
-<p>3. 开始处理 event loop</p>
+<li><p>开始处理 event loop</p></li>
+</ol>
 
 <p>如何处理 event loop 呢？下图给出了一个简单的概览：</p>
 
-<pre><code> ┌───────────────────────┐
+<pre><code>   ┌───────────────────────┐
 ┌─&gt;│        timers         │
 │  └──────────┬────────────┘
 │  ┌──────────┴────────────┐
@@ -259,7 +259,7 @@
 
 <h2 id="各阶段详解">各阶段详解</h2>
 
-<p><strong>timers 阶段</strong></p>
+<h3 id="timers-阶段">timers 阶段</h3>
 
 <p>计时器实际上是在指定多久以后可以执行某个回调函数，而不是指定某个函数的确切执行时间。当指定的时间达到后，计时器的回调函数会尽早被执行。如果操作系统很忙，或者 Node.js 正在执行一个耗时的函数，那么计时器的回调函数就会被推迟执行。</p>
 
@@ -297,7 +297,7 @@ someAsyncOperation(() =&gt; {
 
 <p>注意：为了防止 poll 阶段占用了 event loop 的所有时间，libuv（Node.js 用来实现 event loop 和所有异步行为的 C 语言写成的库）对 poll 阶段的最长停留时间做出了限制，具体时间因操作系统而异。</p>
 
-<p><strong>I/O callbacks 阶段</strong></p>
+<h3 id="i-o-callbacks-阶段">I/O callbacks 阶段</h3>
 
 <p>这个阶段会执行一些系统操作的回调函数，比如 TCP 报错，如果一个 TCP socket 开始连接时出现了 ECONNREFUSED 错误，一些 *nix 系统就会（向 Node.js）通知这个错误。这个通知就会被放入 I/O callbacks 队列。</p>
 
@@ -325,7 +325,7 @@ someAsyncOperation(() =&gt; {
 
 <p>一旦 poll 队列为空，event loop 就会检查计时器有没有到期，如果有计时器到期了，event loop 就会回到 timers 阶段执行计时器的回调。</p>
 
-<p><strong>check 阶段</strong></p>
+<h3 id="check-阶段">check 阶段</h3>
 
 <p>这个阶段允许开发者在 poll 阶段结束后立即执行一些函数。如果 poll 阶段空闲了，同时存在 setImmediate() 任务，event loop 就会进入 check 阶段。</p>
 
@@ -335,7 +335,7 @@ someAsyncOperation(() =&gt; {
 
 <p>（译注：感觉同样的话说了三遍）</p>
 
-<p><strong>close callbacks 阶段</strong></p>
+<h3 id="close-callbacks-阶段">close callbacks 阶段</h3>
 
 <p>如果一个 socket 或者 handle 被突然关闭（比如 socket.destroy()），那么就会有一个 close 事件进入这个阶段。否则（译注：我没看到这个否则在否定什么，是在否定「突然」吗？），这个 close 事件就会进入 process.nextTick()。</p>
 

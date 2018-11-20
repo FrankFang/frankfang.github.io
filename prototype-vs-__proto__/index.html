@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="方应杭">
+  <meta name="description" content="方应杭的个人网站">
+  <meta name="keywords" content="方应杭,前端,饥人谷,前端培训">
+  
+  <link rel="prev" href="http://fangyinghang.com/let-in-js/" />
+  <link rel="next" href="http://fangyinghang.com/how-do-i-read-job-description/" />
+  <link rel="canonical" href="http://fangyinghang.com/prototype-vs-__proto__/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           prototype 和 __proto__ 的区别 | 方应杭的个人网站
+       
+  </title>
+  <meta name="title" content="prototype 和 __proto__ 的区别 | 方应杭的个人网站">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "http://fangyinghang.com/"
+    },
+    "articleSection" : "posts",
+    "name" : "prototype 和 __proto__ 的区别",
+    "headline" : "prototype 和 __proto__ 的区别",
+    "description" : "你的 JS 代码还没运行的时候，JS 环境里已经有一个 window 对象了 window 对象有一个 Object 属性，window.Object 是一个函数对象 window.Object 这个函数对象有一个重要属",
+    "inLanguage" : "zh-CN",
+    "author" : "方应杭",
+    "creator" : "方应杭",
+    "publisher": "方应杭",
+    "accountablePerson" : "方应杭",
+    "copyrightHolder" : "方应杭",
+    "copyrightYear" : "2018",
+    "datePublished": "2018-02-09 02:21:39 &#43;0800 CST",
+    "dateModified" : "2018-02-09 02:21:39 &#43;0800 CST",
+    "url" : "http://fangyinghang.com/prototype-vs-__proto__/",
+    "wordCount" : "1201",
+    "keywords" : [  "方应杭的个人网站"]
+}
+</script>
+
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	 
+          <a href="http://fangyinghang.com/">方应杭的个人网站</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" 
+                   
+                  href="/" title="">
+                  首页
+                </a>
+                
+                <a class="menu-item" 
+                   
+                  href="/posts/" title="">
+                  文章
+                </a>
+                
+                <a class="menu-item" 
+                   
+                  href="/contacts/" title="">
+                  联系我
+                </a>
+                
+                <a class="menu-item" 
+                   
+                  href="/wechat-subscribe/" title="">
+                  订阅
+                </a>
+                
+                <a class="menu-item" 
+                   target="_blank"
+                  href="https://www.ximalaya.com/keji/12837765/" title="">
+                  电台
+                </a>
+                
+                <a class="menu-item" 
+                   
+                  href="/index.xml" title="">
+                  RSS
+                </a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  
+              
+              <a href="http://fangyinghang.com/">方应杭的个人网站</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/" title="">首页</a>
+                
+                <a class="menu-item" href="/posts/" title="">文章</a>
+                
+                <a class="menu-item" href="/contacts/" title="">联系我</a>
+                
+                <a class="menu-item" href="/wechat-subscribe/" title="">订阅</a>
+                
+                <a class="menu-item" href="https://www.ximalaya.com/keji/12837765/" title="">电台</a>
+                
+                <a class="menu-item" href="/index.xml" title="">RSS</a>
+                
+        </div>
+    </div>
+</nav>
+
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">prototype 和 __proto__ 的区别</h1>
+        <div class="post-meta">
+                <a itemprop="name" href="http://fangyinghang.com/" rel="author">
+                  方应杭</a>
+                <span class="post-time">写于
+                  <time datetime=2018-02-09 itemprop="datePublished">
+                    2018年02月09日
+                  </time>
+                </span>
+                
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+            
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/prototype-vs-__proto__/1.jpg" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
+
+<ol>
+<li>你的 JS 代码还没运行的时候，JS 环境里已经有一个 <code>window</code> 对象了</li>
+<li><code>window</code> 对象有一个 Object 属性，<code>window.Object</code> 是一个函数对象</li>
+<li><code>window.Object</code> 这个函数对象有一个重要属性是 prototype，干什么用的等会说</li>
+<li><code>window.Object.prototype</code> 里面有这么几个属性 toString（函数）、valueOf（函数）</li>
+</ol>
+
+<p>好，目前先知道这些就够了。</p>
+
+<p>然后我们写一句代码</p>
+
+<pre><code>var obj = {}
+obj.toString()
+</code></pre>
+
+<p>这句代码做了啥？为什么 obj 有 toString() 属性？</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/prototype-vs-__proto__/2.jpg" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
+
+<ol>
+<li>这句话大概是让 obj 变量指向一个空对象，这个空对象有个 <code>__proto__</code> 属性指向 <code>window.Object.prototype</code>。</li>
+<li>这样你在调用 <code>obj.toString()</code> 的时候，obj 本身没有 toString，就去 <code>obj.__proto__</code> 上面去找 toString。</li>
+<li>所以你调用 <code>obj.toString</code> 的时候，实际上调用的是 <code>window.Object.prototype.toString</code></li>
+<li>那么 <code>window.Object.prototype.toString</code> 是怎么获取 obj 的内容的呢？
+那是因为 <code>obj.toString()</code> 等价于 <code>obj.toString.call(obj)</code></li>
+<li>同时 <code>obj.toString.call(obj)</code> 等价于 <code>window.Object.prototype.toString.call(obj)</code>
+这句话把 obj 传给 toString 了。</li>
+</ol>
+
+<h2 id="再看复杂一点的">再看复杂一点的</h2>
+
+<p>回到第一幅图</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/prototype-vs-__proto__/1.jpg" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
+
+<p>我们写一句代码</p>
+
+<pre><code>var arr = []
+arr.push(1) // [1]
+</code></pre>
+
+<p>请问这两句话做了什么？</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/prototype-vs-__proto__/3.jpg" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
+
+<ol>
+<li>看红色部分，<code>var arr = []</code> 大概会让 arr 指向一个空对象，然后 <code>arr.__proto__</code> 指向 <code>window.Array.prototype</code>。（其实 arr 有一个 length:0，不过这里就忽略吧）</li>
+<li>这样你在调用 <code>arr.push</code> 的时候，arr 自身没有 push 属性，就去 <code>arr.__proto__</code> 上找 push
+因此 <code>arr.push</code> 实际上是 <code>window.Array.prototype.push</code></li>
+<li><code>arr.push(1)</code> 等价与 <code>arr.push.call(arr,1)</code></li>
+<li><code>arr.push.call(arr,1)</code> 等价于 <code>window.Array.prototype.push.call(arr, 1)</code></li>
+</ol>
+
+<h2 id="再再复杂一点">再再复杂一点</h2>
+
+<p><code>arr.valueOf()</code> 做了什么?</p>
+
+<ol>
+<li>arr 自身没有 valueOf，于是去 <code>arr.__proto__</code> 上找</li>
+<li><code>arr.__proto__</code> 只有 pop、push 也没有 valueOf，于是去 <code>arr.__proto__.__proto__</code> 上找</li>
+
+<li><p><code>arr.__proto__.__proto__</code> 就是 <code>window.Object.prototype</code>
+所以 <code>arr.valueOf</code> 其实就是 <code>window.Object.prototype.valueOf</code></p></li>
+
+<li><p><code>arr.valueOf()</code> 等价于 <code>arr.valueOf.call(arr)</code>
+<code>arr.valueOf.call(arr)</code> 等价于 <code>window.Object.prototype.valueOf.call(arr)</code></p></li>
+</ol>
+
+<p>看，JavaScript 其实很优美很简单。</p>
+
+<p>只是你想复杂了而已：</p>
+
+<ul>
+<li>prototype 指向一块内存，这个内存里面有共用属性，而 <code>__proto__</code> 指向<strong>同一块内存</strong>。</li>
+<li>prototype 和 <code>__proto__</code> 的不同点在于：prototype 是构造函数的属性，而 <code>__proto__</code> 是对象的属性</li>
+<li>如果没有 prototype，那么共用属性就没有立足之地</li>
+<li>如果没有 <code>__proto__</code>，那么一个对象就不知道自己的共用属性有哪些。</li>
+</ul>
+
+<p>这里隐含了一个难点……构造函数也是对象！先不纠结这个。</p>
+
+<h2 id="反证法">反证法</h2>
+
+<p>假设我们把 <code>__proto__</code> 去掉，那么</p>
+
+<pre><code>var obj = {}
+obj.toString() // 报错，没有 toString 方法
+</code></pre>
+
+<p>所以你只能这样声明一个对象咯：</p>
+
+<pre><code>var obj = {
+  toString: window.Object.prototype.toString,
+  valueOf: window.Object.ptototype.valueOf
+}
+obj.toString() // '[object Object]'
+</code></pre>
+
+<p>现在知道 <code>__proto__</code> 帮你省多少代码了吧？</p>
+
+<p>假设我们删掉 prototype，包括 <code>window.Object.prototype</code> 和 <code>window.Array.prototype</code>。</p>
+
+<p>那么 <code>window.Object.prototype.toString</code> 也一并被删除了。</p>
+
+<p>然后我们基本就没法写代码了……</p>
+
+<pre><code>var obj = {}
+obj.toString() // toString 不存在，因为 toString 没有定义过啊
+</code></pre>
+
+<p>prototype 的意义就是把共有属性预先定义好，给之后的对象用。</p>
+
+<p>自己想想吧~</p>
+
+<p>新人搞不懂原型大抵是因为</p>
+
+<ol>
+<li>不懂内存、引用</li>
+<li>不懂链表、树等数据结构</li>
+<li>不知道函数是一种对象</li>
+<li>被 Java 的 class 关键字毒害了</li>
+<li>还有一种可能是因为没遇到我</li>
+</ol>
+
+<p>这幅图我还可以继续讲，把 JS 所有基础知识都能串起来。</p>
+
+<p>比如很多人不懂什么是伪数组，很简单：</p>
+
+<ol>
+<li>如果一个数组的 <code>__proto__</code> 直接或间接指向 <code>Array.prototye</code>（用到了数组的共用属性），那么就是真数组</li>
+<li>如果一个数组的 <code>__proto__</code> 没有直接或间接指向 <code>Array.prototye</code>，那么就是伪数组</li>
+</ol>
+
+<pre><code>var realArr = {0: 'a', 1:'b', length: 2}
+realArr.__proto__ = Array.prototype
+// 这就是真数组（并不完全是）
+// 基本等价于 realArr = ['a', 'b']
+realArr.push !== undefined // true
+
+var fakeArr = {0: 'a', 1:'b', length: 2}
+// 这就是伪数组
+realArr.push === undefined // true
+</code></pre>
+
+<p>完。</p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>作者</span>
+                <span>方应杭 </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>链接</span>
+                    <a href=http://fangyinghang.com/prototype-vs-__proto__/>http://fangyinghang.com/prototype-vs-__proto__/</span>
+            </p>
+            
+             
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+        <section>
+                <a href="javascript:window.history.back();">后退</a></span> · 
+                <span><a href="http://fangyinghang.com/">回到首页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="http://fangyinghang.com/let-in-js/" class="prev" rel="prev" title="我用了两个月的时间才理解 let"><i class="iconfont icon-left"></i>&nbsp;我用了两个月的时间才理解 let</a>
+         
+        
+        <a href="http://fangyinghang.com/how-do-i-read-job-description/" class="next" rel="next" title="互联网公司招聘启事的正确阅读方式">互联网公司招聘启事的正确阅读方式&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+  <div class="copyright">
+    <div>
+      &copy;
+      
+      <span itemprop="copyrightYear">2012 - 2018</span>
+      
+      <span class="with-love">
+        <i class="iconfont icon-love"></i> 
+      </span>
+      
+      <span class="author" itemprop="copyrightHolder"><a href="http://fangyinghang.com/">方应杭</a> </span> 
+      
+
+      
+      <span>
+    </div>
+    <div>
+      Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+  </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+     <link href="//lib.baomitu.com/lightgallery/1.6.11/css/lightgallery.min.css" rel="stylesheet">  
+      
+     <script src="/js/vendor_gallery.min.js" async="" ></script>
+    
+  
+
+
+
+
+     </div>
+  </body>
+</html>

@@ -96,6 +96,15 @@ jQuery 教你如何设计 API 上文说到我一个不会 JS 的人居然能看�
     </item>
     
     <item>
+      <title>prototype 和 __proto__ 的区别</title>
+      <link>http://fangyinghang.com/prototype-vs-__proto__/</link>
+      <pubDate>Fri, 09 Feb 2018 02:21:39 +0800</pubDate>
+      
+      <guid>http://fangyinghang.com/prototype-vs-__proto__/</guid>
+      <description>你的 JS 代码还没运行的时候，JS 环境里已经有一个 window 对象了 window 对象有一个 Object 属性，window.Object 是一个函数对象 window.Object 这个函数对象有一个重要属</description>
+    </item>
+    
+    <item>
       <title>我用了两个月的时间才理解 let</title>
       <link>http://fangyinghang.com/let-in-js/</link>
       <pubDate>Thu, 27 Jul 2017 13:39:30 +0800</pubDate>

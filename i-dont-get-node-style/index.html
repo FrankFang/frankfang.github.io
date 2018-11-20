@@ -9,9 +9,9 @@
   <meta name="description" content="方应杭的个人网站">
   <meta name="keywords" content="方应杭,前端,饥人谷,前端培训">
   
-  <link rel="prev" href="http://fangyinghang.com/how-do-i-read-job-description/" />
-  <link rel="next" href="http://fangyinghang.com/gulu-ui/" />
-  <link rel="canonical" href="http://fangyinghang.com/84-years-old-programmer/" />
+  <link rel="prev" href="http://fangyinghang.com/why-still-jquery/" />
+  <link rel="next" href="http://fangyinghang.com/eventloop-timers-and-nexttick/" />
+  <link rel="canonical" href="http://fangyinghang.com/i-dont-get-node-style/" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -22,10 +22,10 @@
   <title>
        
        
-           84岁的老程序员 | 方应杭的个人网站
+           我不是很懂 Node.js 社区的 DRY 文化 | 方应杭的个人网站
        
   </title>
-  <meta name="title" content="84岁的老程序员 | 方应杭的个人网站">
+  <meta name="title" content="我不是很懂 Node.js 社区的 DRY 文化 | 方应杭的个人网站">
     
   
   <link rel="stylesheet" href="/font/iconfont.css">
@@ -44,9 +44,9 @@
          "@id": "http://fangyinghang.com/"
     },
     "articleSection" : "posts",
-    "name" : "84岁的老程序员",
-    "headline" : "84岁的老程序员",
-    "description" : "Quora 上有人问「年纪大的程序员去哪了」 2017年，84 岁的 Gerald Weinberg 回答到： 根据我的判断，我应该是能回答这个问题的年纪最大的人了。我开始写代码的时候，",
+    "name" : "我不是很懂 Node.js 社区的 DRY 文化",
+    "headline" : "我不是很懂 Node.js 社区的 DRY 文化",
+    "description" : "我一直以为 npm 里下载量较大的 package 是 React 这样不错的包。 今天我才知道我错了。 目前 React 每周下载量是 240 万次。 然而下面我要说的几个包的下载量全都大于 React",
     "inLanguage" : "zh-CN",
     "author" : "方应杭",
     "creator" : "方应杭",
@@ -54,10 +54,10 @@
     "accountablePerson" : "方应杭",
     "copyrightHolder" : "方应杭",
     "copyrightYear" : "2018",
-    "datePublished": "2018-04-08 23:00:23 &#43;0800 CST",
-    "dateModified" : "2018-04-08 23:00:23 &#43;0800 CST",
-    "url" : "http://fangyinghang.com/84-years-old-programmer/",
-    "wordCount" : "691",
+    "datePublished": "2018-11-09 02:18:28 &#43;0800 CST",
+    "dateModified" : "2018-11-09 02:18:28 &#43;0800 CST",
+    "url" : "http://fangyinghang.com/i-dont-get-node-style/",
+    "wordCount" : "767",
     "keywords" : [  "方应杭的个人网站"]
 }
 </script>
@@ -152,13 +152,13 @@
       		
 <article class="post-warp" itemscope itemtype="http://schema.org/Article">
     <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">84岁的老程序员</h1>
+        <h1 class="post-title" itemprop="name headline">我不是很懂 Node.js 社区的 DRY 文化</h1>
         <div class="post-meta">
                 <a itemprop="name" href="http://fangyinghang.com/" rel="author">
                   方应杭</a>
                 <span class="post-time">写于
-                  <time datetime=2018-04-08 itemprop="datePublished">
-                    2018年04月08日
+                  <time datetime=2018-11-09 itemprop="datePublished">
+                    2018年11月09日
                   </time>
                 </span>
                 
@@ -167,6 +167,8 @@
     <div class="post-content">
         
 
+        
+            
         
 
         
@@ -180,37 +182,110 @@
           
           
 
-          <p>Quora 上有人问「<a href="https://www.quora.com/Where-do-old-programmers-go" rel="nofollow noreferrer" target="_blank">年纪大的程序员去哪了</a>」</p>
+          <p>我一直以为 npm 里下载量较大的 package 是 React 这样不错的包。</p>
 
-<p>2017年，84 岁的 Gerald Weinberg 回答到：</p>
+<p>今天我才知道我错了。</p>
+
+<p>目前 React 每周下载量是 240 万次。</p>
+
+<p>然而下面我要说的几个包的下载量全都大于 React！</p>
+
+<p><a href="https://www.npmjs.com/package/is-odd" rel="nofollow noreferrer" target="_blank">is-odd</a>，每周下载 300 万次</p>
+
+<p>源代码如下：</p>
+
+<pre><code>'use strict';
+
+var isNumber = require('is-number');
+
+module.exports = function isOdd(i) {
+  if (!isNumber(i)) {
+    throw new TypeError('is-odd expects a number.');
+  }
+  if (Number(i) !== Math.floor(i)) {
+    throw new RangeError('is-odd expects an integer.');
+  }
+  return !!(~~i &amp; 1);
+};
+</code></pre>
+
+<p>你没有看错，五行核心代码，还依赖了一个 is-number 库。</p>
+
+<p>这个 is-number 库更厉害，每周下载 1000 万次</p>
+
+<p>源代码如下：</p>
+
+<pre><code>'use strict';
+
+module.exports = function isNumber(num) {
+  var number = +num;
+
+  if ((number - number) !== 0) {
+    // Discard Infinity and NaN
+    return false;
+  }
+
+  if (number === num) {
+    return true;
+  }
+
+  if (typeof num === 'string') {
+    // String parsed, both a non-empty whitespace string and an empty string
+    // will have been coerced to 0\. If 0 trim the string and see if its empty.
+    if (number === 0 &amp;&amp; num.trim() === '') {
+      return false;
+    }
+    return true;
+  }
+  return false;
+};
+</code></pre>
+
+<p>后来我发现这两个库的作者是同一个人（该作者水平很高），这个人还写了另外几个库：</p>
+
+<ul>
+<li>is-plain-object，每周下载量 330 万</li>
+<li>is-primitive，每周下载量 350 万，<a href="https://github.com/jonschlinkert/is-primitive/blob/master/index.js" rel="nofollow noreferrer" target="_blank">源代码你自己可以看看</a></li>
+<li>isobject，每周下载量 750 万</li>
+</ul>
+
+<p>需要指出的是</p>
+
+<ol>
+<li>webpack、babel 等库都有「间接地」依赖上面的一些包。</li>
+<li>这些包的 markdown 代码远远多于 JS 代码，可能它们的 markdown 更值得我们学习</li>
+</ol>
+
+<p>这件事对我的启发：</p>
+
+<ol>
+<li>原来有这么多 JS 程序员不会判断奇数</li>
+<li>只要 markdown 写得漂亮，就能迷倒 JS 程序员</li>
+<li>1 + &lsquo;1&rsquo; 的问题一直在困扰 JS 程序员，我要不要写一个 add() 库解决这个问题呢</li>
+</ol>
 
 <blockquote>
-<p>根据我的判断，我应该是能回答这个问题的年纪最大的人了。我开始写代码的时候，「程序员」这个职位还没有诞生。</p>
-
-<p>这周我刚好已经84岁了，跟我同时期入行的程序员（1956年，大概20个人）几乎都已经过世了，我希望我的伙伴们去了天堂（也可能是去了云里？）。</p>
-
-<p>我自己已经慢慢地在停止为了工资写代码，转而去教年轻人如何成为杰出的专业程序员。不过我依然会为了学习和快乐而写很多代码，早在 40 年前，我就已经不能忍受为一个对编程一无所知的老板写代码了。</p>
-
-<p>我更多的收入来自于顾问、教书和写作等工作。这些工作都和编程有关，不过更注重整体设计而非代码细节。如果你是一名优秀的程序员，你也可以在年纪大的时候做这些工作。不过你不能傻坐着等别人来找你，你要善于推销自己。</p>
-
-<p>如果你还不够优秀，就快点让你自己变优秀，否则就早点退休做点别的吧。<strong><em>我们不需要平庸的程序员，从来不需要。</em></strong></p>
-
-<p>这是我的个人网站：<a href="http://www.geraldmweinberg.com/Site/Home.html" rel="nofollow noreferrer" target="_blank">Gerald M. Weinberg: Writer</a></p>
+<p><strong>我终于知道为什么 npm install 总是动不动就下载 300 Mb 的东西了，Node.js 社区强调的 DRY 文化使得 node_modules 臃肿不堪，因为有的库引用了 is-object，有的库引用了 isobject，还有的库引用了 isObject，每个包看起来很 DRY，但是合起来就 wet 得不行了，呵呵。</strong></p>
 </blockquote>
 
-<p>完，以下是原文。</p>
+<p>Node 社区跟我想得不太一样，说不上好也说不上坏，反正不是很适合我。</p>
 
-<blockquote>
-<p>As far as I can tell, I’m the oldest old programmer to answer this question so far. I’m so old that the title “programmer” didn’t even exist when I started.</p>
+<hr />
 
-<p>I celebrate my 84th birthday this week, and as far as I know, most of the programmers who were around under various titles when I started (in 1956, maybe 20 of us in the USA) are now dead. I hope they’ve gone to heaven (the cloud?).</p>
+<p>以下是扯淡。</p>
 
-<p>Myself, I gradually ceased writing code for money and transitioned to training younger people to be outstanding professional programmers. I still write lots of code for my own use and amusement and learning, but it’s been at least 40 years since I could tolerate writing code for a boss who didn’t understand what programming was all about.</p>
+<p>我是看到 Medium 上的一篇《<a href="https://medium.com/commitlog/the-internet-is-at-the-mercy-of-a-handful-of-people-73fac4bc5068" rel="nofollow noreferrer" target="_blank">混乱又危险的 Node.js 生态</a>》才知道这些的，这篇文章里的一个评论我很赞同：</p>
 
-<p>I’ve earned multiple livings as consultant, teacher, and writer. Always about programming, but more about design rather than coding details as the years went by. If you’re good, you can do any of these things even at advanced age, but you can’t just sit around waiting for someone to find you.</p>
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/i-dont-get-node/1.jpg" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
 
-<p>If you’re not good, then either get good (it’s never too late) or retire. We don’t need mediocre programmers, and we never did.</p>
-</blockquote>
+<p>如果你不能在十秒钟内写出一个判断奇数的函数，要么你是一个糟糕的打字员，要么你就不应该当程序员！</p>
+
+<p>还有一些颇为搞笑的评论：</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/i-dont-get-node/2.jpg" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure>
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/i-dont-get-node/3.jpg" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure>
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/i-dont-get-node/4.jpg" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure>
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/i-dont-get-node/5.jpg" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
 
     </div>
 
@@ -225,7 +300,7 @@
              
             <p class="copyright-item">
                     <span>链接</span>
-                    <a href=http://fangyinghang.com/84-years-old-programmer/>http://fangyinghang.com/84-years-old-programmer/</span>
+                    <a href=http://fangyinghang.com/i-dont-get-node-style/>http://fangyinghang.com/i-dont-get-node-style/</span>
             </p>
             
              
@@ -246,10 +321,10 @@
 
     <div class="post-nav">
         
-        <a href="http://fangyinghang.com/how-do-i-read-job-description/" class="prev" rel="prev" title="互联网公司招聘启事的正确阅读方式"><i class="iconfont icon-left"></i>&nbsp;互联网公司招聘启事的正确阅读方式</a>
+        <a href="http://fangyinghang.com/why-still-jquery/" class="prev" rel="prev" title="jQuery 都过时了，那我还学它干嘛？"><i class="iconfont icon-left"></i>&nbsp;jQuery 都过时了，那我还学它干嘛？</a>
          
         
-        <a href="http://fangyinghang.com/gulu-ui/" class="next" rel="next" title="我写了一个基于 Vue 的 UI 框架——轱辘 UI">我写了一个基于 Vue 的 UI 框架——轱辘 UI&nbsp;<i class="iconfont icon-right"></i></a>
+        <a href="http://fangyinghang.com/eventloop-timers-and-nexttick/" class="next" rel="next" title="Event Loop、计时器、nextTick">Event Loop、计时器、nextTick&nbsp;<i class="iconfont icon-right"></i></a>
         
     </div>
 
@@ -296,8 +371,9 @@
 
 
     
-    
-    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+     <link href="//lib.baomitu.com/lightgallery/1.6.11/css/lightgallery.min.css" rel="stylesheet">  
+      
+     <script src="/js/vendor_gallery.min.js" async="" ></script>
     
   
 

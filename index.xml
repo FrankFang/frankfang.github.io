@@ -381,6 +381,119 @@ myEmitter.on(&#39;event&#39;, () =&amp;gt; {
     </item>
     
     <item>
+      <title>我不是很懂 Node.js 社区的 DRY 文化</title>
+      <link>http://fangyinghang.com/i-dont-get-node-style/</link>
+      <pubDate>Fri, 09 Nov 2018 02:18:28 +0800</pubDate>
+      
+      <guid>http://fangyinghang.com/i-dont-get-node-style/</guid>
+      <description>&lt;p&gt;我一直以为 npm 里下载量较大的 package 是 React 这样不错的包。&lt;/p&gt;
+
+&lt;p&gt;今天我才知道我错了。&lt;/p&gt;
+
+&lt;p&gt;目前 React 每周下载量是 240 万次。&lt;/p&gt;
+
+&lt;p&gt;然而下面我要说的几个包的下载量全都大于 React！&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.npmjs.com/package/is-odd&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;is-odd&lt;/a&gt;，每周下载 300 万次&lt;/p&gt;
+
+&lt;p&gt;源代码如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&#39;use strict&#39;;
+
+var isNumber = require(&#39;is-number&#39;);
+
+module.exports = function isOdd(i) {
+  if (!isNumber(i)) {
+    throw new TypeError(&#39;is-odd expects a number.&#39;);
+  }
+  if (Number(i) !== Math.floor(i)) {
+    throw new RangeError(&#39;is-odd expects an integer.&#39;);
+  }
+  return !!(~~i &amp;amp; 1);
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;你没有看错，五行核心代码，还依赖了一个 is-number 库。&lt;/p&gt;
+
+&lt;p&gt;这个 is-number 库更厉害，每周下载 1000 万次&lt;/p&gt;
+
+&lt;p&gt;源代码如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&#39;use strict&#39;;
+
+module.exports = function isNumber(num) {
+  var number = +num;
+
+  if ((number - number) !== 0) {
+    // Discard Infinity and NaN
+    return false;
+  }
+
+  if (number === num) {
+    return true;
+  }
+
+  if (typeof num === &#39;string&#39;) {
+    // String parsed, both a non-empty whitespace string and an empty string
+    // will have been coerced to 0\. If 0 trim the string and see if its empty.
+    if (number === 0 &amp;amp;&amp;amp; num.trim() === &#39;&#39;) {
+      return false;
+    }
+    return true;
+  }
+  return false;
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;后来我发现这两个库的作者是同一个人（该作者水平很高），这个人还写了另外几个库：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;is-plain-object，每周下载量 330 万&lt;/li&gt;
+&lt;li&gt;is-primitive，每周下载量 350 万，&lt;a href=&#34;https://github.com/jonschlinkert/is-primitive/blob/master/index.js&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;源代码你自己可以看看&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;isobject，每周下载量 750 万&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;需要指出的是&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;webpack、babel 等库都有「间接地」依赖上面的一些包。&lt;/li&gt;
+&lt;li&gt;这些包的 markdown 代码远远多于 JS 代码，可能它们的 markdown 更值得我们学习&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;这件事对我的启发：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;原来有这么多 JS 程序员不会判断奇数&lt;/li&gt;
+&lt;li&gt;只要 markdown 写得漂亮，就能迷倒 JS 程序员&lt;/li&gt;
+&lt;li&gt;1 + &amp;lsquo;1&amp;rsquo; 的问题一直在困扰 JS 程序员，我要不要写一个 add() 库解决这个问题呢&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;我终于知道为什么 npm install 总是动不动就下载 300 Mb 的东西了，Node.js 社区强调的 DRY 文化使得 node_modules 臃肿不堪，因为有的库引用了 is-object，有的库引用了 isobject，还有的库引用了 isObject，每个包看起来很 DRY，但是合起来就 wet 得不行了，呵呵。&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Node 社区跟我想得不太一样，说不上好也说不上坏，反正不是很适合我。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;以下是扯淡。&lt;/p&gt;
+
+&lt;p&gt;我是看到 Medium 上的一篇《&lt;a href=&#34;https://medium.com/commitlog/the-internet-is-at-the-mercy-of-a-handful-of-people-73fac4bc5068&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;混乱又危险的 Node.js 生态&lt;/a&gt;》才知道这些的，这篇文章里的一个评论我很赞同：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://fangyinghang.com/images/i-dont-get-node/1.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;如果你不能在十秒钟内写出一个判断奇数的函数，要么你是一个糟糕的打字员，要么你就不应该当程序员！&lt;/p&gt;
+
+&lt;p&gt;还有一些颇为搞笑的评论：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://fangyinghang.com/images/i-dont-get-node/2.jpg&#34; alt=&#34;&#34; /&gt;
+&lt;img src=&#34;http://fangyinghang.com/images/i-dont-get-node/3.jpg&#34; alt=&#34;&#34; /&gt;
+&lt;img src=&#34;http://fangyinghang.com/images/i-dont-get-node/4.jpg&#34; alt=&#34;&#34; /&gt;
+&lt;img src=&#34;http://fangyinghang.com/images/i-dont-get-node/5.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>我的课程</title>
       <link>http://fangyinghang.com/my/courses/</link>
       <pubDate>Thu, 08 Nov 2018 04:04:02 +0800</pubDate>
@@ -837,6 +950,40 @@ axios.get(&#39;/api&#39;).then(fn1, fn2)
 
 &lt;p&gt;If you’re not good, then either get good (it’s never too late) or retire. We don’t need mediocre programmers, and we never did.&lt;/p&gt;
 &lt;/blockquote&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>互联网公司招聘启事的正确阅读方式</title>
+      <link>http://fangyinghang.com/how-do-i-read-job-description/</link>
+      <pubDate>Sun, 25 Feb 2018 02:17:24 +0800</pubDate>
+      
+      <guid>http://fangyinghang.com/how-do-i-read-job-description/</guid>
+      <description>&lt;p&gt;最近我的前端直播班的学生快要开始投简历了，所以我要提前做一些准备工作，正好看到一篇《&lt;a href=&#34;https://moment.douban.com/post/106703/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;互联网公司招聘启事的正确阅读方式&lt;/a&gt;》很有意思，就搬运过来并自己再加一些内容。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;「工资 6k 到 40k」——那工资就是 6k；&lt;/li&gt;
+&lt;li&gt;「工资上不封顶」——就是说说而已，没人会给程序员一个月一百万月薪的；&lt;/li&gt;
+&lt;li&gt;「美女如云」——我司没有福利，你们员工自己互相给福利吧；&lt;/li&gt;
+&lt;li&gt;「大牛云集」——有两个稍微有点经验的程序员；&lt;/li&gt;
+&lt;li&gt;「需要你有一定抗压能力」——需要你自愿加班&lt;/li&gt;
+&lt;li&gt;「不强制加班」——需要你自愿加班&lt;/li&gt;
+&lt;li&gt;「我们目前处于创业阶段」——一周上六天班&lt;/li&gt;
+&lt;li&gt;「弹性工作时间」——上班不弹，下班弹，而且只往后半夜弹&lt;/li&gt;
+&lt;li&gt;「可提供有竞争力的薪酬」——我们给的工资跟其他公司差不多&lt;/li&gt;
+&lt;li&gt;「期权激励拿到手软」——希望能弥补你看到基本工资后的脚软；&lt;/li&gt;
+&lt;li&gt;「有活力的技术团队」——团队平均工作经验小于1年；&lt;/li&gt;
+&lt;li&gt;「千亿市场的探索者」——目前尚没看清具体市场在哪；&lt;/li&gt;
+&lt;li&gt;「扁平化管理」——公司还没招到HR；&lt;/li&gt;
+&lt;li&gt;「典型欧美创业工作环境」——办公室现处于毛坯房状态；&lt;/li&gt;
+&lt;li&gt;「新技术+新方向+新团队」——嗯，目前这三样都没有；&lt;/li&gt;
+&lt;li&gt;「直进核心团队」——公司尚未设置非核心团队岗；&lt;/li&gt;
+&lt;li&gt;「全方位成长机会」——你有很大机会成为外卖超人；&lt;/li&gt;
+&lt;li&gt;「提供各种福利」——每样细说咱就伤感情了；&lt;/li&gt;
+&lt;li&gt;「提供住宿、班车及两餐」——每周提供数小时时间与家人团聚；&lt;/li&gt;
+&lt;li&gt;「加入我们，给你足够大的发展空间！」——目前公司规模小于10人；&lt;/li&gt;
+&lt;li&gt;「公司计划短期内上市」——您也知道计划一般赶不上变化；&lt;/li&gt;
+&lt;/ul&gt;
 </description>
     </item>
     
@@ -2230,28 +2377,6 @@ func()
 &lt;p&gt;&lt;strong&gt;如果你觉得一个概念很复杂，那么很可能是你理解错了。&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;完。&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>微信订阅</title>
-      <link>http://fangyinghang.com/wechat-subscribe/</link>
-      <pubDate>Sun, 08 Nov 2015 03:43:41 +0800</pubDate>
-      
-      <guid>http://fangyinghang.com/wechat-subscribe/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;http://fangyinghang.com/images/me/qrcode.jpg&#34; alt=&#34;扫码关注&#34; /&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>联系方式</title>
-      <link>http://fangyinghang.com/contacts/</link>
-      <pubDate>Sun, 08 Nov 2015 03:43:41 +0800</pubDate>
-      
-      <guid>http://fangyinghang.com/contacts/</guid>
-      <description>&lt;p&gt;邮箱：fangyinghang # foxmail.com&lt;/p&gt;
-
-&lt;p&gt;知乎：&lt;a href=&#34;https://www.zhihu.com/people/zhihusucks/answers/by_votes&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;zhihusucks&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     

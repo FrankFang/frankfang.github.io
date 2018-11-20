@@ -21,6 +21,15 @@
     </item>
     
     <item>
+      <title>我不是很懂 Node.js 社区的 DRY 文化</title>
+      <link>http://fangyinghang.com/i-dont-get-node-style/</link>
+      <pubDate>Fri, 09 Nov 2018 02:18:28 +0800</pubDate>
+      
+      <guid>http://fangyinghang.com/i-dont-get-node-style/</guid>
+      <description>我一直以为 npm 里下载量较大的 package 是 React 这样不错的包。 今天我才知道我错了。 目前 React 每周下载量是 240 万次。 然而下面我要说的几个包的下载量全都大于 React</description>
+    </item>
+    
+    <item>
       <title>jQuery 都过时了，那我还学它干嘛？</title>
       <link>http://fangyinghang.com/why-still-jquery/</link>
       <pubDate>Mon, 15 Oct 2018 16:22:04 +0800</pubDate>
@@ -75,6 +84,15 @@ jQuery 教你如何设计 API 上文说到我一个不会 JS 的人居然能看�
       
       <guid>http://fangyinghang.com/84-years-old-programmer/</guid>
       <description>Quora 上有人问「年纪大的程序员去哪了」 2017年，84 岁的 Gerald Weinberg 回答到： 根据我的判断，我应该是能回答这个问题的年纪最大的人了。我开始写代码的时候，</description>
+    </item>
+    
+    <item>
+      <title>互联网公司招聘启事的正确阅读方式</title>
+      <link>http://fangyinghang.com/how-do-i-read-job-description/</link>
+      <pubDate>Sun, 25 Feb 2018 02:17:24 +0800</pubDate>
+      
+      <guid>http://fangyinghang.com/how-do-i-read-job-description/</guid>
+      <description>最近我的前端直播班的学生快要开始投简历了，所以我要提前做一些准备工作，正好看到一篇《互联网公司招聘启事的正确阅读方式》很有意思，就搬运过来并</description>
     </item>
     
     <item>

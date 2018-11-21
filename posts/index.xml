@@ -114,6 +114,15 @@ jQuery 教你如何设计 API 上文说到我一个不会 JS 的人居然能看�
     </item>
     
     <item>
+      <title>CSS 为什么这么难学</title>
+      <link>http://fangyinghang.com/why-is-css-so-hard/</link>
+      <pubDate>Thu, 05 Oct 2017 02:18:49 +0800</pubDate>
+      
+      <guid>http://fangyinghang.com/why-is-css-so-hard/</guid>
+      <description>短答案：因为 CSS 不正交。 长答案： 我先来解释一下什么是正交。 你调过显示器的「亮度」、「色调」和「饱和度」吧。 「亮度」就是明暗程度，值越大，屏幕越</description>
+    </item>
+    
+    <item>
       <title>我用了两个月的时间才理解 let</title>
       <link>http://fangyinghang.com/let-in-js/</link>
       <pubDate>Thu, 27 Jul 2017 13:39:30 +0800</pubDate>

@@ -6,10 +6,19 @@
     <description>Recent content in Posts on 方应杭的个人网站</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 09 Nov 2018 02:23:41 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 09 Nov 2018 02:24:08 +0800</lastBuildDate>
     
 	<atom:link href="http://fangyinghang.com/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Rx.js 思想入门</title>
+      <link>http://fangyinghang.com/what-is-rxjs/</link>
+      <pubDate>Fri, 09 Nov 2018 02:24:08 +0800</pubDate>
+      
+      <guid>http://fangyinghang.com/what-is-rxjs/</guid>
+      <description>原版视频：Async JavaScript at Netflix by Jafar Husain 原视频语速极快，我反复听了好几遍。本节课就是我对该演讲的翻译和理解。 我觉得这个视频对 Rx.js 新手实在是太友好了，基</description>
+    </item>
     
     <item>
       <title>Event Loop、计时器、nextTick</title>

@@ -6,470 +6,8 @@
     <description>Recent content in 方应杭的个人网站 </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 09 Nov 2018 02:24:08 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 09 Nov 2018 02:23:41 +0800</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
-    
-    <item>
-      <title>Rx.js 思想入门</title>
-      <link>http://fangyinghang.com/what-is-rxjs/</link>
-      <pubDate>Fri, 09 Nov 2018 02:24:08 +0800</pubDate>
-      
-      <guid>http://fangyinghang.com/what-is-rxjs/</guid>
-      <description>
-
-&lt;p&gt;原版视频：&lt;a href=&#34;https://www.youtube.com/watch?v=XRYN2xt11Ek&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Async JavaScript at Netflix&lt;/a&gt; by Jafar Husain&lt;br /&gt;
-原视频语速极快，我反复听了好几遍。本节课就是我对该演讲的翻译和理解。&lt;/p&gt;
-
-&lt;p&gt;我觉得这个视频对 Rx.js 新手实在是太友好了，基本一听就懂，所以花了一天时间汉化以及重新演绎。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;本节课主要关注如何通过「换一种思路」来解决「异步」问题。&lt;/p&gt;
-
-&lt;p&gt;我们的所有网页应用都是异步的：&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;脚本加载&lt;/li&gt;
-&lt;li&gt;播放器&lt;/li&gt;
-&lt;li&gt;数据访问&lt;/li&gt;
-&lt;li&gt;动画&lt;/li&gt;
-&lt;li&gt;DOM事件绑定、数据事件绑定&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&#34;异步编程&#34;&gt;异步编程&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;function play(movieId, cancelButton, callback){
-    let movieTicket
-    let playError
-    let tryFinish = () =&amp;gt;{
-        if(playError){
-            callback(null, playError)
-        }else if(movieTicket &amp;amp;&amp;amp; player.initialized){
-            callback(null, movieTicket)
-        }
-    }
-    cancelButton.addEventListener(&#39;click&#39;, ()=&amp;gt;{ playError = &#39;cancel&#39; })
-    if(!player.initialized){
-        player.init((error)=&amp;gt;{
-            playError = error
-            tryFinish()
-        })
-    }
-    authorizeMovie(movieId, (error, ticket)=&amp;gt;{
-        playError = error
-        movieTicket = ticket
-        tryFinish()
-    })
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;我们可以看到，异步编程中的状态（state）是很难跟踪的&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://fangyinghang.com/images/what-is-rxjs/1.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;当项目变复杂时，你很难理解某个状态是如何变化的。&lt;/p&gt;
-
-&lt;p&gt;另一方面，使用回调时，try&amp;hellip;catch 语法基本是没用的&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://fangyinghang.com/images/what-is-rxjs/2.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;另外，如果你监听了一个事件却忘了销毁它，很容易造成内存泄露。这在异步编程很常见。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://fangyinghang.com/images/what-is-rxjs/3.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;预备知识一-iterator-observer&#34;&gt;预备知识一：Iterator &amp;amp; Observer&lt;/h2&gt;
-
-&lt;p&gt;为了解决这些问题，让我们回到 1994 年。1994 年有一本书叫做《设计模式》&lt;/p&gt;
-
-&lt;p&gt;这本书讲了很多编程套路（编程套路就是设计模式）&lt;/p&gt;
-
-&lt;p&gt;今天我们只关注其中的两个设计模式&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Iterator 迭代器&lt;/li&gt;
-&lt;li&gt;Observer 观察者&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&#34;迭代器&#34;&gt;迭代器&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;function makeIterator(array){
-    var nextIndex = 0;
-
-    return {
-       next: function(){
-           return nextIndex &amp;lt; array.length ?
-               {value: array[nextIndex++], done: false} :
-               {done: true};
-       }
-    };
-}
-
-var it = makeIterator([&#39;a&#39;, &#39;b&#39;]);
-console.log(it.next().value); // &#39;a&#39;
-console.log(it.next().value); // &#39;b&#39;
-console.log(it.next().done);  // true
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;ES 6 提供了一个语法糖来达成迭代器模式，这个语法糖叫做生成器（Generator）&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;
-function* idMaker() {
-  var index = 0;
-  while(true)
-    yield index++;
-}
-
-var gen = idMaker();
-
-console.log(gen.next().value); // 0
-console.log(gen.next().value); // 1
-console.log(gen.next().value); // 2
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;所谓迭代器模式就是你可以用 .next() API 来「依次」访问下一项。（next只是一个函数名而已，可以随意约定）&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;如果有下一项，你就会得到 &lt;code&gt;{value: 下一项的值, done: false}&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;如果没有下一项，你就会得到 &lt;code&gt;{value: null, done: true}&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&#34;观察者模式&#34;&gt;观察者模式&lt;/h2&gt;
-
-&lt;p&gt;这个模式则是监听一个对象的变化，一旦对象发生变化，就调用你提供的函数。（JS 已废弃 Object.observe()，请使用 Proxy API 代替）&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;
-var user = {
-  id: 0,
-  name: &#39;Brendan Eich&#39;,
-  title: &#39;Mr.&#39;
-};
-
-// 创建用户的greeting
-function updateGreeting() {
-  user.greeting = &#39;Hello, &#39; + user.title + &#39; &#39; + user.name + &#39;!&#39;;
-}
-updateGreeting();
-
-Object.observe(user, function(changes) {
-  changes.forEach(function(change) {
-    // 当name或title属性改变时, 更新greeting
-    if (change.name === &#39;name&#39; || change.name === &#39;title&#39;) {
-      updateGreeting();
-    }
-  });
-});
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;两种模式的区别&#34;&gt;两种模式的区别&lt;/h2&gt;
-
-&lt;p&gt;假设 A 是一个迭代器，那么 B 可以主动使用 A.next() 来要求 A 产生变化。（B主动要求A变化）&lt;br /&gt;
-假设 B 是一个观察者，在观察着 A，那么 A 一旦变化，A 就会主动通知 B。（A变化之后B被动接收通知）&lt;/p&gt;
-
-&lt;p&gt;或者这么说：在观察者模式里，被观察的人在迭代观察者（调用观察者的一个函数）。&lt;br /&gt;
-再说清楚一点：观察者就是一个迭代器，被观察的人一旦有变化，就会调用观察者的一个函数。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;user .on change
-    observer.next()
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;只不过，观察者永远可以 .next()，不会结束。而迭代器是会结束的，即返回 &lt;code&gt;{done: true}&lt;/code&gt;。&lt;/p&gt;
-
-&lt;h2 id=&#34;预备知识二-array-v-s-event&#34;&gt;预备知识二：Array V.S. Event&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;    Array: [ {x:1,y:1}, {x:2, y:2}, {x:10,y:10} ]
-    Event: {x:1,y:1} ... {x:2, y:2} ... {x:10, y:10}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;数组和事件，有啥区别？&lt;/p&gt;
-
-&lt;p&gt;他们都是 collection（数据集、集合）。&lt;/p&gt;
-
-&lt;p&gt;为了阐述它俩之间的相同点，我们来举两个例子。&lt;/p&gt;
-
-&lt;p&gt;首先我们介绍 Array 的 4 个操作：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://fangyinghang.com/images/what-is-rxjs/4.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;用这几个 API 我们可以做一些 amazing 的事情，在 Netflix 我们主要向用户展示一些好看的剧集。&lt;/p&gt;
-
-&lt;p&gt;我们需要展示评分最高的剧集给用户。能不能用上面的操作做到呢？&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;let getTopRatedFilms = user =&amp;gt; 
-    user.videoLists
-        .map( videoList =&amp;gt; 
-            videoList.videos
-                .filter( video =&amp;gt; video.rating === 5.0)
-        ).concatAll()
-
-getTopRatedFilms(currentUser)
-    .forEach(film =&amp;gt; console.log(film) )
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;好，如果我现在告诉你，一个拖曳操作能用类似的代码实现，你相信吗？&lt;br /&gt;
-你肯定在心里想：这不可能！&lt;/p&gt;
-
-&lt;p&gt;是时候展示真正的技术了：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;let getElemenetDrags = el =&amp;gt;
-    el.mouseDowns
-        .map( mouseDown =&amp;gt; 
-            document.mouseMoves
-                .takeUntil(document.mouseUps)
-        )
-        .concatAll()
-
-getElementDrags(div)
-    .forEach(position =&amp;gt; img.position = position )
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;能做到这一切，都是因为 Observable（大意：可被观察的对象）&lt;/p&gt;
-
-&lt;h2 id=&#34;observable&#34;&gt;Observable&lt;/h2&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Observable = Collections + Time&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&#34;来历&#34;&gt;来历&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://fangyinghang.com/images/what-is-rxjs/5.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;用途&#34;&gt;用途&lt;/h2&gt;
-
-&lt;p&gt;Observable 可以表示&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;事件&lt;/li&gt;
-&lt;li&gt;数据请求&lt;/li&gt;
-&lt;li&gt;动画&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;而且可以方便的把这三种东西组合起来，因此，异步操作变得很简单。&lt;/p&gt;
-
-&lt;p&gt;将事件转化为 Observable 的 API 很简单&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;var mouseDowns = Observable.fromEvent(element, &#39;mouseDown&#39;)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;之前我们是如何操作事件的？——监听（或者叫做订阅）&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;// 订阅或监听
-let handler = e =&amp;gt; console.log(e)
-document.addEventListener(&#39;mousemove&#39;, handler)
-
-// 取消订阅或去掉监听
-document.removeEventListener(&#39;mousemove&#39;, handler)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;现在我们怎么对事件进行操作呢？——forEach&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;// 订阅
-let subscription = mouseMoves.forEach(e =&amp;gt; console.log(e) )
-// 取消订阅
-subscription.dispose()
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;将事件包装成 Observable 对象，可以方便地使用 forEach/map/filter/takeUntil/concatAll 等 API 来操作，比之前的方式容易很多。&lt;/p&gt;
-
-&lt;p&gt;为了处理失败情况，forEach 还可以接收两个额外的参数：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://fangyinghang.com/images/what-is-rxjs/6.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;看起来有点像 Promise 对吧。&lt;/p&gt;
-
-&lt;p&gt;为了跟清楚地阐述如何使用 forEach/map/filter/takeUntil/concatAll 等 API 来操作 Observable 对象，我现在发明一种新的语法：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://fangyinghang.com/images/what-is-rxjs/7.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;这个语法的规则是&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;{1&amp;hellip;2} 表示这个对象会一开始发射一个1，一段时间后发射一个2&lt;/li&gt;
-&lt;li&gt;{1&amp;hellip;2&amp;hellip;&amp;hellip;3}表示发射1，一段时间后发射2，两段时间后发射3（也就是说 &amp;hellip; 表示一段时间，&amp;hellip;&amp;hellip; 表示两段时间）&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&#34;foreach&#34;&gt;forEach&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;gt; {1......2............3}.forEach(console.log)
-1
-一段时间后 
-一段时间后 
-2
-一段时间后 
-一段时间后 
-一段时间后 
-一段时间后
-3
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;map&#34;&gt;map&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;&amp;gt; {1......2............3}.map(x=&amp;gt;x+1)
-2
-一段时间后 
-一段时间后
-3
-一段时间后 
-一段时间后
-一段时间后 
-一段时间后
-4
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;filter&#34;&gt;filter&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;gt; {1......2............3}.filter(x=&amp;gt;x&amp;gt;1)
-一段时间后 
-一段时间后
-2
-一段时间后 
-一段时间后
-一段时间后 
-一段时间后
-3
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;concatall&#34;&gt;concatAll&lt;/h2&gt;
-
-&lt;p&gt;考虑 race conditions（竞态问题）&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;{
-    ...{1}
-    ......{2..................3}
-    ............{}
-    ..................{4}
-}.concatAll()
-
-{
-    ...1...2..................3...4
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;takeuntil&#34;&gt;takeUntil&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;&amp;gt; {...1...2............3}.takeUntil(
-  {............4}    
-)
-{...1...2...}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;这个 API 给我们一个启发：其实我们根本不需要去取消订阅，只需要告诉系统订阅到什么情况为止就行了；就是在另一个事件出现时，系统自动取消上一个事件的订阅即可。&lt;/p&gt;
-
-&lt;p&gt;实际上很多人都不会去取消订阅，以至于出现内存泄露。比如我们经常监听 window 的 onload 事件，却基本没人去取消监听 window 的 onload 事件。&lt;/p&gt;
-
-&lt;p&gt;我已经有五年没有做过「取消监听」这件事了。但是我的代码却没有内存泄露，因为：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://fangyinghang.com/images/what-is-rxjs/8.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;再回头看我们的 drag 代码：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;let getElemenetDrags = el =&amp;gt;
-    el.mouseDowns
-        .map( mouseDown =&amp;gt; 
-            document.mouseMoves
-                .takeUntil(document.mouseUps)
-        )
-        .concatAll()
-
-getElementDrags(div)
-    .forEach(position =&amp;gt; img.position = position )
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;第二个例子&#34;&gt;第二个例子&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://fangyinghang.com/images/what-is-rxjs/9.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;这个 demo 的难点有两个：&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;如果用户依次输入 abcdef，请问你应该发送几个请求？答案是用函数防抖，发一次请求。&lt;/li&gt;
-&lt;li&gt;如果用户输入 a，然后 300 毫秒后输入 b，那么你会发两个请求，一个请求查询 a 相关的热词，一个请求查询 ab 相关的热词，你能保证这两个请求响应的顺序吗？答案是不能。（竞态问题）&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;使用 Observable 来思考这个问题&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;let search = 
-    keyPresses
-        .debounce(250) // 原文是 throttle，但我个人认为原文写错了，我已经在 Twitter 上询问了演讲者，尚未得到回复
-        .map(key =&amp;gt;
-            getJSON(&#39;/search?q=&#39; + input.value)
-                .retry(3)
-                .takeUntil(keyPresses)
-        )
-        .concatAll()
-search.forEach(
-    results =&amp;gt; updateUI(results),
-    error =&amp;gt; showMessage(error)
-)
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;最开始的回调地狱&#34;&gt;最开始的回调地狱&lt;/h2&gt;
-
-&lt;p&gt;最后我们本文回到最开始的代码&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;function play(movieId, cancelButton, callback){
-    let movieTicket
-    let playError
-    let tryFinish = () =&amp;gt;{
-        if(playError){
-            callback(null, playError)
-        }else if(movieTicket &amp;amp;&amp;amp; player.initialized){
-            callback(null, movieTicket)
-        }
-    }
-    cancelButton.addEventListener(&#39;click&#39;, ()=&amp;gt;{ playError = &#39;cancel&#39; })
-    if(!player.initialized){
-        player.init((error)=&amp;gt;{
-            playError = error
-            tryFinish()
-        })
-    }
-    authorizeMovie(movieId, (error, ticket)=&amp;gt;{
-        playError = error
-        movieTicket = ticket
-        tryFinish()
-    })
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;通过改变思维方式，你可以写出这样的代码&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;let authorizations = 
-    player.init()
-        .map(()=&amp;gt;
-            playAttempts
-                .map(movieId=&amp;gt;
-                    player.authorize(movieId)
-                        .retry(3)
-                        .takeUntil(cancels)
-                )
-                .concatAll()
-        )
-        .concatAll()
-
-authorizations.forEach(
-    license =&amp;gt; player.play(license),
-    error =&amp;gt; showError(error)
-)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;总结&#34;&gt;总结&lt;/h2&gt;
-
-&lt;p&gt;以上就是 Rx.js 的思想，如果你需要更实际的练习，你可以点击以下链接：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;英文教程：&lt;a href=&#34;http://reactivex.io/learnrx/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://reactivex.io/learnrx/&lt;/a&gt; （演讲者自己写的教程）&lt;/li&gt;
-&lt;li&gt;中文教程：&lt;a href=&#34;https://www.google.com/search?q=site%3Azhihu.com+太狼+rxjs&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://www.google.com/search?q=site%3Azhihu.com+太狼+rxjs&lt;/a&gt; （我推荐太狼在知乎上写的 Rx.js 教程）&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-    </item>
     
     <item>
       <title>Event Loop、计时器、nextTick</title>
@@ -1412,6 +950,468 @@ axios.get(&#39;/api&#39;).then(fn1, fn2)
 
 &lt;p&gt;If you’re not good, then either get good (it’s never too late) or retire. We don’t need mediocre programmers, and we never did.&lt;/p&gt;
 &lt;/blockquote&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Rx.js 思想入门</title>
+      <link>http://fangyinghang.com/what-is-rxjs/</link>
+      <pubDate>Tue, 13 Mar 2018 02:24:08 +0800</pubDate>
+      
+      <guid>http://fangyinghang.com/what-is-rxjs/</guid>
+      <description>
+
+&lt;p&gt;原版视频：&lt;a href=&#34;https://www.youtube.com/watch?v=XRYN2xt11Ek&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Async JavaScript at Netflix&lt;/a&gt; by Jafar Husain&lt;br /&gt;
+原视频语速极快，我反复听了好几遍。本节课就是我对该演讲的翻译和理解。&lt;/p&gt;
+
+&lt;p&gt;我觉得这个视频对 Rx.js 新手实在是太友好了，基本一听就懂，所以花了一天时间汉化以及重新演绎。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;本节课主要关注如何通过「换一种思路」来解决「异步」问题。&lt;/p&gt;
+
+&lt;p&gt;我们的所有网页应用都是异步的：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;脚本加载&lt;/li&gt;
+&lt;li&gt;播放器&lt;/li&gt;
+&lt;li&gt;数据访问&lt;/li&gt;
+&lt;li&gt;动画&lt;/li&gt;
+&lt;li&gt;DOM事件绑定、数据事件绑定&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;异步编程&#34;&gt;异步编程&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;function play(movieId, cancelButton, callback){
+    let movieTicket
+    let playError
+    let tryFinish = () =&amp;gt;{
+        if(playError){
+            callback(null, playError)
+        }else if(movieTicket &amp;amp;&amp;amp; player.initialized){
+            callback(null, movieTicket)
+        }
+    }
+    cancelButton.addEventListener(&#39;click&#39;, ()=&amp;gt;{ playError = &#39;cancel&#39; })
+    if(!player.initialized){
+        player.init((error)=&amp;gt;{
+            playError = error
+            tryFinish()
+        })
+    }
+    authorizeMovie(movieId, (error, ticket)=&amp;gt;{
+        playError = error
+        movieTicket = ticket
+        tryFinish()
+    })
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;我们可以看到，异步编程中的状态（state）是很难跟踪的&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://fangyinghang.com/images/what-is-rxjs/1.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;当项目变复杂时，你很难理解某个状态是如何变化的。&lt;/p&gt;
+
+&lt;p&gt;另一方面，使用回调时，try&amp;hellip;catch 语法基本是没用的&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://fangyinghang.com/images/what-is-rxjs/2.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;另外，如果你监听了一个事件却忘了销毁它，很容易造成内存泄露。这在异步编程很常见。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://fangyinghang.com/images/what-is-rxjs/3.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;预备知识一-iterator-observer&#34;&gt;预备知识一：Iterator &amp;amp; Observer&lt;/h2&gt;
+
+&lt;p&gt;为了解决这些问题，让我们回到 1994 年。1994 年有一本书叫做《设计模式》&lt;/p&gt;
+
+&lt;p&gt;这本书讲了很多编程套路（编程套路就是设计模式）&lt;/p&gt;
+
+&lt;p&gt;今天我们只关注其中的两个设计模式&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Iterator 迭代器&lt;/li&gt;
+&lt;li&gt;Observer 观察者&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;迭代器&#34;&gt;迭代器&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;function makeIterator(array){
+    var nextIndex = 0;
+
+    return {
+       next: function(){
+           return nextIndex &amp;lt; array.length ?
+               {value: array[nextIndex++], done: false} :
+               {done: true};
+       }
+    };
+}
+
+var it = makeIterator([&#39;a&#39;, &#39;b&#39;]);
+console.log(it.next().value); // &#39;a&#39;
+console.log(it.next().value); // &#39;b&#39;
+console.log(it.next().done);  // true
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ES 6 提供了一个语法糖来达成迭代器模式，这个语法糖叫做生成器（Generator）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;
+function* idMaker() {
+  var index = 0;
+  while(true)
+    yield index++;
+}
+
+var gen = idMaker();
+
+console.log(gen.next().value); // 0
+console.log(gen.next().value); // 1
+console.log(gen.next().value); // 2
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;所谓迭代器模式就是你可以用 .next() API 来「依次」访问下一项。（next只是一个函数名而已，可以随意约定）&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;如果有下一项，你就会得到 &lt;code&gt;{value: 下一项的值, done: false}&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;如果没有下一项，你就会得到 &lt;code&gt;{value: null, done: true}&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;观察者模式&#34;&gt;观察者模式&lt;/h2&gt;
+
+&lt;p&gt;这个模式则是监听一个对象的变化，一旦对象发生变化，就调用你提供的函数。（JS 已废弃 Object.observe()，请使用 Proxy API 代替）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;
+var user = {
+  id: 0,
+  name: &#39;Brendan Eich&#39;,
+  title: &#39;Mr.&#39;
+};
+
+// 创建用户的greeting
+function updateGreeting() {
+  user.greeting = &#39;Hello, &#39; + user.title + &#39; &#39; + user.name + &#39;!&#39;;
+}
+updateGreeting();
+
+Object.observe(user, function(changes) {
+  changes.forEach(function(change) {
+    // 当name或title属性改变时, 更新greeting
+    if (change.name === &#39;name&#39; || change.name === &#39;title&#39;) {
+      updateGreeting();
+    }
+  });
+});
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;两种模式的区别&#34;&gt;两种模式的区别&lt;/h2&gt;
+
+&lt;p&gt;假设 A 是一个迭代器，那么 B 可以主动使用 A.next() 来要求 A 产生变化。（B主动要求A变化）&lt;br /&gt;
+假设 B 是一个观察者，在观察着 A，那么 A 一旦变化，A 就会主动通知 B。（A变化之后B被动接收通知）&lt;/p&gt;
+
+&lt;p&gt;或者这么说：在观察者模式里，被观察的人在迭代观察者（调用观察者的一个函数）。&lt;br /&gt;
+再说清楚一点：观察者就是一个迭代器，被观察的人一旦有变化，就会调用观察者的一个函数。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;user .on change
+    observer.next()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;只不过，观察者永远可以 .next()，不会结束。而迭代器是会结束的，即返回 &lt;code&gt;{done: true}&lt;/code&gt;。&lt;/p&gt;
+
+&lt;h2 id=&#34;预备知识二-array-v-s-event&#34;&gt;预备知识二：Array V.S. Event&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;    Array: [ {x:1,y:1}, {x:2, y:2}, {x:10,y:10} ]
+    Event: {x:1,y:1} ... {x:2, y:2} ... {x:10, y:10}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;数组和事件，有啥区别？&lt;/p&gt;
+
+&lt;p&gt;他们都是 collection（数据集、集合）。&lt;/p&gt;
+
+&lt;p&gt;为了阐述它俩之间的相同点，我们来举两个例子。&lt;/p&gt;
+
+&lt;p&gt;首先我们介绍 Array 的 4 个操作：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://fangyinghang.com/images/what-is-rxjs/4.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;用这几个 API 我们可以做一些 amazing 的事情，在 Netflix 我们主要向用户展示一些好看的剧集。&lt;/p&gt;
+
+&lt;p&gt;我们需要展示评分最高的剧集给用户。能不能用上面的操作做到呢？&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;let getTopRatedFilms = user =&amp;gt; 
+    user.videoLists
+        .map( videoList =&amp;gt; 
+            videoList.videos
+                .filter( video =&amp;gt; video.rating === 5.0)
+        ).concatAll()
+
+getTopRatedFilms(currentUser)
+    .forEach(film =&amp;gt; console.log(film) )
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;好，如果我现在告诉你，一个拖曳操作能用类似的代码实现，你相信吗？&lt;br /&gt;
+你肯定在心里想：这不可能！&lt;/p&gt;
+
+&lt;p&gt;是时候展示真正的技术了：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;let getElemenetDrags = el =&amp;gt;
+    el.mouseDowns
+        .map( mouseDown =&amp;gt; 
+            document.mouseMoves
+                .takeUntil(document.mouseUps)
+        )
+        .concatAll()
+
+getElementDrags(div)
+    .forEach(position =&amp;gt; img.position = position )
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;能做到这一切，都是因为 Observable（大意：可被观察的对象）&lt;/p&gt;
+
+&lt;h2 id=&#34;observable&#34;&gt;Observable&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Observable = Collections + Time&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;来历&#34;&gt;来历&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://fangyinghang.com/images/what-is-rxjs/5.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;用途&#34;&gt;用途&lt;/h2&gt;
+
+&lt;p&gt;Observable 可以表示&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;事件&lt;/li&gt;
+&lt;li&gt;数据请求&lt;/li&gt;
+&lt;li&gt;动画&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;而且可以方便的把这三种东西组合起来，因此，异步操作变得很简单。&lt;/p&gt;
+
+&lt;p&gt;将事件转化为 Observable 的 API 很简单&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var mouseDowns = Observable.fromEvent(element, &#39;mouseDown&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;之前我们是如何操作事件的？——监听（或者叫做订阅）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;// 订阅或监听
+let handler = e =&amp;gt; console.log(e)
+document.addEventListener(&#39;mousemove&#39;, handler)
+
+// 取消订阅或去掉监听
+document.removeEventListener(&#39;mousemove&#39;, handler)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;现在我们怎么对事件进行操作呢？——forEach&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// 订阅
+let subscription = mouseMoves.forEach(e =&amp;gt; console.log(e) )
+// 取消订阅
+subscription.dispose()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;将事件包装成 Observable 对象，可以方便地使用 forEach/map/filter/takeUntil/concatAll 等 API 来操作，比之前的方式容易很多。&lt;/p&gt;
+
+&lt;p&gt;为了处理失败情况，forEach 还可以接收两个额外的参数：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://fangyinghang.com/images/what-is-rxjs/6.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;看起来有点像 Promise 对吧。&lt;/p&gt;
+
+&lt;p&gt;为了跟清楚地阐述如何使用 forEach/map/filter/takeUntil/concatAll 等 API 来操作 Observable 对象，我现在发明一种新的语法：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://fangyinghang.com/images/what-is-rxjs/7.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;这个语法的规则是&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;{1&amp;hellip;2} 表示这个对象会一开始发射一个1，一段时间后发射一个2&lt;/li&gt;
+&lt;li&gt;{1&amp;hellip;2&amp;hellip;&amp;hellip;3}表示发射1，一段时间后发射2，两段时间后发射3（也就是说 &amp;hellip; 表示一段时间，&amp;hellip;&amp;hellip; 表示两段时间）&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;foreach&#34;&gt;forEach&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; {1......2............3}.forEach(console.log)
+1
+一段时间后 
+一段时间后 
+2
+一段时间后 
+一段时间后 
+一段时间后 
+一段时间后
+3
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;map&#34;&gt;map&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;&amp;gt; {1......2............3}.map(x=&amp;gt;x+1)
+2
+一段时间后 
+一段时间后
+3
+一段时间后 
+一段时间后
+一段时间后 
+一段时间后
+4
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;filter&#34;&gt;filter&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; {1......2............3}.filter(x=&amp;gt;x&amp;gt;1)
+一段时间后 
+一段时间后
+2
+一段时间后 
+一段时间后
+一段时间后 
+一段时间后
+3
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;concatall&#34;&gt;concatAll&lt;/h2&gt;
+
+&lt;p&gt;考虑 race conditions（竞态问题）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;{
+    ...{1}
+    ......{2..................3}
+    ............{}
+    ..................{4}
+}.concatAll()
+
+{
+    ...1...2..................3...4
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;takeuntil&#34;&gt;takeUntil&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;&amp;gt; {...1...2............3}.takeUntil(
+  {............4}    
+)
+{...1...2...}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这个 API 给我们一个启发：其实我们根本不需要去取消订阅，只需要告诉系统订阅到什么情况为止就行了；就是在另一个事件出现时，系统自动取消上一个事件的订阅即可。&lt;/p&gt;
+
+&lt;p&gt;实际上很多人都不会去取消订阅，以至于出现内存泄露。比如我们经常监听 window 的 onload 事件，却基本没人去取消监听 window 的 onload 事件。&lt;/p&gt;
+
+&lt;p&gt;我已经有五年没有做过「取消监听」这件事了。但是我的代码却没有内存泄露，因为：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://fangyinghang.com/images/what-is-rxjs/8.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;再回头看我们的 drag 代码：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;let getElemenetDrags = el =&amp;gt;
+    el.mouseDowns
+        .map( mouseDown =&amp;gt; 
+            document.mouseMoves
+                .takeUntil(document.mouseUps)
+        )
+        .concatAll()
+
+getElementDrags(div)
+    .forEach(position =&amp;gt; img.position = position )
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;第二个例子&#34;&gt;第二个例子&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://fangyinghang.com/images/what-is-rxjs/9.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;这个 demo 的难点有两个：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;如果用户依次输入 abcdef，请问你应该发送几个请求？答案是用函数防抖，发一次请求。&lt;/li&gt;
+&lt;li&gt;如果用户输入 a，然后 300 毫秒后输入 b，那么你会发两个请求，一个请求查询 a 相关的热词，一个请求查询 ab 相关的热词，你能保证这两个请求响应的顺序吗？答案是不能。（竞态问题）&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;使用 Observable 来思考这个问题&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;let search = 
+    keyPresses
+        .debounce(250) // 原文是 throttle，但我个人认为原文写错了，我已经在 Twitter 上询问了演讲者，尚未得到回复
+        .map(key =&amp;gt;
+            getJSON(&#39;/search?q=&#39; + input.value)
+                .retry(3)
+                .takeUntil(keyPresses)
+        )
+        .concatAll()
+search.forEach(
+    results =&amp;gt; updateUI(results),
+    error =&amp;gt; showMessage(error)
+)
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;最开始的回调地狱&#34;&gt;最开始的回调地狱&lt;/h2&gt;
+
+&lt;p&gt;最后我们本文回到最开始的代码&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;function play(movieId, cancelButton, callback){
+    let movieTicket
+    let playError
+    let tryFinish = () =&amp;gt;{
+        if(playError){
+            callback(null, playError)
+        }else if(movieTicket &amp;amp;&amp;amp; player.initialized){
+            callback(null, movieTicket)
+        }
+    }
+    cancelButton.addEventListener(&#39;click&#39;, ()=&amp;gt;{ playError = &#39;cancel&#39; })
+    if(!player.initialized){
+        player.init((error)=&amp;gt;{
+            playError = error
+            tryFinish()
+        })
+    }
+    authorizeMovie(movieId, (error, ticket)=&amp;gt;{
+        playError = error
+        movieTicket = ticket
+        tryFinish()
+    })
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;通过改变思维方式，你可以写出这样的代码&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;let authorizations = 
+    player.init()
+        .map(()=&amp;gt;
+            playAttempts
+                .map(movieId=&amp;gt;
+                    player.authorize(movieId)
+                        .retry(3)
+                        .takeUntil(cancels)
+                )
+                .concatAll()
+        )
+        .concatAll()
+
+authorizations.forEach(
+    license =&amp;gt; player.play(license),
+    error =&amp;gt; showError(error)
+)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;总结&#34;&gt;总结&lt;/h2&gt;
+
+&lt;p&gt;以上就是 Rx.js 的思想，如果你需要更实际的练习，你可以点击以下链接：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;英文教程：&lt;a href=&#34;http://reactivex.io/learnrx/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://reactivex.io/learnrx/&lt;/a&gt; （演讲者自己写的教程）&lt;/li&gt;
+&lt;li&gt;中文教程：&lt;a href=&#34;https://www.google.com/search?q=site%3Azhihu.com+太狼+rxjs&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://www.google.com/search?q=site%3Azhihu.com+太狼+rxjs&lt;/a&gt; （我推荐太狼在知乎上写的 Rx.js 教程）&lt;/li&gt;
+&lt;/ul&gt;
 </description>
     </item>
     

@@ -6,19 +6,10 @@
     <description>Recent content in Posts on 方应杭的个人网站</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 09 Nov 2018 02:24:08 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 09 Nov 2018 02:23:41 +0800</lastBuildDate>
     
 	<atom:link href="http://fangyinghang.com/posts/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Rx.js 思想入门</title>
-      <link>http://fangyinghang.com/what-is-rxjs/</link>
-      <pubDate>Fri, 09 Nov 2018 02:24:08 +0800</pubDate>
-      
-      <guid>http://fangyinghang.com/what-is-rxjs/</guid>
-      <description>原版视频：Async JavaScript at Netflix by Jafar Husain 原视频语速极快，我反复听了好几遍。本节课就是我对该演讲的翻译和理解。 我觉得这个视频对 Rx.js 新手实在是太友好了，基</description>
-    </item>
     
     <item>
       <title>Event Loop、计时器、nextTick</title>
@@ -93,6 +84,15 @@ jQuery 教你如何设计 API 上文说到我一个不会 JS 的人居然能看�
       
       <guid>http://fangyinghang.com/84-years-old-programmer/</guid>
       <description>Quora 上有人问「年纪大的程序员去哪了」 2017年，84 岁的 Gerald Weinberg 回答到： 根据我的判断，我应该是能回答这个问题的年纪最大的人了。我开始写代码的时候，</description>
+    </item>
+    
+    <item>
+      <title>Rx.js 思想入门</title>
+      <link>http://fangyinghang.com/what-is-rxjs/</link>
+      <pubDate>Tue, 13 Mar 2018 02:24:08 +0800</pubDate>
+      
+      <guid>http://fangyinghang.com/what-is-rxjs/</guid>
+      <description>原版视频：Async JavaScript at Netflix by Jafar Husain 原视频语速极快，我反复听了好几遍。本节课就是我对该演讲的翻译和理解。 我觉得这个视频对 Rx.js 新手实在是太友好了，基</description>
     </item>
     
     <item>

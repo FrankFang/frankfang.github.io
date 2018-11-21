@@ -3,16 +3,6 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
     <url>
-      <loc>http://fangyinghang.com/what-is-rxjs/</loc>
-      
-      <lastmod>2018-11-09T02:24:08+08:00</lastmod>
-      
-      
-      
-      
-    </url>
-  
-    <url>
       <loc>http://fangyinghang.com/eventloop-timers-and-nexttick/</loc>
       
       <lastmod>2018-11-09T02:23:41+08:00</lastmod>
@@ -96,6 +86,16 @@
       <loc>http://fangyinghang.com/84-years-old-programmer/</loc>
       
       <lastmod>2018-04-08T23:00:23+08:00</lastmod>
+      
+      
+      
+      
+    </url>
+  
+    <url>
+      <loc>http://fangyinghang.com/what-is-rxjs/</loc>
+      
+      <lastmod>2018-03-13T02:24:08+08:00</lastmod>
       
       
       
@@ -277,7 +277,7 @@
     <url>
       <loc>http://fangyinghang.com/posts/</loc>
       
-      <lastmod>2018-11-09T02:24:08+08:00</lastmod>
+      <lastmod>2018-11-09T02:23:41+08:00</lastmod>
       
       
       
@@ -299,7 +299,7 @@
     <url>
       <loc>http://fangyinghang.com/</loc>
       
-      <lastmod>2018-11-09T02:24:08+08:00</lastmod>
+      <lastmod>2018-11-09T02:23:41+08:00</lastmod>
       
       
       
